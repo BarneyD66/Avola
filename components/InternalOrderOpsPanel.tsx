@@ -11,6 +11,7 @@ import {
   updateOrderTgDispatchStatus,
   type TgDispatchStatus,
 } from "@/data/orderStore";
+import { buildTgTaskMessage } from "@/data/tgTaskTemplate";
 
 type InternalOrderOpsPanelProps = {
   orderId: string;
@@ -49,6 +50,7 @@ export function InternalOrderOpsPanel({
 
   const tgStatus = order.tgDispatchStatus ?? "tg_pending";
   const tgMeta = getTgDispatchStatusMeta(tgStatus);
+  const tgMessage = buildTgTaskMessage(order);
 
   return (
     <section className="surface-panel rounded-[30px] border border-white/8 p-6 sm:p-8">
@@ -82,6 +84,7 @@ export function InternalOrderOpsPanel({
             value: order.paymentStatus ?? "pending_payment",
           },
           { label: "TG Dispatch Status", value: tgStatus },
+          { label: "TG Task Code", value: order.tgTaskCode ?? "-" },
           { label: "TG Task Type", value: order.tgTaskType ?? "-" },
           { label: "TG Target Channel", value: order.tgTargetChannel ?? "-" },
           { label: "TG Message ID", value: order.tgMessageId ?? "-" },
@@ -101,6 +104,15 @@ export function InternalOrderOpsPanel({
             </p>
           </div>
         ))}
+      </div>
+
+      <div className="mt-8">
+        <p className="text-xs uppercase tracking-[0.24em] text-zinc-500">
+          TG Message Preview
+        </p>
+        <pre className="mt-4 whitespace-pre-wrap rounded-2xl border border-white/8 bg-black/30 p-4 text-sm leading-7 text-foreground">
+          {tgMessage}
+        </pre>
       </div>
 
       <div className="mt-8">

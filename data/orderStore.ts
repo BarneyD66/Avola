@@ -1,5 +1,6 @@
 import { seedOrders } from "@/data/mockOrders";
 import type { Service, ServicePackage } from "@/data/services";
+import { generateTgTaskCode } from "@/data/tgTaskTemplate";
 
 export type OrderStatus = "pending" | "running" | "completed" | "issue";
 
@@ -44,6 +45,12 @@ export type Order = {
   selectedPackageLabel?: string;
   selectedPackagePrice?: string;
   selectedPackageResult?: string;
+  selectedPackageDeliveryTime?: string;
+  deliveryTime?: string;
+  formValues?: Record<string, string>;
+  targetLink?: string;
+  additionalRequirement?: string;
+  contact?: string;
   paymentProvider?: "unipay";
   paymentMethod?: "crypto";
   paymentStatus?: PaymentStatus;
@@ -64,6 +71,8 @@ export type Order = {
   tgDispatchError?: string;
   tgGeneratedAt?: string;
   tgDispatchedAt?: string;
+  tgTaskCode?: string;
+  tgTemplateVersion?: string;
 };
 
 export const ORDER_STORAGE_KEY = "avola-orders";
@@ -72,7 +81,7 @@ const SIMULATION_COOLDOWN_MS = 800;
 const DEFAULT_PAYMENT_CURRENCY = "USDT";
 const DEFAULT_PAYMENT_CHAIN = "Polygon";
 const PAYMENT_WINDOW_MINUTES = 30;
-const DEFAULT_TG_CHANNEL = "@Avolaofficial";
+const DEFAULT_TG_CHANNEL = "@avolatest";
 const simulationTimestamps = new Map<string, number>();
 let cachedOrdersSnapshot: Order[] | null = null;
 let cachedOrdersRaw: string | null = null;
@@ -659,7 +668,8 @@ export function setOrderPaymentConfirming(orderId: string) {
 
 export function markOrderPaid(orderId: string) {
   return replaceOrder(orderId, (order) => {
-    const updatedAt = formatDateTime(new Date());
+    const paidAtDate = new Date();
+    const updatedAt = formatDateTime(paidAtDate);
 
     return {
       ...order,
@@ -671,6 +681,8 @@ export function markOrderPaid(orderId: string) {
       progress: Math.max(order.progress, 12),
       tgDispatchStatus: "tg_ready",
       tgGeneratedAt: updatedAt,
+      tgTaskCode: order.tgTaskCode ?? generateTgTaskCode(getAllOrders(), paidAtDate),
+      tgTemplateVersion: "tg-task-template-v1",
       summary:
         "支付已完成，订单已进入处理流程。你可以通过订单查询页或用户后台继续跟踪后续进度。",
     };
@@ -679,7 +691,8 @@ export function markOrderPaid(orderId: string) {
 
 export function markOrderPaidMock(orderId: string) {
   return replaceOrder(orderId, (order) => {
-    const updatedAt = formatDateTime(new Date());
+    const paidAtDate = new Date();
+    const updatedAt = formatDateTime(paidAtDate);
 
     return {
       ...order,
@@ -692,6 +705,8 @@ export function markOrderPaidMock(orderId: string) {
       receivedAmount: order.paymentAmount ?? order.amount,
       tgDispatchStatus: "tg_ready",
       tgGeneratedAt: updatedAt,
+      tgTaskCode: order.tgTaskCode ?? generateTgTaskCode(getAllOrders(), paidAtDate),
+      tgTemplateVersion: "tg-task-template-v1",
       summary:
         "当前为测试支付模式，订单已进入内部处理流程，后续将继续更新执行进度。",
       timeline: syncTimeline(order, "running", updatedAt),
@@ -728,10 +743,74 @@ export function updateOrderTgDispatchStatus(
   });
 }
 
+export function markOrderTgDispatched(orderId: string, messageId?: string) {
+  return replaceOrder(orderId, (order) => {
+    const updatedAt = formatDateTime(new Date());
+
+    return {
+      ...order,
+      updatedAt,
+      tgDispatchStatus: "tg_dispatched",
+      tgDispatchedAt: updatedAt,
+      tgMessageId: messageId ?? order.tgMessageId ?? `tg-${order.id}`,
+      tgDispatchError: undefined,
+    };
+  });
+}
+
+export function markOrderTgFailed(orderId: string, error: string) {
+  return replaceOrder(orderId, (order) => ({
+    ...order,
+    updatedAt: formatDateTime(new Date()),
+    tgDispatchStatus: "tg_failed",
+    tgDispatchError: error,
+  }));
+}
+
+const orderTargetLinkKeys = [
+  "targetUrl",
+  "contentUrl",
+  "groupUrl",
+  "accountUrl",
+  "postUrl",
+  "campaignUrl",
+  "repoUrl",
+  "siteUrl",
+  "appUrl",
+  "appStoreUrl",
+  "playStoreUrl",
+];
+
+function cleanOrderFormValues(formValues?: Record<string, string>) {
+  if (!formValues) {
+    return undefined;
+  }
+
+  const entries = Object.entries(formValues)
+    .filter(([key]) => key !== "queryPassword")
+    .map(([key, value]) => [key, value.trim()] as const)
+    .filter(([, value]) => value.length > 0);
+
+  return entries.length ? Object.fromEntries(entries) : undefined;
+}
+
+function getTargetLinkFromFormValues(formValues?: Record<string, string>) {
+  for (const key of orderTargetLinkKeys) {
+    const value = formValues?.[key]?.trim();
+
+    if (value) {
+      return value;
+    }
+  }
+
+  return undefined;
+}
+
 export function createOrderFromService(
   service: Service,
   queryPassword: string,
   selectedPackage?: ServicePackage | null,
+  formValues?: Record<string, string>,
 ): Order {
   const now = new Date();
   const resolvedDeliveryTime =
@@ -744,6 +823,7 @@ export function createOrderFromService(
     now.getDate(),
   )}${randomSegment}`;
   const createdAt = formatDateTime(now);
+  const cleanedFormValues = cleanOrderFormValues(formValues);
   const packageSummary = selectedPackage
     ? `已选择 ${selectedPackage.label}，对应结果为 ${selectedPackage.result}。`
     : "";
@@ -770,6 +850,12 @@ export function createOrderFromService(
     selectedPackageLabel: selectedPackage?.label,
     selectedPackagePrice: selectedPackage?.price,
     selectedPackageResult: selectedPackage?.result,
+    selectedPackageDeliveryTime: selectedPackage?.deliveryTime,
+    deliveryTime: resolvedDeliveryTime,
+    formValues: cleanedFormValues,
+    targetLink: getTargetLinkFromFormValues(cleanedFormValues),
+    additionalRequirement: cleanedFormValues?.extraRequirements,
+    contact: cleanedFormValues?.contact,
     paymentProvider: "unipay",
     paymentMethod: "crypto",
     paymentStatus: "pending_payment",

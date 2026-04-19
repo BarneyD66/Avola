@@ -183,6 +183,7 @@ export function PurchasePanel({ service }: PurchasePanelProps) {
       service,
       values.queryPassword,
       rawSelectedPackage,
+      values,
     );
 
     addOrder(order);
