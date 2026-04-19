@@ -15,6 +15,42 @@ function getTelegramConfig() {
   };
 }
 
+async function sendTelegramMessage({
+  botToken,
+  chatId,
+  text,
+  disableWebPagePreview,
+}: {
+  botToken: string;
+  chatId: string;
+  text: string;
+  disableWebPagePreview: boolean;
+}) {
+  const response = await fetch(
+    `https://api.telegram.org/bot${botToken}/sendMessage`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        chat_id: chatId,
+        text,
+        disable_web_page_preview: disableWebPagePreview,
+      }),
+    },
+  );
+  const result = (await response.json()) as TelegramSendMessageResponse;
+
+  if (!response.ok || !result.ok) {
+    throw new Error(result.description ?? "Telegram dispatch failed.");
+  }
+
+  return result.result?.message_id
+    ? String(result.result.message_id)
+    : undefined;
+}
+
 export async function POST(request: Request) {
   const { botToken, chatId } = getTelegramConfig();
 
@@ -50,38 +86,36 @@ export async function POST(request: Request) {
     );
   }
 
-  const response = await fetch(
-    `https://api.telegram.org/bot${botToken}/sendMessage`,
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        chat_id: chatId,
-        text: payload.message,
-        disable_web_page_preview: false,
-      }),
-    },
-  );
-  const result = (await response.json()) as TelegramSendMessageResponse;
+  try {
+    const messageId = await sendTelegramMessage({
+      botToken,
+      chatId,
+      text: payload.message,
+      disableWebPagePreview: false,
+    });
 
-  if (!response.ok || !result.ok) {
+    const randyMessageId = await sendTelegramMessage({
+      botToken,
+      chatId,
+      text: "/randy",
+      disableWebPagePreview: true,
+    });
+
+    return NextResponse.json({
+      ok: true,
+      orderId: payload.orderId,
+      chatId,
+      messageId,
+      randyMessageId,
+    });
+  } catch (error) {
     return NextResponse.json(
       {
         ok: false,
-        error: result.description ?? "Telegram dispatch failed.",
+        error:
+          error instanceof Error ? error.message : "Telegram dispatch failed.",
       },
       { status: 502 },
     );
   }
-
-  return NextResponse.json({
-    ok: true,
-    orderId: payload.orderId,
-    chatId,
-    messageId: result.result?.message_id
-      ? String(result.result.message_id)
-      : undefined,
-  });
 }
