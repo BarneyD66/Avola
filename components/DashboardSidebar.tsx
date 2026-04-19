@@ -22,7 +22,7 @@ export function DashboardSidebar() {
   ];
 
   return (
-    <aside className="surface-panel h-fit rounded-[28px] border border-white/8 p-5 lg:sticky lg:top-6">
+    <aside className="surface-panel h-fit rounded-[24px] border border-white/8 p-4 sm:rounded-[28px] sm:p-5 lg:sticky lg:top-6">
       <Link
         href="/"
         className="text-lg font-semibold tracking-[0.18em] text-white hover:text-accent-strong"
@@ -30,11 +30,11 @@ export function DashboardSidebar() {
         Avola
       </Link>
 
-      <p className="mt-3 text-sm leading-7 text-zinc-500">
+      <p className="mt-3 hidden text-sm leading-7 text-zinc-500 sm:block">
         {messages.dashboard.sidebarDescription}
       </p>
 
-      <nav className="mt-6 flex flex-col gap-2">
+      <nav className="mt-4 flex gap-2 overflow-x-auto pb-1 sm:mt-6 sm:flex-col sm:overflow-visible sm:pb-0">
         {navItems.map((item) => {
           const active = item.isActive(pathname);
 
@@ -42,7 +42,7 @@ export function DashboardSidebar() {
             <Link
               key={item.href}
               href={item.href}
-              className={`rounded-2xl border px-4 py-3 text-sm font-medium transition ${
+              className={`shrink-0 rounded-2xl border px-4 py-3 text-sm font-medium transition sm:shrink ${
                 active
                   ? "border-accent/30 bg-accent/12 text-white"
                   : "border-transparent text-zinc-300 hover:border-white/10 hover:bg-white/[0.04] hover:text-white"
@@ -54,7 +54,7 @@ export function DashboardSidebar() {
         })}
       </nav>
 
-      <div className="mt-6 rounded-2xl border border-dashed border-white/10 bg-white/[0.02] px-4 py-3">
+      <div className="mt-6 hidden rounded-2xl border border-dashed border-white/10 bg-white/[0.02] px-4 py-3 sm:block">
         <p className="text-sm font-medium text-zinc-500">
           {messages.dashboard.accountSettings}
         </p>

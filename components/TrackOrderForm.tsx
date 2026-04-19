@@ -51,12 +51,12 @@ export function TrackOrderForm({
   };
 
   return (
-    <section className="surface-panel rounded-[30px] border border-white/8 p-6 sm:p-8">
+    <section className="surface-panel rounded-[24px] border border-white/8 p-4 sm:rounded-[30px] sm:p-8">
       <div className="max-w-2xl">
         <p className="text-xs font-medium uppercase tracking-[0.3em] text-accent-strong/80">
           {messages.track.formEyebrow}
         </p>
-        <h2 className="mt-4 text-2xl font-semibold tracking-tight text-white sm:text-3xl">
+        <h2 className="mt-4 text-[1.45rem] font-semibold tracking-tight text-white sm:text-3xl">
           {messages.track.formTitle}
         </h2>
         <p className="mt-3 text-sm leading-7 text-zinc-400 sm:text-base">
@@ -65,7 +65,7 @@ export function TrackOrderForm({
       </div>
 
       <form
-        className="mt-8 grid gap-5 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_auto] lg:items-end"
+        className="mt-6 grid gap-4 sm:mt-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_auto] lg:items-end"
         onSubmit={handleSubmit}
         noValidate
       >
@@ -85,11 +85,7 @@ export function TrackOrderForm({
                 setErrors((current) => ({ ...current, orderId: undefined }));
               }
             }}
-            className={`mt-2 w-full rounded-2xl border bg-white/[0.03] px-4 py-3 text-sm text-white outline-none placeholder:text-zinc-500 focus:border-accent/50 focus:bg-white/[0.05] focus:ring-4 focus:ring-accent/10 ${
-              errors.orderId
-                ? "border-rose-400/50 ring-4 ring-rose-400/10"
-                : "border-white/10"
-            }`}
+            className={`ui-input mt-2 ${errors.orderId ? "ui-input--error" : ""}`}
           />
           {errors.orderId ? (
             <p className="mt-2 text-sm text-rose-300">{errors.orderId}</p>
@@ -112,11 +108,7 @@ export function TrackOrderForm({
                 setErrors((current) => ({ ...current, password: undefined }));
               }
             }}
-            className={`mt-2 w-full rounded-2xl border bg-white/[0.03] px-4 py-3 text-sm text-white outline-none placeholder:text-zinc-500 focus:border-accent/50 focus:bg-white/[0.05] focus:ring-4 focus:ring-accent/10 ${
-              errors.password
-                ? "border-rose-400/50 ring-4 ring-rose-400/10"
-                : "border-white/10"
-            }`}
+            className={`ui-input mt-2 ${errors.password ? "ui-input--error" : ""}`}
           />
           {errors.password ? (
             <p className="mt-2 text-sm text-rose-300">{errors.password}</p>
@@ -125,7 +117,7 @@ export function TrackOrderForm({
 
         <button
           type="submit"
-          className="inline-flex h-[50px] items-center justify-center rounded-full border border-accent/40 bg-accent px-6 text-sm font-semibold text-white shadow-[0_16px_40px_rgba(59,130,246,0.22)] hover:bg-[#4f90f7] active:scale-[0.98]"
+          className="ui-primary-button h-[50px] w-full px-6 text-sm font-semibold lg:w-auto"
         >
           {messages.track.submit}
         </button>

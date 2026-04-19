@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 import { useLocale } from "@/components/LocaleProvider";
 import { OrderStatusBadge } from "@/components/OrderStatusBadge";
+import { PaymentStatusBadge } from "@/components/PaymentStatusBadge";
 import { ProgressBar } from "@/components/ProgressBar";
 import type { Order } from "@/data/orderStore";
 import { getLocalizedServiceName } from "@/locales/content";
@@ -12,7 +13,7 @@ type DashboardOrderTableProps = {
   orders: Order[];
 };
 
-type FilterKey = "all" | "running" | "reviewing" | "completed" | "issue";
+type FilterKey = "all" | "running" | "completed" | "issue";
 
 export function DashboardOrderTable({ orders }: DashboardOrderTableProps) {
   const { locale, messages } = useLocale();
@@ -29,11 +30,6 @@ export function DashboardOrderTable({ orders }: DashboardOrderTableProps) {
           key: "running",
           label: messages.dashboard.orders.filters.running,
           matches: (status) => status === "pending" || status === "running",
-        },
-        {
-          key: "reviewing",
-          label: messages.dashboard.orders.filters.reviewing,
-          matches: (status) => status === "reviewing",
         },
         {
           key: "completed",
@@ -61,8 +57,8 @@ export function DashboardOrderTable({ orders }: DashboardOrderTableProps) {
   }, [activeFilter, filters, orders]);
 
   return (
-    <section className="surface-panel rounded-[30px] border border-white/8 p-6 sm:p-8">
-      <div className="flex flex-wrap gap-2">
+    <section className="surface-panel rounded-[24px] border border-white/8 p-4 sm:rounded-[30px] sm:p-8">
+      <div className="-mx-1 flex gap-2 overflow-x-auto px-1 pb-1 sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0 sm:pb-0">
         {filters.map((filter) => {
           const active = filter.key === activeFilter;
 
@@ -71,7 +67,7 @@ export function DashboardOrderTable({ orders }: DashboardOrderTableProps) {
               key={filter.key}
               type="button"
               onClick={() => setActiveFilter(filter.key)}
-              className={`rounded-full border px-4 py-2 text-sm font-medium ${
+              className={`shrink-0 rounded-full border px-4 py-2 text-sm font-medium ${
                 active
                   ? "border-accent/30 bg-accent/12 text-white"
                   : "border-white/10 bg-white/[0.03] text-zinc-300 hover:bg-white/[0.06] hover:text-white"
@@ -90,6 +86,7 @@ export function DashboardOrderTable({ orders }: DashboardOrderTableProps) {
               <th className="px-5 py-4">{messages.dashboard.orders.table.orderId}</th>
               <th className="px-5 py-4">{messages.dashboard.orders.table.serviceName}</th>
               <th className="px-5 py-4">{messages.dashboard.orders.table.status}</th>
+              <th className="px-5 py-4">{messages.dashboard.orders.table.paymentStatus}</th>
               <th className="px-5 py-4">{messages.dashboard.orders.table.amount}</th>
               <th className="px-5 py-4">{messages.dashboard.orders.table.progress}</th>
               <th className="px-5 py-4">{messages.dashboard.orders.table.createdAt}</th>
@@ -108,6 +105,11 @@ export function DashboardOrderTable({ orders }: DashboardOrderTableProps) {
                 </td>
                 <td className="px-5 py-4">
                   <OrderStatusBadge status={order.status} />
+                </td>
+                <td className="px-5 py-4">
+                  <PaymentStatusBadge
+                    status={order.paymentStatus ?? "pending_payment"}
+                  />
                 </td>
                 <td className="px-5 py-4 text-sm text-zinc-200">
                   {order.amount}
@@ -142,7 +144,7 @@ export function DashboardOrderTable({ orders }: DashboardOrderTableProps) {
         {filteredOrders.map((order) => (
           <div
             key={order.id}
-            className="rounded-[24px] border border-white/8 bg-white/[0.02] p-5"
+            className="rounded-[22px] border border-white/8 bg-white/[0.02] p-4 sm:rounded-[24px] sm:p-5"
           >
             <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
               <div>
@@ -156,7 +158,7 @@ export function DashboardOrderTable({ orders }: DashboardOrderTableProps) {
               <OrderStatusBadge status={order.status} />
             </div>
 
-            <div className="mt-5 grid gap-4 sm:grid-cols-2">
+            <div className="mt-5 grid gap-3 sm:grid-cols-2 sm:gap-4">
               <div>
                 <p className="text-xs uppercase tracking-[0.24em] text-zinc-500">
                   {messages.dashboard.orders.table.amount}
@@ -168,6 +170,16 @@ export function DashboardOrderTable({ orders }: DashboardOrderTableProps) {
                   {messages.dashboard.orders.table.createdAt}
                 </p>
                 <p className="mt-2 text-sm text-zinc-200">{order.createdAt}</p>
+              </div>
+              <div className="sm:col-span-2">
+                <p className="text-xs uppercase tracking-[0.24em] text-zinc-500">
+                  {messages.dashboard.orders.table.paymentStatus}
+                </p>
+                <div className="mt-2">
+                  <PaymentStatusBadge
+                    status={order.paymentStatus ?? "pending_payment"}
+                  />
+                </div>
               </div>
               <div className="sm:col-span-2">
                 <div className="flex items-center justify-between gap-4 text-sm text-zinc-300">
@@ -186,7 +198,7 @@ export function DashboardOrderTable({ orders }: DashboardOrderTableProps) {
 
             <Link
               href={`/dashboard/orders/${order.id}`}
-              className="mt-5 inline-flex rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-sm font-medium text-white hover:bg-white/[0.08] active:scale-[0.98]"
+              className="mt-5 inline-flex w-full justify-center rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-sm font-medium text-white hover:bg-white/[0.08] active:scale-[0.98] sm:w-auto"
             >
               {messages.dashboard.orders.table.viewDetail}
             </Link>

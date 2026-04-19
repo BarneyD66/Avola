@@ -58,19 +58,19 @@ export function CopyableField({
 
   return (
     <div
-      className={`rounded-[24px] border border-white/8 bg-white/[0.03] p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.03)] sm:p-5 ${className}`}
+      className={`rounded-[22px] border border-white/8 bg-white/[0.03] p-3.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.03)] sm:rounded-[24px] sm:p-5 ${className}`}
     >
       <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
         <div className="min-w-0">
           <p className="text-xs uppercase tracking-[0.24em] text-zinc-500">
             {label}
           </p>
-          <p className="mt-3 break-all text-base font-semibold tracking-[0.08em] text-white sm:text-lg">
+          <p className="mt-3 break-all text-sm font-semibold tracking-[0.06em] text-white sm:text-lg sm:tracking-[0.08em]">
             {displayValue}
           </p>
         </div>
 
-        <div className="flex shrink-0 items-center gap-2">
+        <div className="flex shrink-0 flex-wrap items-center gap-2">
           {masked ? (
             <button
               type="button"

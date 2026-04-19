@@ -18,7 +18,7 @@ export function ServiceActionButton({
   return (
     <Link
       href={`/service/${slug}`}
-      className={`inline-flex min-h-11 items-center justify-center rounded-2xl border px-4 py-3 text-sm font-medium shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] ${
+      className={`inline-flex min-h-10 items-center justify-center rounded-2xl border px-3 py-2.5 text-[13px] font-medium shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] sm:min-h-11 sm:px-4 sm:py-3 sm:text-sm ${
         featured
           ? "border-accent/34 bg-accent/12 text-accent-strong hover:border-accent/50 hover:bg-accent/18 hover:text-white"
           : "border-white/10 bg-white/[0.04] text-zinc-200 hover:-translate-y-0.5 hover:border-accent/22 hover:bg-white/[0.07] hover:text-white active:translate-y-0"

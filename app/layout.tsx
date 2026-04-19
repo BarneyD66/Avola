@@ -1,14 +1,8 @@
 import type { Metadata } from "next";
-import { Manrope } from "next/font/google";
 import Script from "next/script";
 import { LocaleProvider } from "@/components/LocaleProvider";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import "./globals.css";
-
-const manrope = Manrope({
-  variable: "--font-manrope",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://avola.local"),
@@ -28,7 +22,7 @@ export default function RootLayout({
     <html
       lang="zh-CN"
       suppressHydrationWarning
-      className={`${manrope.variable} dark h-full antialiased`}
+      className="dark h-full antialiased"
     >
       <body className="min-h-full font-sans text-foreground">
         <Script id="avola-theme-init" strategy="beforeInteractive">

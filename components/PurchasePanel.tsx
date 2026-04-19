@@ -6,10 +6,6 @@ import { DynamicFieldRenderer } from "@/components/DynamicFieldRenderer";
 import { useLocale } from "@/components/LocaleProvider";
 import { PackageSelector } from "@/components/PackageSelector";
 import { PurchaseSummary } from "@/components/PurchaseSummary";
-import {
-  createCreatedOrderPreview,
-  saveCreatedOrderPreview,
-} from "@/data/createdOrderPreview";
 import { addOrder, createOrderFromService } from "@/data/orderStore";
 import {
   getDefaultServicePackage,
@@ -188,29 +184,27 @@ export function PurchasePanel({ service }: PurchasePanelProps) {
       values.queryPassword,
       rawSelectedPackage,
     );
-    const preview = createCreatedOrderPreview(order);
 
     addOrder(order);
-    saveCreatedOrderPreview(preview);
-    router.push("/order/created");
+    router.push(`/checkout/${order.id}`);
   };
 
   return (
     <aside className="lg:sticky lg:top-28">
-      <div className="surface-panel rounded-[28px] border border-white/8 p-6 sm:p-7">
+      <div className="surface-panel rounded-[24px] border border-white/8 p-4 shadow-[0_18px_42px_rgba(0,0,0,0.2)] sm:rounded-[28px] sm:p-7">
         <div>
           <p className="text-xs font-medium uppercase tracking-[0.28em] text-accent-strong/80">
             {messages.service.orderRequest}
           </p>
-          <h2 className="mt-4 text-2xl font-semibold tracking-tight text-white">
+          <h2 className="mt-3 text-[1.45rem] font-semibold tracking-tight text-white sm:mt-4 sm:text-2xl">
             {messages.service.buyNow}
           </h2>
-          <p className="mt-3 text-sm leading-7 text-zinc-400">
+          <p className="mt-2.5 max-w-[30rem] text-sm leading-7 text-zinc-400 sm:mt-3">
             {messages.service.noLoginDescription}
           </p>
         </div>
 
-        <form className="mt-8 space-y-5" onSubmit={handleSubmit} noValidate>
+        <form className="mt-6 space-y-4 sm:mt-7 sm:space-y-5" onSubmit={handleSubmit} noValidate>
           {displayFields.map((field) => (
             <DynamicFieldRenderer
               key={field.key}
@@ -222,15 +216,17 @@ export function PurchasePanel({ service }: PurchasePanelProps) {
           ))}
 
           {localizedService.packages?.length ? (
-            <PackageSelector
-              packages={localizedService.packages}
-              selectedPackageId={selectedPackageId}
-              error={errors.selectedPackage}
-              onChange={handlePackageChange}
-            />
+            <div className="rounded-[20px] border border-white/8 bg-white/[0.02] p-3.5 sm:rounded-[24px] sm:p-5">
+              <PackageSelector
+                packages={localizedService.packages}
+                selectedPackageId={selectedPackageId}
+                error={errors.selectedPackage}
+                onChange={handlePackageChange}
+              />
+            </div>
           ) : null}
 
-          <div>
+          <div className="pt-1">
             <label htmlFor="contact" className="text-sm font-medium text-zinc-200">
               {messages.service.contact}
             </label>
@@ -241,7 +237,7 @@ export function PurchasePanel({ service }: PurchasePanelProps) {
               value={values.contact}
               placeholder={messages.service.contactPlaceholder}
               onChange={(event) => setFieldValue("contact", event.target.value)}
-              className="mt-2 w-full rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-white outline-none placeholder:text-zinc-500 focus:border-accent/50 focus:bg-white/[0.05] focus:ring-4 focus:ring-accent/10"
+              className="ui-input mt-2"
             />
           </div>
 
@@ -261,11 +257,11 @@ export function PurchasePanel({ service }: PurchasePanelProps) {
                 setFieldValue("extraRequirements", event.target.value)
               }
               rows={3}
-              className="mt-2 w-full resize-y rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-white outline-none placeholder:text-zinc-500 focus:border-accent/50 focus:bg-white/[0.05] focus:ring-4 focus:ring-accent/10"
+              className="ui-input mt-2 resize-y"
             />
           </div>
 
-          <div>
+          <div className="border-t border-white/8 pt-5">
             <label
               htmlFor="queryPassword"
               className="text-sm font-medium text-zinc-200"
@@ -282,10 +278,8 @@ export function PurchasePanel({ service }: PurchasePanelProps) {
               onChange={(event) =>
                 setFieldValue("queryPassword", event.target.value)
               }
-              className={`mt-2 w-full rounded-2xl border bg-white/[0.03] px-4 py-3 text-sm text-white outline-none placeholder:text-zinc-500 focus:border-accent/50 focus:bg-white/[0.05] focus:ring-4 focus:ring-accent/10 ${
-                errors.queryPassword
-                  ? "border-rose-400/50 ring-4 ring-rose-400/10"
-                  : "border-white/10"
+              className={`ui-input mt-2 ${
+                errors.queryPassword ? "ui-input--error" : ""
               }`}
             />
             {errors.queryPassword ? (
@@ -302,7 +296,7 @@ export function PurchasePanel({ service }: PurchasePanelProps) {
 
           <button
             type="submit"
-            className="inline-flex w-full items-center justify-center rounded-full border border-accent/40 bg-accent px-5 py-3 text-sm font-semibold text-white shadow-[0_16px_40px_rgba(59,130,246,0.22)] hover:bg-[#4f90f7] active:scale-[0.98]"
+            className="ui-primary-button w-full px-5 py-3.5 text-sm font-semibold"
           >
             {messages.service.buyNow}
           </button>

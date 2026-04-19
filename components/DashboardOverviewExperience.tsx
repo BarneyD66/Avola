@@ -5,9 +5,12 @@ import { useEffect, useSyncExternalStore } from "react";
 import { DashboardStatCard } from "@/components/DashboardStatCard";
 import { useLocale } from "@/components/LocaleProvider";
 import { OrderStatusBadge } from "@/components/OrderStatusBadge";
+import { PaymentStatusBadge } from "@/components/PaymentStatusBadge";
 import { ProgressBar } from "@/components/ProgressBar";
 import {
-  getAllOrders,
+  getDisplayPaymentStatus,
+  getOrdersSnapshot,
+  getServerOrdersSnapshot,
   simulateOrdersProgressOnce,
   subscribeToOrders,
 } from "@/data/orderStore";
@@ -25,8 +28,8 @@ export function DashboardOverviewExperience() {
   const { locale, messages } = useLocale();
   const orders = useSyncExternalStore(
     subscribeToOrders,
-    getAllOrders,
-    getAllOrders,
+    getOrdersSnapshot,
+    getServerOrdersSnapshot,
   );
 
   useEffect(() => {
@@ -40,7 +43,7 @@ export function DashboardOverviewExperience() {
     .reduce((sum, order) => sum + parseAmount(order.amount), 0)
     .toFixed(0)}`;
   const runningOrders = orders.filter((order) =>
-    ["pending", "running", "reviewing"].includes(order.status),
+    ["pending", "running"].includes(order.status),
   ).length;
   const completedOrders = orders.filter(
     (order) => order.status === "completed",
@@ -61,12 +64,12 @@ export function DashboardOverviewExperience() {
   ];
 
   return (
-    <div className="flex flex-col gap-6 sm:gap-8">
-      <section className="surface-panel rounded-[30px] border border-white/8 p-7 sm:p-9">
+    <div className="flex flex-col gap-5 sm:gap-8">
+      <section className="surface-panel rounded-[24px] border border-white/8 p-5 sm:rounded-[30px] sm:p-9">
         <p className="text-xs font-medium uppercase tracking-[0.32em] text-accent-strong/80">
           {messages.dashboard.overview.eyebrow}
         </p>
-        <h2 className="mt-5 text-3xl font-semibold tracking-[-0.03em] text-white sm:text-4xl">
+        <h2 className="mt-4 text-[2rem] leading-tight font-semibold tracking-[-0.03em] text-white sm:mt-5 sm:text-4xl">
           {messages.dashboard.overview.title}
         </h2>
         <p className="mt-4 max-w-3xl text-base leading-8 text-zinc-400 sm:text-lg">
@@ -99,7 +102,7 @@ export function DashboardOverviewExperience() {
         />
       </section>
 
-      <section className="surface-panel rounded-[30px] border border-white/8 p-6 sm:p-8">
+      <section className="surface-panel rounded-[24px] border border-white/8 p-4 sm:rounded-[30px] sm:p-8">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <h3 className="text-2xl font-semibold tracking-tight text-white">
@@ -121,7 +124,7 @@ export function DashboardOverviewExperience() {
           {recentOrders.map((order) => (
             <div
               key={order.id}
-              className="rounded-[24px] border border-white/8 bg-white/[0.02] p-5"
+              className="rounded-[22px] border border-white/8 bg-white/[0.02] p-4 sm:rounded-[24px] sm:p-5"
             >
               <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
                 <div>
@@ -132,10 +135,15 @@ export function DashboardOverviewExperience() {
                     {getLocalizedServiceName(order.serviceSlug, order.serviceName, locale)}
                   </h4>
                 </div>
-                <OrderStatusBadge status={order.status} />
+                <div className="flex flex-col items-start gap-3 sm:items-end">
+                  <OrderStatusBadge status={order.status} />
+                  <PaymentStatusBadge
+                    status={order.paymentStatus ?? "pending_payment"}
+                  />
+                </div>
               </div>
 
-              <div className="mt-5 grid gap-4 md:grid-cols-2 xl:grid-cols-[minmax(0,1fr)_140px_180px_auto] xl:items-end">
+              <div className="mt-5 grid gap-4 md:grid-cols-2 xl:grid-cols-[minmax(0,1fr)_140px_140px_180px_auto] xl:items-end">
                 <div>
                   <div className="flex items-center justify-between gap-4 text-sm text-zinc-300">
                     <span>{messages.order.labels.progress}</span>
@@ -155,9 +163,23 @@ export function DashboardOverviewExperience() {
                   </p>
                   <p className="mt-2 text-sm text-zinc-200">{order.amount}</p>
                 </div>
+                <div>
+                  <p className="text-xs uppercase tracking-[0.24em] text-zinc-500">
+                    {messages.dashboard.overview.paymentStatusLabel}
+                  </p>
+                  <p className="mt-2 text-sm text-zinc-200">
+                    {
+                      messages.payment.status[
+                        getDisplayPaymentStatus(
+                          order.paymentStatus ?? "pending_payment",
+                        )
+                      ].label
+                    }
+                  </p>
+                </div>
                 <Link
                   href={`/dashboard/orders/${order.id}`}
-                  className="inline-flex w-fit rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-sm font-medium text-white hover:bg-white/[0.08] active:scale-[0.98]"
+                  className="inline-flex w-fit rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-sm font-medium text-white hover:bg-white/[0.08] active:scale-[0.98] xl:justify-self-end"
                 >
                   {messages.dashboard.orders.table.viewDetail}
                 </Link>
@@ -167,7 +189,7 @@ export function DashboardOverviewExperience() {
         </div>
       </section>
 
-      <section className="surface-panel rounded-[30px] border border-white/8 p-6 sm:p-8">
+      <section className="surface-panel rounded-[24px] border border-white/8 p-4 sm:rounded-[30px] sm:p-8">
         <h3 className="text-2xl font-semibold tracking-tight text-white">
           {messages.dashboard.overview.quickReorderTitle}
         </h3>

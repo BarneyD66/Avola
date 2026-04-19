@@ -4,8 +4,8 @@ type BrandWordmarkProps = {
 };
 
 const sizeClassMap = {
-  header: "text-[1.7rem] sm:text-[1.85rem]",
-  hero: "text-[2.35rem] sm:text-[2.9rem] lg:text-[3.4rem]",
+  header: "text-[1.45rem] sm:text-[1.85rem]",
+  hero: "text-[2.15rem] sm:text-[2.9rem] lg:text-[3.4rem]",
 };
 
 export function BrandWordmark({

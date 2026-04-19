@@ -22,13 +22,13 @@ export function PackageSelector({
   return (
     <div>
       <div className="flex items-center gap-2">
-        <p className="text-sm font-medium text-zinc-200">
+        <p className="text-xs font-medium uppercase tracking-[0.22em] text-zinc-500">
           {messages.service.selectPackage}
         </p>
         <span className="text-accent-strong">*</span>
       </div>
 
-      <div className="mt-3 grid gap-3">
+      <div className="mt-3 grid gap-2.5 sm:gap-3">
         {packages.map((item) => (
           <PackageOptionCard
             key={item.id}

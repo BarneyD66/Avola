@@ -13,7 +13,9 @@ export function CategoryPreviewPackageList({
   const { locale, messages } = useLocale();
   const visibleItems =
     locale === "en"
-      ? items.slice(0, Math.min(items.length, 2))
+      ? items.length > 3
+        ? items.slice(0, 1)
+        : items.slice(0, Math.min(items.length, 2))
       : items.slice(0, Math.min(items.length, 3));
 
   if (!visibleItems.length) {
@@ -21,25 +23,25 @@ export function CategoryPreviewPackageList({
   }
 
   return (
-    <div className="mt-4">
-      <p className="text-[11px] font-medium uppercase tracking-[0.22em] text-zinc-500">
+    <div className="mt-3.5 sm:mt-4">
+      <p className="text-[10px] font-medium uppercase tracking-[0.24em] text-zinc-500">
         {messages.home.categories.packagePreview}
       </p>
-      <div className="mt-2.5 divide-y divide-white/8">
+      <div className="mt-2 divide-y divide-white/8">
         {visibleItems.map((item) => (
           <div
             key={`${item.title}-${item.price}`}
-            className="flex items-start justify-between gap-4 py-2.5"
+            className="flex items-start justify-between gap-3 py-2 sm:gap-4"
           >
             <div className="min-w-0">
-              <p className="truncate text-sm font-medium text-foreground sm:text-[15px]">
+              <p className="line-clamp-2 text-[13px] font-medium leading-5 text-foreground sm:truncate sm:text-[14px]">
                 {item.title}
               </p>
-              <p className="mt-1 text-xs leading-5 text-muted-strong sm:text-[13px]">
+              <p className="mt-0.5 text-[11px] leading-5 text-muted sm:text-xs">
                 {item.result}
               </p>
             </div>
-            <span className="shrink-0 text-sm font-semibold text-accent-strong sm:text-[15px]">
+            <span className="shrink-0 pt-0.5 text-[13px] font-semibold text-accent-strong sm:text-[14px]">
               {item.price}
             </span>
           </div>

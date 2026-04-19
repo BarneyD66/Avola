@@ -16,23 +16,23 @@ export function Header() {
 
   return (
     <header className="fixed inset-x-0 top-0 z-50">
-      <div className="mx-auto mt-4 flex w-[calc(100%-1.25rem)] max-w-6xl items-center justify-between rounded-2xl border border-white/10 bg-black/30 px-5 py-3 shadow-[0_18px_48px_rgba(0,0,0,0.28)] backdrop-blur-xl sm:mt-5 sm:w-[calc(100%-2rem)] sm:px-6">
+      <div className="glass-panel mx-auto mt-3 flex w-[calc(100%-1rem)] max-w-6xl flex-col gap-3 rounded-2xl px-4 py-3 sm:mt-5 sm:w-[calc(100%-2rem)] sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-7">
         <Link
           href="/"
-          className="inline-flex items-center transition hover:opacity-90"
+          className="inline-flex w-fit items-center transition hover:opacity-90"
           aria-label={messages.header.homeAriaLabel}
         >
           <BrandWordmark size="header" />
         </Link>
 
-        <nav className="flex items-center gap-2 sm:gap-3">
+        <nav className="-mx-1 flex items-center gap-2 overflow-x-auto px-1 pb-1 sm:mx-0 sm:gap-3 sm:overflow-visible sm:px-0 sm:pb-0">
           <LocaleToggle />
           <ThemeToggle />
           {navItems.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className="rounded-full border border-transparent px-4 py-2 text-sm text-zinc-300 hover:border-white/10 hover:bg-white/[0.04] hover:text-white active:scale-[0.98]"
+              className="nav-pill active:scale-[0.98]"
             >
               {item.label}
             </Link>

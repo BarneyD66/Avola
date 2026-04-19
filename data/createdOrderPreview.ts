@@ -15,6 +15,8 @@ export type CreatedOrderPreview = {
 };
 
 export const CREATED_ORDER_PREVIEW_STORAGE_KEY = "avola-created-order-preview";
+let cachedPreviewRaw: string | null | undefined;
+let cachedPreview: CreatedOrderPreview | null | undefined;
 
 export function createCreatedOrderPreview(order: Order): CreatedOrderPreview {
   return {
@@ -33,22 +35,39 @@ export function createCreatedOrderPreview(order: Order): CreatedOrderPreview {
 }
 
 export function saveCreatedOrderPreview(preview: CreatedOrderPreview) {
+  const rawValue = JSON.stringify(preview);
+
   sessionStorage.setItem(
     CREATED_ORDER_PREVIEW_STORAGE_KEY,
-    JSON.stringify(preview),
+    rawValue,
   );
+  cachedPreviewRaw = rawValue;
+  cachedPreview = preview;
 }
 
 export function readCreatedOrderPreview() {
+  if (typeof window === "undefined") {
+    return undefined;
+  }
+
   const rawValue = sessionStorage.getItem(CREATED_ORDER_PREVIEW_STORAGE_KEY);
 
+  if (rawValue === cachedPreviewRaw) {
+    return cachedPreview;
+  }
+
+  cachedPreviewRaw = rawValue;
+
   if (!rawValue) {
+    cachedPreview = null;
     return null;
   }
 
   try {
-    return JSON.parse(rawValue) as CreatedOrderPreview;
+    cachedPreview = JSON.parse(rawValue) as CreatedOrderPreview;
+    return cachedPreview;
   } catch {
+    cachedPreview = null;
     return null;
   }
 }

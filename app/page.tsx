@@ -8,8 +8,8 @@ export default function Home() {
   return (
     <>
       <Header />
-      <main className="relative flex-1 pt-28 pb-16 sm:pt-32 sm:pb-20">
-        <div className="mx-auto flex w-full max-w-6xl flex-col gap-8 px-5 sm:gap-10 sm:px-6 lg:px-8">
+      <main className="relative flex-1 pt-36 pb-14 sm:pt-32 sm:pb-20">
+        <div className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-4 sm:gap-8 sm:px-6 lg:gap-9 lg:px-8">
           <IntroSection />
           <NoticeCard />
           <CategoryPreviewSection categories={categoryPreviews} />

@@ -1,4 +1,4 @@
-export const zhCN = {
+﻿export const zhCN = {
   header: {
     homeAriaLabel: "Avola 首页",
     track: "查询订单",
@@ -114,6 +114,8 @@ export const zhCN = {
       "进度会随订单推进持续更新，建议按最近更新时间确认最新状态。",
     timelineTitle: "时间线",
     timelineDescription: "订单状态将按节点推进，便于你持续查看当前阶段。",
+    paymentStatus: "支付状态",
+    paymentStatusDescription: "支付状态与订单执行状态分开展示，便于快速判断当前进度。",
   },
   order: {
     labels: {
@@ -131,6 +133,16 @@ export const zhCN = {
       basicInfo: "基础信息",
       orderSummary: "订单摘要",
       timeline: "时间线",
+      paymentStatus: "支付状态",
+      paymentMethod: "支付方式",
+      paymentProvider: "支付渠道",
+      paymentAmount: "支付金额",
+      paymentCurrency: "支付币种",
+      paymentChain: "支付链",
+      paymentAddress: "收款地址",
+      paymentReference: "支付参考号",
+      paymentExpiresAt: "支付过期时间",
+      paidAt: "支付完成时间",
     },
     status: {
       pending: {
@@ -173,6 +185,71 @@ export const zhCN = {
       copy: "复制",
       copied: "已复制",
     },
+  },
+  payment: {
+    provider: "Unipay",
+    method: "Crypto",
+    status: {
+      pending_payment: {
+        label: "待支付",
+        description: "订单已创建，请先完成支付后再进入处理流程。",
+      },
+      awaiting_transfer: {
+        label: "等待转账",
+        description: "请按页面展示的金额完成转账，到账后系统会继续更新支付状态。",
+      },
+      payment_confirming: {
+        label: "支付确认中",
+        description: "系统正在确认是否到账，请稍后查看最新结果。",
+      },
+      paid: {
+        label: "已支付",
+        description: "支付已完成，订单已进入处理流程。",
+      },
+      payment_failed: {
+        label: "支付失败",
+        description: "当前支付未成功完成，请重新发起支付。",
+      },
+      expired: {
+        label: "已过期",
+        description: "当前支付会话已过期，请重新发起支付。",
+      },
+      cancelled: {
+        label: "已取消",
+        description: "当前支付流程已取消，可重新发起支付。",
+      },
+    },
+  },
+  checkout: {
+    eyebrow: "支付承接",
+    title: "完成支付",
+    description: "在进入正式支付流程前，请先确认订单信息与当前支付状态。",
+    missingTitle: "未找到订单信息",
+    missingDescription: "当前没有可支付的订单信息，请返回服务页重新提交订单。",
+    summaryTitle: "支付摘要",
+    instructionsTitle: "支付说明",
+    instructions: [
+      "请按页面显示金额完成支付",
+      "支付确认后，系统将自动更新订单状态",
+      "若支付后页面未自动更新，请稍后在订单查询页查看",
+    ],
+    continuePayment: "模拟支付成功",
+    continuePaymentHint: "当前按钮仅用于内部联调阶段的模拟支付测试。",
+    mockModeHint: "模拟支付成功后，订单将进入内部处理流程。",
+    trackOrder: "去订单查询",
+    backHome: "返回首页",
+    packageTitle: "已选套餐",
+  },
+  success: {
+    eyebrow: "支付成功",
+    title: "支付已完成",
+    description: "支付已完成，订单已进入处理流程。",
+    unpaidTitle: "支付尚未完成",
+    unpaidDescription: "当前订单尚未进入已支付状态，请先返回支付页继续完成流程。",
+    mockNotice: "当前为测试支付模式，订单已进入内部处理流程。",
+    trackOrder: "去订单查询",
+    home: "返回首页",
+    backToCheckout: "返回支付页",
   },
   created: {
     eyebrow: "Order Created",
@@ -244,6 +321,7 @@ export const zhCN = {
         "关注最近推进中的订单，并快速进入详情页查看最新状态。",
       allOrders: "查看全部订单",
       latestUpdatedAt: "最近更新时间",
+      paymentStatusLabel: "支付状态",
       quickReorderTitle: "快速复购",
       quickReorderDescription:
         "对常用服务可直接重新进入下单页，减少重复查找路径。",
@@ -268,6 +346,7 @@ export const zhCN = {
         orderId: "订单号",
         serviceName: "服务名称",
         status: "状态",
+        paymentStatus: "支付状态",
         amount: "金额",
         progress: "进度",
         createdAt: "创建时间",
@@ -283,6 +362,7 @@ export const zhCN = {
         "当前未检测到可展示的订单信息，请返回订单列表继续查看其他订单。",
       backToOrders: "返回订单列表",
       progressTitle: "进度区",
+      paymentTitle: "支付信息",
       orderSummaryTitle: "订单摘要",
       timelineDescription: "订单会按阶段推进并持续更新当前节点。",
       repurchase: "再次购买此服务",
@@ -303,3 +383,5 @@ export const zhCN = {
     home: "返回首页",
   },
 } as const;
+
+

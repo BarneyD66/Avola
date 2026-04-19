@@ -52,13 +52,13 @@ export function CreatedOrderCard({ order }: CreatedOrderCardProps) {
   }
 
   return (
-    <section className="surface-panel rounded-[30px] border border-white/8 p-6 sm:p-8">
+    <section className="surface-panel rounded-[24px] border border-white/8 p-4 sm:rounded-[30px] sm:p-8">
       <div className="flex flex-col gap-5 md:flex-row md:items-start md:justify-between">
         <div>
           <p className="text-xs font-medium uppercase tracking-[0.3em] text-accent-strong/80">
             {messages.created.eyebrow}
           </p>
-          <h2 className="mt-4 text-2xl font-semibold tracking-tight text-white sm:text-3xl">
+          <h2 className="mt-4 text-[1.45rem] font-semibold tracking-tight text-white sm:text-3xl">
             {messages.created.cardTitle}
           </h2>
           <p className="mt-3 text-sm leading-7 text-zinc-400 sm:text-base">
@@ -69,7 +69,7 @@ export function CreatedOrderCard({ order }: CreatedOrderCardProps) {
         <OrderStatusBadge status={order.status} />
       </div>
 
-      <div className="mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+      <div className="mt-6 grid gap-3 sm:mt-8 sm:grid-cols-2 sm:gap-4 xl:grid-cols-3">
         <CopyableField
           label={messages.order.labels.orderId}
           value={order.orderId}
@@ -103,7 +103,7 @@ export function CreatedOrderCard({ order }: CreatedOrderCardProps) {
         </div>
       ) : null}
 
-      <div className="mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+      <div className="mt-6 grid gap-3 sm:mt-8 sm:grid-cols-2 sm:gap-4 xl:grid-cols-4">
         {items.map((item) => (
           <div
             key={item.label}

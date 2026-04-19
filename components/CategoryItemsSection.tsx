@@ -18,17 +18,17 @@ export function CategoryItemsSection({ category }: CategoryItemsSectionProps) {
   }
 
   return (
-    <section className="flex flex-col gap-6">
+    <section className="flex flex-col gap-4 sm:gap-6">
       <div className="max-w-3xl">
-        <h2 className="text-3xl font-semibold tracking-tight text-white sm:text-4xl">
+        <h2 className="text-[1.9rem] font-semibold tracking-tight text-foreground sm:text-4xl">
           {localizedCategory.title}
         </h2>
-        <p className="mt-3 text-base leading-8 text-zinc-400 sm:text-lg">
+        <p className="mt-2 text-sm leading-7 text-muted sm:mt-3 sm:text-lg sm:leading-8">
           {localizedCategory.description}
         </p>
       </div>
 
-      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+      <div className="grid gap-3.5 sm:gap-4 md:grid-cols-2 xl:grid-cols-3">
         {localizedCategory.items.map((item) => (
           <CategoryItemCard
             key={item.title}

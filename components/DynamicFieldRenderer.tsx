@@ -18,8 +18,7 @@ export function DynamicFieldRenderer({
 }: DynamicFieldRendererProps) {
   const { messages } = useLocale();
 
-  const baseClassName =
-    "mt-2 w-full rounded-2xl border bg-white/[0.03] px-4 py-3 text-sm text-white outline-none placeholder:text-zinc-500 focus:border-accent/50 focus:bg-white/[0.05] focus:ring-4 focus:ring-accent/10";
+  const baseClassName = "ui-input mt-2";
 
   return (
     <div>
@@ -36,9 +35,7 @@ export function DynamicFieldRenderer({
           name={field.key}
           value={value}
           onChange={(event) => onChange(field.key, event.target.value)}
-          className={`${baseClassName} ${
-            error ? "border-rose-400/50 ring-4 ring-rose-400/10" : "border-white/10"
-          }`}
+          className={`${baseClassName} ${error ? "ui-input--error" : ""}`}
         >
           <option value="">{messages.service.selectPlaceholder}</option>
           {field.options?.map((option) => (
@@ -63,9 +60,7 @@ export function DynamicFieldRenderer({
 
             onChange(field.key, nextValue);
           }}
-          className={`${baseClassName} ${
-            error ? "border-rose-400/50 ring-4 ring-rose-400/10" : "border-white/10"
-          }`}
+          className={`${baseClassName} ${error ? "ui-input--error" : ""}`}
         />
       )}
 

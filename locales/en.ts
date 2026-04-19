@@ -121,6 +121,8 @@ export const en: Messages = {
     timelineTitle: "Timeline",
     timelineDescription:
       "The order status will advance by milestones, so you can keep track of the current stage.",
+    paymentStatus: "Payment Status",
+    paymentStatusDescription: "Payment and execution status are displayed separately for easier tracking.",
   },
   order: {
     labels: {
@@ -138,6 +140,16 @@ export const en: Messages = {
       basicInfo: "Basic Information",
       orderSummary: "Order Summary",
       timeline: "Timeline",
+      paymentStatus: "Payment Status",
+      paymentMethod: "Payment Method",
+      paymentProvider: "Payment Provider",
+      paymentAmount: "Payment Amount",
+      paymentCurrency: "Payment Currency",
+      paymentChain: "Payment Chain",
+      paymentAddress: "Payment Address",
+      paymentReference: "Payment Reference",
+      paymentExpiresAt: "Payment Expires At",
+      paidAt: "Paid At",
     },
     status: {
       pending: {
@@ -153,10 +165,10 @@ export const en: Messages = {
           "The current order is being processed. Please check again later for the latest progress.",
       },
       reviewing: {
-        label: "Reviewing",
-        description: "The current order has entered the result verification stage.",
+        label: "Running",
+        description: "The current order is being processed. Please check again later for the latest progress.",
         summary:
-          "The current order has entered the result verification stage. The system will update the final status after verification is completed.",
+          "The current order is being processed. Please check again later for the latest progress.",
       },
       completed: {
         label: "Completed",
@@ -175,7 +187,7 @@ export const en: Messages = {
       created: "Order created",
       queued: "Entered execution queue",
       running: "Running",
-      reviewing: "Reviewing",
+      reviewing: "Running",
       completed: "Completed",
       pending: "Pending update",
     },
@@ -185,6 +197,78 @@ export const en: Messages = {
       copy: "Copy",
       copied: "Copied",
     },
+  },
+  payment: {
+    provider: "Unipay",
+    method: "Crypto",
+    status: {
+      pending_payment: {
+        label: "Pending Payment",
+        description: "The order has been created. Please complete payment first before processing begins.",
+      },
+      awaiting_transfer: {
+        label: "Awaiting Transfer",
+        description: "Please complete the transfer according to the amount shown on this page.",
+      },
+      payment_confirming: {
+        label: "Payment Confirming",
+        description: "The system is confirming whether the payment has arrived. Please check again shortly.",
+      },
+      paid: {
+        label: "Paid",
+        description: "Payment has been completed and the order has entered the processing flow.",
+      },
+      payment_failed: {
+        label: "Payment Failed",
+        description: "The current payment did not complete successfully. Please start the payment again.",
+      },
+      expired: {
+        label: "Expired",
+        description: "The current payment session has expired. Please start a new payment.",
+      },
+      cancelled: {
+        label: "Cancelled",
+        description: "The current payment flow has been cancelled. You can start a new payment.",
+      },
+    },
+  },
+  checkout: {
+    eyebrow: "Checkout",
+    title: "Complete Payment",
+    description:
+      "Before entering the formal payment flow, please confirm the order information and current payment status.",
+    missingTitle: "Order not found",
+    missingDescription:
+      "No payable order information is currently available. Please return to the service page and submit a new order.",
+    summaryTitle: "Payment Summary",
+    instructionsTitle: "Payment Instructions",
+    instructions: [
+      "Please complete payment according to the amount shown on this page.",
+      "After payment is confirmed, the system will automatically update the order status.",
+      "If the page does not update automatically after payment, please check later on the order tracking page.",
+    ],
+    continuePayment: "Simulate Payment Success",
+    continuePaymentHint:
+      "This button is currently used for internal mock payment testing.",
+    mockModeHint:
+      "After simulated payment success, the order will enter the internal processing flow.",
+    trackOrder: "Track Order",
+    backHome: "Back to Home",
+    packageTitle: "Selected Package",
+  },
+  success: {
+    eyebrow: "Payment Success",
+    title: "Payment Completed",
+    description:
+      "Payment has been completed and the order has entered the processing flow.",
+    unpaidTitle: "Payment not completed",
+    unpaidDescription:
+      "The current order has not reached the paid state yet. Please return to the checkout page to continue the process.",
+    mockNotice:
+      "This order is currently in mock payment mode and has entered the internal processing flow.",
+    trackOrder: "Track Order",
+    home: "Back to Home",
+    backToCheckout: "Back to Checkout",
   },
   created: {
     eyebrow: "Order Created",
@@ -243,7 +327,7 @@ export const en: Messages = {
         },
         runningOrders: {
           label: "Active Orders",
-          description: "Including pending, running, and reviewing orders",
+          description: "Including pending and running orders",
         },
         completedOrders: {
           label: "Completed Orders",
@@ -259,6 +343,7 @@ export const en: Messages = {
         "Focus on the orders that are moving recently and quickly enter the detail page to view the latest status.",
       allOrders: "View All Orders",
       latestUpdatedAt: "Last Updated",
+      paymentStatusLabel: "Payment",
       quickReorderTitle: "Quick Reorder",
       quickReorderDescription:
         "You can directly re-enter the order page for frequently used services and reduce repeated path searching.",
@@ -275,7 +360,7 @@ export const en: Messages = {
       filters: {
         all: "All",
         running: "Running",
-        reviewing: "Reviewing",
+        reviewing: "Running",
         completed: "Completed",
         issue: "Issue Handling",
       },
@@ -283,6 +368,7 @@ export const en: Messages = {
         orderId: "Order ID",
         serviceName: "Service Name",
         status: "Status",
+        paymentStatus: "Payment",
         amount: "Amount",
         progress: "Progress",
         createdAt: "Created At",
@@ -298,6 +384,7 @@ export const en: Messages = {
         "No order information is currently available to display. Please return to the order list and continue viewing other orders.",
       backToOrders: "Back to Order List",
       progressTitle: "Progress",
+      paymentTitle: "Payment Information",
       orderSummaryTitle: "Order Summary",
       timelineDescription:
         "The order will advance by stages and keep updating the current milestone.",

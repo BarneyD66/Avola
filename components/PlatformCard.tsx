@@ -11,24 +11,24 @@ export function PlatformCard({ platform }: PlatformCardProps) {
   const hasSingleAction = platform.actions.length === 1;
 
   return (
-    <article className="surface-panel flex h-full flex-col rounded-[26px] border border-white/8 p-5 sm:p-6">
-      <div className="rounded-[20px] border border-white/7 bg-white/[0.02] px-4 py-3.5">
+    <article className="surface-panel flex h-full flex-col rounded-[24px] border border-white/8 p-4 sm:rounded-[26px] sm:p-6">
+      <div className="rounded-[18px] border border-white/7 bg-white/[0.02] px-3.5 py-3.5 sm:rounded-[20px] sm:px-4">
         <div className="flex items-center gap-3.5">
           <PlatformIcon iconKey={platform.iconKey} />
           <div className="min-w-0">
-            <h3 className="text-lg font-semibold tracking-tight text-white sm:text-xl">
+            <h3 className="text-base font-semibold tracking-tight text-white sm:text-xl">
               {platform.platform}
             </h3>
-            <p className="mt-1 text-sm leading-6 text-zinc-400">
+            <p className="mt-1 text-[13px] leading-6 text-zinc-400 sm:text-sm">
               {platform.description}
             </p>
           </div>
         </div>
       </div>
 
-      <div className={`mt-5 flex flex-1 ${hasSingleAction ? "items-end" : "items-start"}`}>
+      <div className={`mt-4 flex flex-1 sm:mt-5 ${hasSingleAction ? "items-end" : "items-start"}`}>
         {isXPlatform ? (
-          <div className="grid w-full grid-cols-2 gap-2.5">
+          <div className="grid w-full grid-cols-2 gap-2">
             {platform.actions.map((action, index) => (
               <ServiceActionButton
                 key={action.slug}
@@ -50,7 +50,7 @@ export function PlatformCard({ platform }: PlatformCardProps) {
             />
           </div>
         ) : (
-          <div className="grid w-full grid-cols-2 gap-2.5">
+          <div className="grid w-full grid-cols-2 gap-2">
             {platform.actions.map((action, index) => (
               <ServiceActionButton
                 key={action.slug}

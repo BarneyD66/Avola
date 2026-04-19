@@ -7,11 +7,11 @@ export function MissingOrderState() {
   const { messages } = useLocale();
 
   return (
-    <section className="surface-panel rounded-[30px] border border-white/8 p-7 text-center sm:p-9">
+    <section className="surface-panel rounded-[24px] border border-white/8 p-5 text-center sm:rounded-[30px] sm:p-9">
       <p className="text-xs font-medium uppercase tracking-[0.32em] text-accent-strong/80">
         {messages.created.missing.eyebrow}
       </p>
-      <h1 className="mt-5 text-3xl font-semibold tracking-tight text-white sm:text-4xl">
+      <h1 className="mt-4 text-[2rem] leading-tight font-semibold tracking-tight text-white sm:mt-5 sm:text-4xl">
         {messages.created.missing.title}
       </h1>
       <p className="mx-auto mt-4 max-w-2xl text-base leading-8 text-zinc-400 sm:text-lg">
