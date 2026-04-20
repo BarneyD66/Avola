@@ -25,40 +25,42 @@ type CoverageItem = {
 };
 
 const PumpFunIcon: IconType = (props: IconBaseProps) => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" {...props}>
-    <path d="M7.2 4.8h4.4a4.4 4.4 0 0 1 4.4 4.4v1.1a4.4 4.4 0 0 1-4.4 4.4H7.2a2.4 2.4 0 0 1-2.4-2.4V7.2a2.4 2.4 0 0 1 2.4-2.4Z" />
-    <path d="M16.1 9.1 9.2 16" />
-    <path d="M9 11.2c.9 0 1.6-.7 1.6-1.6S9.9 8 9 8s-1.6.7-1.6 1.6.7 1.6 1.6 1.6Z" />
-    <path d="M14.7 16c.9 0 1.6-.7 1.6-1.6s-.7-1.6-1.6-1.6-1.6.7-1.6 1.6.7 1.6 1.6 1.6Z" />
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" {...props}>
+    <path d="M8.15 4.55a4.15 4.15 0 0 0-2.95 1.23l-.72.72a4.18 4.18 0 0 0 0 5.91l7.11 7.11a4.18 4.18 0 0 0 5.91 0l2.03-2.03a4.18 4.18 0 0 0 0-5.91L12.42 4.48a4.15 4.15 0 0 0-4.27-.93Z" />
+    <path d="m8.2 15.8 7.6-7.6" />
+    <path d="M8.1 13.8c.32-.62.76-1.06 1.32-1.32" />
+    <path d="M6.95 12.65c.17-.34.4-.65.67-.92" />
   </svg>
 );
 
 const DexScreenerIcon: IconType = (props: IconBaseProps) => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" {...props}>
-    <path d="M6 16.5 12 6l6 10.5" />
-    <path d="M8.1 13.3 12 10.9l3.9 2.4" />
-    <path d="M9.6 18.1c.8-.8 1.5-1.2 2.4-1.2s1.6.4 2.4 1.2" />
-    <circle cx="9.4" cy="10.1" r="0.75" fill="currentColor" stroke="none" />
-    <circle cx="14.6" cy="10.1" r="0.75" fill="currentColor" stroke="none" />
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" {...props}>
+    <path d="M12 4.8c1.86 0 3.68.86 5.01 2.36 1.46 1.66 2.18 3.95 2 6.3-.2 2.67-1.53 5.08-3.67 6.24-1.14.62-2.34.82-3.34.82s-2.2-.2-3.34-.82c-2.14-1.16-3.47-3.57-3.67-6.24-.18-2.35.54-4.64 2-6.3A6.72 6.72 0 0 1 12 4.8Z" />
+    <path d="M8.35 11.15 12 13.5l3.65-2.35" />
+    <path d="M9.15 15.6c.92.78 1.82 1.1 2.85 1.1s1.93-.32 2.85-1.1" />
+    <circle cx="9.55" cy="10.15" r="0.72" fill="currentColor" stroke="none" />
+    <circle cx="14.45" cy="10.15" r="0.72" fill="currentColor" stroke="none" />
   </svg>
 );
 
 const PancakeSwapIcon: IconType = (props: IconBaseProps) => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" {...props}>
-    <path d="M8.2 8.2V6.7a1.8 1.8 0 1 1 3.6 0v1" />
-    <path d="M12.2 7.7v-1a1.8 1.8 0 1 1 3.6 0v1.5" />
-    <path d="M6.4 12.5c0-3.4 2.7-6.2 6-6.2s6 2.8 6 6.2c0 3.5-2.7 6.1-6 6.1s-6-2.6-6-6.1Z" />
-    <circle cx="10.4" cy="12.2" r="0.7" fill="currentColor" stroke="none" />
-    <circle cx="14.6" cy="12.2" r="0.7" fill="currentColor" stroke="none" />
-    <path d="M9.8 15.2c.8.7 1.5 1 2.2 1s1.4-.3 2.2-1" />
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" {...props}>
+    <path d="M9.05 7.1V5.9a1.55 1.55 0 1 1 3.1 0v1" />
+    <path d="M11.85 6.9V5.85a1.55 1.55 0 1 1 3.1 0V7.1" />
+    <path d="M7.15 11.15c0-2.88 2.17-5.15 4.85-5.15s4.85 2.27 4.85 5.15c0 2.82-2.17 5.2-4.85 5.2s-4.85-2.38-4.85-5.2Z" />
+    <path d="M6.25 14.5c.84 1.88 2.78 3.1 5.75 3.1s4.91-1.22 5.75-3.1" />
+    <circle cx="10.2" cy="10.95" r="0.62" fill="currentColor" stroke="none" />
+    <circle cx="13.8" cy="10.95" r="0.62" fill="currentColor" stroke="none" />
+    <path d="M10.3 13.6c.63.48 1.14.68 1.7.68s1.07-.2 1.7-.68" />
   </svg>
 );
 
 const FourMemeIcon: IconType = (props: IconBaseProps) => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" {...props}>
-    <path d="M14.6 4.8v14.4" />
-    <path d="M7.4 13.3 14.6 4.8" />
-    <path d="M7.4 13.3h9.2" />
+    <rect x="4.4" y="4.4" width="15.2" height="15.2" rx="5" />
+    <path d="M13.9 7.8v8.4" />
+    <path d="M9.2 12.15h6.2" />
+    <path d="m9.2 12.15 4.7-4.35" />
   </svg>
 );
 

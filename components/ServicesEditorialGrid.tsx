@@ -39,10 +39,7 @@ export function ServicesEditorialGrid({
               <div className="services-directory-card-header flex items-start gap-4">
                 <CategoryPreviewIcon iconKey={category.iconKey} />
                 <div className="min-w-0">
-                  <p className="text-[10px] font-medium uppercase tracking-[0.24em] text-accent-strong/68">
-                    {messages.services.editorialLabel}
-                  </p>
-                  <h2 className="services-directory-card-title mt-2 max-w-[16ch] text-[1.4rem] leading-[1.08] font-semibold tracking-[-0.038em] text-foreground sm:text-[1.68rem]">
+                  <h2 className="services-directory-card-title max-w-[16ch] text-[1.4rem] leading-[1.08] font-semibold tracking-[-0.038em] text-foreground sm:text-[1.68rem]">
                     {category.title}
                   </h2>
                   <p className="mt-3 max-w-[34rem] text-[14px] leading-7 text-muted sm:text-[14.5px] sm:leading-7.5">

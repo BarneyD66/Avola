@@ -1439,6 +1439,20 @@ html.light .header-login-pill:hover {
   margin-right: auto;
 }
 
+[class*="text-[10px]"][class*="uppercase"],
+[class*="text-[11px]"][class*="uppercase"],
+[class*="text-xs"][class*="uppercase"] {
+  font-size: 0.76rem !important;
+  letter-spacing: 0.18em !important;
+  color: rgba(158, 188, 232, 0.9) !important;
+}
+
+html.light [class*="text-[10px]"][class*="uppercase"],
+html.light [class*="text-[11px]"][class*="uppercase"],
+html.light [class*="text-xs"][class*="uppercase"] {
+  color: rgba(88, 108, 138, 0.9) !important;
+}
+
 .brand-hero-emphasis {
   color: #dfeeff;
   text-shadow:
@@ -1475,11 +1489,26 @@ html.light .header-login-pill:hover {
 .brand-story-hero-trust-title {
   text-wrap: balance;
   max-width: 13ch;
+  min-height: 3.6em;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
 }
 
 .brand-story-hero-trust-description {
   max-width: 18.5ch;
   text-wrap: balance;
+  min-height: 4.9em;
+}
+
+@media (min-width: 640px) {
+  .brand-story-hero-trust-title {
+    min-height: 3.3em;
+  }
+
+  .brand-story-hero-trust-description {
+    min-height: 4.6em;
+  }
 }
 
 .brand-story-card-feature {
@@ -1834,15 +1863,36 @@ html.light .services-directory-card-panel {
   }
 
   .header-shell {
+    margin-top: 0.8rem;
+    width: calc(100% - 0.75rem);
+    min-height: auto;
     row-gap: 0.65rem;
+    border-radius: 1.15rem;
+    padding: 0.9rem 0.9rem 0.85rem;
+  }
+
+  .brand-wordmark {
+    letter-spacing: 0.08em;
+    font-size: 1.22rem !important;
   }
 
   .header-control-cluster .segmented-shell {
     max-width: 100%;
   }
 
+  .header-control-cluster .segmented-button {
+    padding: 0.38rem 0.68rem;
+    font-size: 0.78rem;
+  }
+
+  .header-mobile-pill {
+    padding: 0.68rem 0.5rem;
+    font-size: 0.78rem;
+  }
+
   .brand-home-main {
-    padding-top: 7.8rem;
+    padding-top: 8.2rem;
+    padding-bottom: 4.5rem;
   }
 
   .brand-home-hero {
@@ -1852,20 +1902,21 @@ html.light .services-directory-card-panel {
   }
 
   .brand-hero-headline {
-    max-width: 11.5ch;
-    font-size: 2.18rem;
-    line-height: 1.08;
+    max-width: 10.9ch;
+    font-size: 2rem;
+    line-height: 1.1;
+    letter-spacing: -0.038em;
   }
 
   .brand-hero-subtitle {
     margin-top: 1.4rem;
     max-width: 100%;
-    font-size: 0.98rem;
-    line-height: 1.9;
+    font-size: 0.96rem;
+    line-height: 1.78;
   }
 
   .brand-hero-actions {
-    margin-top: 1.8rem;
+    margin-top: 1.7rem;
     width: 100%;
   }
 
@@ -1877,6 +1928,223 @@ html.light .services-directory-card-panel {
 
   .brand-story-hero-trust {
     margin-top: 2rem;
+    grid-template-columns: 1fr;
+    gap: 0.85rem;
+  }
+
+  .brand-story-hero-trust-item {
+    border-radius: 1.15rem;
+    padding: 1rem 1rem 0.95rem;
+  }
+
+  .brand-story-hero-trust-title {
+    max-width: 16ch;
+    font-size: 0.98rem;
+    line-height: 1.34;
+  }
+
+  .brand-story-hero-trust-description {
+    max-width: 22rem;
+    margin-top: 0.65rem;
+    font-size: 0.82rem;
+    line-height: 1.55;
+  }
+
+  .platform-coverage-band {
+    border-radius: 1.35rem;
+    padding: 1rem 0.95rem 1.05rem;
+  }
+
+  .platform-coverage-band .sm\:text-right {
+    text-align: left !important;
+  }
+
+  .brand-story-panel {
+    border-radius: 1.75rem;
+    padding: 1.6rem 1rem 1.75rem;
+  }
+
+  .brand-story-panel h2 {
+    text-wrap: balance;
+  }
+
+  .brand-value-strip {
+    border-radius: 1.2rem;
+  }
+
+  .brand-value-cell {
+    padding: 1rem 0.95rem 1.05rem;
+  }
+
+  .brand-value-cell h3 {
+    margin-top: 0.9rem;
+    max-width: 100%;
+    font-size: 1.02rem;
+  }
+
+  .brand-value-cell p:last-child {
+    margin-top: 0.7rem;
+    max-width: 100%;
+    font-size: 0.82rem;
+    line-height: 1.55;
+  }
+
+  .brand-flow-stage {
+    gap: 1rem;
+  }
+
+  .brand-flow-list,
+  .flow-detail-panel {
+    border-radius: 1.35rem;
+  }
+
+  .brand-flow-list {
+    padding: 1rem 0.95rem 1.05rem;
+  }
+
+  .brand-flow-list-item {
+    grid-template-columns: auto auto minmax(0, 1fr);
+    gap: 0.78rem;
+    padding: 0.95rem 0 1rem;
+  }
+
+  .brand-flow-list-item p.text-\[1rem\] {
+    font-size: 0.98rem;
+    line-height: 1.3;
+  }
+
+  .brand-flow-list-item p.text-\[13px\] {
+    margin-top: 0.45rem;
+    font-size: 0.82rem;
+    line-height: 1.5;
+  }
+
+  .brand-flow-list-marker {
+    width: 2.4rem;
+    height: 2.4rem;
+  }
+
+  .flow-detail-panel {
+    padding: 1.15rem 1rem 1.1rem;
+  }
+
+  .brand-flow-active-rail {
+    margin-top: 1rem;
+    grid-template-columns: 1fr;
+  }
+
+  .brand-flow-active-block {
+    border-radius: 1rem;
+    padding: 0.95rem 0.95rem 1rem;
+  }
+
+  .brand-trust-grid {
+    margin-top: 1.6rem;
+  }
+
+  .brand-trust-item,
+  .brand-trust-item-anchor {
+    padding: 1rem 0.95rem 1.05rem;
+  }
+
+  .brand-trust-item-anchor h3,
+  .brand-trust-item p.text-\[0\.96rem\] {
+    max-width: 100%;
+  }
+
+  .brand-support-inline {
+    border-radius: 1.1rem;
+    padding: 1rem 0.95rem;
+  }
+
+  .brand-story-card {
+    border-radius: 1.35rem;
+    padding: 1rem 0.95rem 1.05rem;
+  }
+
+  .brand-story-card .space-y-2,
+  .brand-story-card .space-y-3 {
+    margin-top: 0.8rem;
+  }
+
+  .services-directory-hero {
+    border-radius: 1.5rem;
+    padding: 1.35rem 1rem 1.4rem;
+  }
+
+  .services-directory-hero h1 {
+    max-width: 11.5ch;
+    font-size: 1.85rem;
+    line-height: 1.08;
+  }
+
+  .services-directory-actions {
+    width: 100%;
+  }
+
+  .services-directory-actions .ui-primary-button,
+  .services-directory-actions .ui-secondary-button {
+    width: 100%;
+  }
+
+  .services-directory-card {
+    border-radius: 1.35rem;
+    padding: 0.9rem;
+  }
+
+  .services-directory-card-header {
+    min-height: auto;
+    gap: 0.75rem;
+  }
+
+  .services-directory-card-title {
+    max-width: 100%;
+    font-size: 1.2rem;
+    line-height: 1.08;
+  }
+
+  .services-directory-card-header p {
+    margin-top: 0.45rem;
+    font-size: 0.84rem;
+    line-height: 1.55rem;
+  }
+
+  .services-directory-card-panel {
+    border-radius: 1rem;
+    padding: 0.85rem 0.85rem 0.9rem;
+  }
+
+  .services-directory-card-panel .sm\:grid-cols-2 {
+    grid-template-columns: 1fr !important;
+    gap: 0.45rem;
+  }
+
+  .services-directory-card-panel .divide-y > div {
+    padding-top: 0.7rem;
+    padding-bottom: 0.7rem;
+  }
+
+  .services-directory-card .mt-6 {
+    margin-top: 0.8rem;
+  }
+
+  .services-directory-card .border-t {
+    padding-top: 0.8rem;
+  }
+
+  .services-directory-card-panel p.text-\[14px\] {
+    font-size: 0.84rem;
+    line-height: 1.45rem;
+  }
+
+  .services-directory-card-panel p.text-\[12px\] {
+    font-size: 0.76rem;
+    line-height: 1.25rem;
+  }
+
+  .services-directory-card-panel span.text-\[12px\] {
+    padding: 0.22rem 0.62rem;
+    font-size: 0.74rem;
   }
 }
 
@@ -2074,6 +2342,111 @@ html.light [class~="shadow-[0_14px_36px_rgba(0,0,0,0.18)]"] {
   position: relative;
 }
 
+.brand-flow-ambient {
+  pointer-events: none;
+  opacity: 0;
+  transform: translate3d(0, 12px, 0) scale(0.96);
+  transition:
+    opacity 700ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.brand-flow-stage .brand-flow-list-item,
+.brand-flow-stage .flow-detail-panel {
+  opacity: 0;
+  transform: translate3d(0, 18px, 0);
+  will-change: transform, opacity;
+}
+
+.brand-flow-stage .brand-flow-list,
+.brand-flow-stage .brand-flow-card-active {
+  position: relative;
+  overflow: hidden;
+}
+
+.brand-flow-stage .brand-flow-list::before,
+.brand-flow-stage .brand-flow-card-active::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 520ms ease;
+}
+
+.brand-flow-stage .brand-flow-list::before {
+  inset: 0 auto 0 0;
+  width: 1px;
+  background: linear-gradient(
+    180deg,
+    rgba(147, 197, 253, 0),
+    rgba(147, 197, 253, 0.55) 20%,
+    rgba(147, 197, 253, 0.16) 55%,
+    rgba(147, 197, 253, 0)
+  );
+  transform: scaleY(0.08);
+  transform-origin: top;
+  transition:
+    opacity 480ms ease,
+    transform 760ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.brand-flow-stage .brand-flow-card-active::after {
+  inset: -8% -24%;
+  background: linear-gradient(
+    115deg,
+    transparent 22%,
+    rgba(255, 255, 255, 0.085) 50%,
+    transparent 78%
+  );
+  transform: translateX(-18%);
+}
+
+.brand-flow-stage.is-flow-visible .brand-flow-list-item,
+.brand-flow-stage.is-flow-visible .flow-detail-panel {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+.brand-flow-stage.is-flow-visible .brand-flow-ambient {
+  opacity: 0.85;
+  transform: translate3d(0, 0, 0) scale(1);
+}
+
+.brand-flow-stage.is-flow-visible .brand-flow-list::before {
+  opacity: 1;
+  transform: scaleY(1);
+}
+
+.brand-flow-stage.is-flow-visible .brand-flow-card-active::after {
+  opacity: 1;
+  animation: flowPanelSweep 6.8s ease-in-out infinite;
+}
+
+.brand-flow-stage.is-flow-visible .brand-flow-list-item {
+  transition:
+    opacity 520ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 520ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 180ms ease,
+    background 180ms ease,
+    box-shadow 180ms ease;
+  transition-delay: var(--flow-step-delay, 0ms);
+}
+
+.brand-flow-stage.is-flow-visible .flow-detail-panel {
+  transition:
+    opacity 560ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 560ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 180ms ease,
+    background 180ms ease,
+    box-shadow 180ms ease;
+  transition-delay: var(--flow-panel-delay, 0ms);
+}
+
+.brand-flow-stage.is-flow-visible .brand-flow-list-item-active .brand-flow-list-line {
+  animation: flowLineGlow 2.8s ease-in-out infinite;
+}
+
 .brand-flow-track {
   position: absolute;
   top: 2rem;
@@ -2190,6 +2563,30 @@ html.light .brand-contact-card {
   box-shadow:
     0 0 0 5px rgba(59, 130, 246, 0.08),
     0 0 20px rgba(59, 130, 246, 0.18);
+}
+
+.brand-flow-detail-content {
+  animation: flowDetailSwap 240ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.brand-flow-detail-content > * {
+  animation: flowDetailInner 280ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.brand-flow-detail-content > *:nth-child(2) {
+  animation-delay: 20ms;
+}
+
+.brand-flow-detail-content > *:nth-child(3) {
+  animation-delay: 40ms;
+}
+
+.brand-flow-detail-content > *:nth-child(4) {
+  animation-delay: 60ms;
+}
+
+.brand-flow-detail-content > * {
+  animation-fill-mode: both;
 }
 
 html.light .brand-story-hero-trust-item,
@@ -2319,6 +2716,57 @@ html.light .brand-flow-inline-dot-muted {
   50% {
     opacity: 1;
     box-shadow: 0 0 0 6px rgba(52, 211, 153, 0);
+  }
+}
+
+@keyframes flowLineGlow {
+  0%,
+  100% {
+    filter: brightness(1);
+  }
+  50% {
+    filter: brightness(1.24);
+  }
+}
+
+@keyframes flowPanelSweep {
+  0% {
+    transform: translateX(-22%);
+    opacity: 0;
+  }
+  14% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateX(18%);
+    opacity: 0;
+  }
+}
+
+@keyframes flowDetailSwap {
+  from {
+    opacity: 0.72;
+    transform: translate3d(0, 10px, 0) scale(0.988);
+    filter: saturate(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: saturate(1);
+  }
+}
+
+@keyframes flowDetailInner {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 8px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
   }
 }
 
@@ -2460,6 +2908,7 @@ html.light .brand-flow-inline-dot-muted {
 
 .brand-value-cell {
   position: relative;
+  min-height: 100%;
   transition:
     background 180ms ease,
     transform 180ms ease,
@@ -2472,6 +2921,14 @@ html.light .brand-flow-inline-dot-muted {
 
 .brand-value-cell:hover {
   background: rgba(255, 255, 255, 0.022);
+}
+
+.brand-value-cell h3 {
+  min-height: 2.9rem;
+}
+
+.brand-value-cell p:last-child {
+  max-width: 24rem;
 }
 
 .brand-trust-grid {
@@ -2723,6 +3180,376 @@ html.light .brand-console-inline:hover {
   background: rgba(255, 255, 255, 0.78);
 }
 
+.interactive-section-glow {
+  --section-glow-x: 50%;
+  --section-glow-y: 50%;
+  --section-glow-opacity: 0;
+  --section-parallax-x: 0px;
+  --section-parallax-y: 0px;
+  isolation: isolate;
+}
+
+.section-cursor-glow {
+  position: absolute;
+  inset: -10%;
+  z-index: 0;
+  pointer-events: none;
+  opacity: var(--section-glow-opacity, 0);
+  background: radial-gradient(
+    24rem circle at var(--section-glow-x, 50%) var(--section-glow-y, 50%),
+    rgba(96, 154, 255, 0.1),
+    rgba(96, 154, 255, 0.045) 28%,
+    rgba(96, 154, 255, 0.012) 44%,
+    transparent 62%
+  );
+  filter: blur(10px);
+  transform: translate3d(
+    calc(var(--section-parallax-x, 0px) * 0.65),
+    calc(var(--section-parallax-y, 0px) * 0.65),
+    0
+  );
+  transition:
+    opacity 220ms ease,
+    transform 180ms ease;
+}
+
+.brand-home-orb,
+.brand-home-grid,
+.brand-hero-spotlight,
+.brand-flow-ambient {
+  transform: translate3d(
+    calc(var(--section-parallax-x, 0px) * 0.12),
+    calc(var(--section-parallax-y, 0px) * 0.12),
+    0
+  );
+  transition: transform 240ms ease;
+}
+
+.ui-primary-button,
+.ui-secondary-button {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  transition:
+    color 180ms ease,
+    background 180ms ease,
+    border-color 180ms ease,
+    box-shadow 220ms ease,
+    transform 180ms ease;
+}
+
+.ui-primary-button::after,
+.ui-secondary-button::after {
+  content: "";
+  position: absolute;
+  inset: -38% -16%;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 200ms ease;
+}
+
+.ui-primary-button::after {
+  background: linear-gradient(
+    112deg,
+    transparent 24%,
+    rgba(255, 255, 255, 0.18) 50%,
+    transparent 76%
+  );
+}
+
+.ui-secondary-button::after {
+  background: linear-gradient(
+    112deg,
+    transparent 28%,
+    rgba(255, 255, 255, 0.08) 50%,
+    transparent 72%
+  );
+}
+
+.ui-primary-button:hover,
+.ui-primary-button:focus-visible {
+  transform: translateY(-2px);
+  box-shadow:
+    0 18px 32px rgba(59, 130, 246, 0.16),
+    0 0 0 1px rgba(255, 255, 255, 0.03) inset;
+}
+
+.ui-secondary-button:hover,
+.ui-secondary-button:focus-visible {
+  transform: translateY(-2px);
+  border-color: rgba(96, 154, 255, 0.18);
+  background: rgba(255, 255, 255, 0.042);
+  box-shadow:
+    0 12px 24px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.ui-primary-button:hover::after,
+.ui-primary-button:focus-visible::after,
+.ui-secondary-button:hover::after,
+.ui-secondary-button:focus-visible::after {
+  opacity: 1;
+  animation: buttonSheen 4.8s ease-in-out infinite;
+}
+
+.ui-primary-button:active,
+.ui-secondary-button:active {
+  transform: translateY(0);
+}
+
+.ui-primary-button:focus-visible,
+.ui-secondary-button:focus-visible,
+.brand-flow-list-item:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 4px rgba(96, 154, 255, 0.12),
+    0 14px 26px rgba(0, 0, 0, 0.08);
+}
+
+.brand-story-hero-trust-item,
+.brand-value-cell,
+.brand-trust-item,
+.brand-support-inline,
+.brand-story-card,
+.brand-flow-card,
+.brand-purchase-card,
+.brand-contact-card {
+  position: relative;
+}
+
+.brand-story-hero-trust-item::after,
+.brand-value-cell::after,
+.brand-trust-item::after,
+.brand-support-inline::after,
+.brand-story-card::after,
+.brand-flow-card::after,
+.brand-purchase-card::after,
+.brand-contact-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.05),
+    transparent 42%
+  );
+  transition: opacity 200ms ease;
+}
+
+.brand-story-hero-trust-item:hover::after,
+.brand-value-cell:hover::after,
+.brand-trust-item:hover::after,
+.brand-support-inline:hover::after,
+.brand-story-card:hover::after,
+.brand-flow-card:hover::after,
+.brand-purchase-card:hover::after,
+.brand-contact-card:hover::after {
+  opacity: 1;
+}
+
+.brand-story-hero-trust-item:hover,
+.brand-value-cell:hover,
+.brand-trust-item:hover,
+.brand-support-inline:hover,
+.brand-story-card:hover,
+.brand-flow-card:hover,
+.brand-purchase-card:hover,
+.brand-contact-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(96, 154, 255, 0.16);
+  box-shadow:
+    0 14px 28px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.045);
+}
+
+.brand-story-hero-trust-item:hover .brand-story-hero-trust-dot,
+.brand-value-cell:hover p.text-\[10px\],
+.brand-trust-item:hover .brand-trust-accent-line,
+.brand-support-inline:hover p.text-\[11px\] {
+  filter: brightness(1.08);
+}
+
+.platform-coverage-item {
+  position: relative;
+}
+
+.platform-coverage-item:hover .platform-coverage-icon-shell {
+  border-color: rgba(96, 154, 255, 0.14);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.016)),
+    rgba(255, 255, 255, 0.02);
+  box-shadow:
+    0 8px 18px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.platform-coverage-item:hover .platform-coverage-icon {
+  color: rgba(184, 213, 255, 0.94);
+}
+
+.platform-coverage-item:hover .platform-coverage-label {
+  color: rgba(245, 248, 252, 0.96);
+}
+
+.brand-flow-list-item {
+  border-radius: 1.3rem;
+  transition:
+    opacity 520ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 520ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 180ms ease,
+    background 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.brand-flow-list-item:hover,
+.brand-flow-list-item:focus-visible {
+  border-color: rgba(96, 154, 255, 0.12);
+  background: rgba(255, 255, 255, 0.018);
+}
+
+.brand-flow-list-item-active {
+  background:
+    linear-gradient(180deg, rgba(96, 154, 255, 0.045), rgba(255, 255, 255, 0.012)),
+    rgba(255, 255, 255, 0.012);
+}
+
+.brand-flow-list-item-active .brand-flow-list-title {
+  color: rgba(245, 248, 252, 0.98);
+}
+
+.brand-flow-list-item-active .brand-flow-list-description {
+  color: rgba(212, 223, 238, 0.84);
+}
+
+.brand-flow-list-item-active .brand-flow-list-marker {
+  box-shadow:
+    0 0 0 5px rgba(96, 154, 255, 0.08),
+    0 0 18px rgba(96, 154, 255, 0.14);
+}
+
+.brand-flow-card-active {
+  transition:
+    border-color 220ms ease,
+    background 220ms ease,
+    box-shadow 240ms ease;
+}
+
+.brand-flow-card-active:hover {
+  border-color: rgba(96, 154, 255, 0.2);
+  box-shadow:
+    0 18px 32px rgba(9, 15, 28, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 0.07);
+}
+
+.brand-flow-detail-content > * {
+  will-change: transform, opacity;
+}
+
+.brand-flow-active-block {
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    background 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.brand-flow-card-active:hover .brand-flow-active-block {
+  border-color: rgba(96, 154, 255, 0.1);
+}
+
+html.light .section-cursor-glow {
+  background: radial-gradient(
+    24rem circle at var(--section-glow-x, 50%) var(--section-glow-y, 50%),
+    rgba(255, 255, 255, 0.72),
+    rgba(108, 138, 190, 0.09) 30%,
+    rgba(108, 138, 190, 0.028) 46%,
+    transparent 64%
+  );
+  filter: blur(14px);
+}
+
+html.light .ui-primary-button:hover,
+html.light .ui-primary-button:focus-visible {
+  box-shadow:
+    0 12px 22px rgba(92, 84, 70, 0.055),
+    inset 0 1px 0 rgba(255, 255, 255, 0.92);
+}
+
+html.light .ui-secondary-button:hover,
+html.light .ui-secondary-button:focus-visible {
+  border-color: rgba(77, 121, 200, 0.14);
+  background: rgba(255, 255, 255, 0.82);
+  box-shadow:
+    0 10px 22px rgba(92, 84, 70, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.94);
+}
+
+html.light .brand-story-hero-trust-item:hover,
+html.light .brand-value-cell:hover,
+html.light .brand-trust-item:hover,
+html.light .brand-support-inline:hover,
+html.light .brand-story-card:hover,
+html.light .brand-flow-card:hover,
+html.light .brand-purchase-card:hover,
+html.light .brand-contact-card:hover {
+  border-color: rgba(77, 121, 200, 0.14);
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow:
+    0 10px 22px rgba(92, 84, 70, 0.045),
+    inset 0 1px 0 rgba(255, 255, 255, 0.94);
+}
+
+html.light .brand-value-cell:hover::after,
+html.light .brand-trust-item:hover::after,
+html.light .brand-story-card:hover::after,
+html.light .brand-story-hero-trust-item:hover::after,
+html.light .brand-support-inline:hover::after,
+html.light .brand-flow-card:hover::after,
+html.light .brand-purchase-card:hover::after,
+html.light .brand-contact-card:hover::after {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.46),
+    transparent 42%
+  );
+}
+
+html.light .platform-coverage-item:hover .platform-coverage-icon-shell {
+  border-color: rgba(77, 121, 200, 0.13);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.68)),
+    rgba(255, 255, 255, 0.72);
+  box-shadow:
+    0 8px 18px rgba(92, 84, 70, 0.035),
+    inset 0 1px 0 rgba(255, 255, 255, 0.94);
+}
+
+html.light .platform-coverage-item:hover .platform-coverage-label {
+  color: #22364b;
+}
+
+html.light .brand-flow-list-item:hover,
+html.light .brand-flow-list-item:focus-visible {
+  border-color: rgba(77, 121, 200, 0.12);
+  background: rgba(255, 255, 255, 0.44);
+}
+
+html.light .brand-flow-list-item-active {
+  background:
+    linear-gradient(180deg, rgba(77, 121, 200, 0.08), rgba(255, 255, 255, 0.56)),
+    rgba(255, 255, 255, 0.5);
+}
+
+html.light .brand-flow-card-active:hover {
+  border-color: rgba(77, 121, 200, 0.18);
+  box-shadow:
+    0 12px 24px rgba(92, 84, 70, 0.045),
+    inset 0 1px 0 rgba(255, 255, 255, 0.94);
+}
+
 @media (max-width: 1023px) {
   .brand-home-hero {
     min-height: auto;
@@ -2748,5 +3575,483 @@ html.light .brand-console-inline:hover {
 
   .platform-coverage-label {
     font-size: 0.8rem;
+  }
+
+  .section-cursor-glow {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section-cursor-glow,
+  .brand-home-orb,
+  .brand-home-grid,
+  .brand-hero-spotlight,
+  .ui-primary-button::after,
+  .ui-secondary-button::after,
+  .brand-flow-stage .brand-flow-list-item,
+  .brand-flow-stage .flow-detail-panel,
+  .brand-flow-stage .brand-flow-list::before,
+  .brand-flow-stage .brand-flow-card-active::after,
+  .brand-flow-ambient,
+  .brand-flow-detail-content,
+  .brand-flow-detail-content > * {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+@keyframes buttonSheen {
+  0% {
+    transform: translateX(-28%);
+  }
+  100% {
+    transform: translateX(24%);
+  }
+}
+
+.interactive-section-glow {
+  --section-glow-strength: 1;
+}
+
+.section-glow-hero {
+  --section-glow-strength: 1.04;
+}
+
+.section-glow-flow {
+  --section-glow-strength: 1.08;
+}
+
+.section-glow-why,
+.section-glow-scenarios,
+.section-glow-rules {
+  --section-glow-strength: 0.82;
+}
+
+.section-cursor-glow {
+  opacity: calc(var(--section-glow-opacity, 0) * var(--section-glow-strength, 1));
+  will-change: opacity, transform;
+}
+
+.brand-home-orb,
+.brand-home-grid,
+.brand-hero-spotlight,
+.brand-flow-ambient {
+  will-change: transform, opacity;
+}
+
+.section-glow-hero .brand-home-orb-a {
+  animation:
+    ambientFloat 18s ease-in-out infinite,
+    backgroundBreath 16s ease-in-out infinite;
+}
+
+.section-glow-hero .brand-home-orb-b {
+  animation:
+    ambientFloat 22s ease-in-out infinite reverse,
+    backgroundBreath 18s ease-in-out infinite;
+}
+
+.section-glow-flow .brand-flow-ambient {
+  animation: backgroundBreath 16s ease-in-out infinite;
+}
+
+.reveal-on-scroll {
+  will-change: opacity, transform;
+  transition:
+    opacity 620ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 620ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.ui-primary-button,
+.ui-secondary-button,
+.platform-coverage-item {
+  transform: translateZ(0);
+  will-change: transform, box-shadow, border-color, background;
+}
+
+.ui-primary-button::before,
+.ui-secondary-button::before {
+  content: "";
+  position: absolute;
+  inset: -42% -14%;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(circle at 50% 18%, rgba(255, 255, 255, 0.18), transparent 58%);
+  transition: opacity 220ms ease;
+}
+
+.ui-primary-button:hover::before,
+.ui-primary-button:focus-visible::before,
+.ui-secondary-button:hover::before,
+.ui-secondary-button:focus-visible::before {
+  opacity: 1;
+}
+
+.ui-primary-button:active,
+.ui-secondary-button:active {
+  transform: translateY(-1px) scale(0.988);
+}
+
+.brand-story-hero-trust-item,
+.brand-value-cell,
+.brand-trust-item,
+.brand-support-inline,
+.brand-story-card,
+.brand-flow-card,
+.brand-purchase-card,
+.brand-contact-card {
+  will-change: transform, box-shadow, border-color, background;
+}
+
+.brand-story-hero-trust-item:hover .brand-story-hero-trust-title,
+.brand-value-cell:hover .text-foreground,
+.brand-trust-item:hover .text-foreground,
+.brand-support-inline:hover .text-muted,
+.brand-story-card:hover .text-muted-strong,
+.brand-contact-card:hover .text-muted-strong {
+  color: rgba(245, 248, 252, 0.98);
+}
+
+.brand-story-hero-trust-item:hover .brand-story-hero-trust-description,
+.brand-value-cell:hover .text-muted,
+.brand-trust-item:hover .text-muted,
+.brand-support-inline:hover .text-muted-strong,
+.brand-story-card:hover .text-muted,
+.brand-flow-card:hover .text-muted,
+.brand-purchase-card:hover .text-muted,
+.brand-contact-card:hover .text-muted {
+  color: rgba(214, 224, 238, 0.86);
+}
+
+.brand-trust-accent-line,
+.brand-story-hero-trust-dot {
+  transition:
+    opacity 200ms ease,
+    transform 200ms ease,
+    box-shadow 220ms ease,
+    filter 200ms ease;
+}
+
+.brand-story-hero-trust-item:hover .brand-story-hero-trust-dot,
+.brand-trust-item:hover .brand-trust-accent-line {
+  box-shadow: 0 0 14px rgba(96, 154, 255, 0.18);
+  transform: translateY(-1px);
+}
+
+.platform-coverage-marquee:hover .platform-coverage-track {
+  animation-play-state: paused;
+}
+
+.platform-coverage-item {
+  transition:
+    transform 200ms ease,
+    border-color 200ms ease,
+    background 200ms ease,
+    box-shadow 220ms ease;
+}
+
+.platform-coverage-item:hover {
+  transform: translateY(-2px);
+}
+
+.platform-coverage-icon-shell,
+.platform-coverage-icon,
+.platform-coverage-label {
+  transition:
+    color 180ms ease,
+    transform 180ms ease,
+    border-color 200ms ease,
+    background 200ms ease,
+    box-shadow 220ms ease;
+}
+
+.platform-coverage-item:hover .platform-coverage-icon-shell {
+  transform: translateY(-1px);
+}
+
+.platform-coverage-item:hover .platform-coverage-icon {
+  transform: translateY(-1px) scale(1.03);
+}
+
+.brand-flow-list-item {
+  position: relative;
+  overflow: clip;
+}
+
+.brand-flow-list-item::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(96, 154, 255, 0.06),
+    transparent 44%,
+    transparent 60%,
+    rgba(96, 154, 255, 0.02)
+  );
+  transition: opacity 180ms ease;
+}
+
+.brand-flow-list-item:hover::before,
+.brand-flow-list-item:focus-visible::before,
+.brand-flow-list-item-active::before {
+  opacity: 1;
+}
+
+.brand-flow-list-line {
+  position: relative;
+  overflow: hidden;
+}
+
+.brand-flow-list-line::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(96, 154, 255, 0.8) 48%,
+    transparent 100%
+  );
+  transform: translateY(-70%);
+}
+
+.brand-flow-list-item-active .brand-flow-list-line::after {
+  opacity: 0.6;
+  animation: flowLineDrift 3.6s linear infinite;
+}
+
+.brand-flow-list-item:hover .brand-flow-list-marker,
+.brand-flow-list-item:focus-visible .brand-flow-list-marker {
+  box-shadow:
+    0 0 0 4px rgba(96, 154, 255, 0.06),
+    0 0 14px rgba(96, 154, 255, 0.12);
+}
+
+.brand-flow-list-item-active .brand-flow-list-marker {
+  animation: flowMarkerPulse 3.4s ease-in-out infinite;
+}
+
+.brand-flow-list-item-active .brand-flow-list-number {
+  color: rgba(244, 248, 255, 0.98);
+}
+
+.brand-flow-card-active {
+  overflow: hidden;
+}
+
+.brand-flow-card-active::before {
+  content: "";
+  position: absolute;
+  inset: -45% -30%;
+  pointer-events: none;
+  opacity: 0.16;
+  background: linear-gradient(
+    108deg,
+    transparent 28%,
+    rgba(255, 255, 255, 0.12) 50%,
+    transparent 74%
+  );
+  transform: translateX(-18%);
+  animation: panelSheen 11s ease-in-out infinite;
+}
+
+.brand-flow-detail-content {
+  animation: flowPanelSwap 240ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.brand-flow-detail-content > * {
+  opacity: 0;
+  transform: translate3d(0, 10px, 0);
+  animation: flowDetailRise 240ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.brand-flow-detail-content > *:nth-child(1) {
+  animation-delay: 20ms;
+}
+
+.brand-flow-detail-content > *:nth-child(2) {
+  animation-delay: 50ms;
+}
+
+.brand-flow-detail-content > *:nth-child(3) {
+  animation-delay: 90ms;
+}
+
+.brand-flow-detail-content > *:nth-child(4) {
+  animation-delay: 130ms;
+}
+
+.brand-flow-active-block {
+  position: relative;
+  overflow: hidden;
+}
+
+.brand-flow-active-block::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.04),
+    transparent 42%
+  );
+  transition: opacity 180ms ease;
+}
+
+.brand-flow-card-active:hover .brand-flow-active-block::after {
+  opacity: 1;
+}
+
+html.light .ui-primary-button::before,
+html.light .ui-secondary-button::before {
+  background: radial-gradient(circle at 50% 18%, rgba(255, 255, 255, 0.72), transparent 62%);
+}
+
+html.light .brand-story-hero-trust-item:hover .brand-story-hero-trust-title,
+html.light .brand-value-cell:hover .text-foreground,
+html.light .brand-trust-item:hover .text-foreground,
+html.light .brand-support-inline:hover .text-muted,
+html.light .brand-story-card:hover .text-muted-strong,
+html.light .brand-contact-card:hover .text-muted-strong {
+  color: #1a2a3f;
+}
+
+html.light .brand-story-hero-trust-item:hover .brand-story-hero-trust-description,
+html.light .brand-value-cell:hover .text-muted,
+html.light .brand-trust-item:hover .text-muted,
+html.light .brand-support-inline:hover .text-muted-strong,
+html.light .brand-story-card:hover .text-muted,
+html.light .brand-flow-card:hover .text-muted,
+html.light .brand-purchase-card:hover .text-muted,
+html.light .brand-contact-card:hover .text-muted {
+  color: #51667f;
+}
+
+html.light .brand-story-hero-trust-item:hover .brand-story-hero-trust-dot,
+html.light .brand-trust-item:hover .brand-trust-accent-line {
+  box-shadow: 0 0 10px rgba(77, 121, 200, 0.12);
+}
+
+html.light .platform-coverage-item:hover {
+  transform: translateY(-1px);
+}
+
+html.light .platform-coverage-item:hover .platform-coverage-icon {
+  color: #3f6aac;
+}
+
+html.light .brand-flow-list-item::before {
+  background: linear-gradient(
+    90deg,
+    rgba(77, 121, 200, 0.08),
+    transparent 44%,
+    transparent 60%,
+    rgba(77, 121, 200, 0.03)
+  );
+}
+
+html.light .brand-flow-list-item:hover .brand-flow-list-marker,
+html.light .brand-flow-list-item:focus-visible .brand-flow-list-marker {
+  box-shadow:
+    0 0 0 4px rgba(77, 121, 200, 0.05),
+    0 0 12px rgba(77, 121, 200, 0.08);
+}
+
+html.light .brand-flow-list-item-active .brand-flow-list-line::after {
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(77, 121, 200, 0.55) 48%,
+    transparent 100%
+  );
+}
+
+html.light .brand-flow-card-active::before {
+  opacity: 0.12;
+  background: linear-gradient(
+    108deg,
+    transparent 28%,
+    rgba(255, 255, 255, 0.72) 50%,
+    transparent 74%
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ui-primary-button::before,
+  .ui-secondary-button::before,
+  .brand-flow-card-active::before,
+  .brand-flow-list-line::after,
+  .brand-flow-active-block::after {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+@keyframes flowMarkerPulse {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 5px rgba(96, 154, 255, 0.08),
+      0 0 18px rgba(96, 154, 255, 0.14);
+  }
+  50% {
+    box-shadow:
+      0 0 0 7px rgba(96, 154, 255, 0.06),
+      0 0 24px rgba(96, 154, 255, 0.2);
+  }
+}
+
+@keyframes flowLineDrift {
+  0% {
+    transform: translateY(-70%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes flowPanelSwap {
+  0% {
+    opacity: 0.92;
+    transform: translate3d(0, 6px, 0) scale(0.992);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes flowDetailRise {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 10px, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes panelSheen {
+  0%,
+  100% {
+    transform: translateX(-18%);
+    opacity: 0.14;
+  }
+  50% {
+    transform: translateX(12%);
+    opacity: 0.22;
   }
 }

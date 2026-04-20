@@ -48,7 +48,7 @@ export function Header() {
             </Link>
           </div>
           <div className="grid gap-2 md:hidden">
-            <div className="flex items-center gap-2 overflow-x-auto pb-1">
+            <div className="flex flex-wrap items-center justify-between gap-2">
               <LocaleToggle />
               <ThemeToggle />
             </div>

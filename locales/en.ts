@@ -21,28 +21,28 @@ export const en: Messages = {
       badge: "Real User Participation Growth",
       title: "Turn every growth budget\ninto real user participation",
       description:
-        "Unlike exposure-first platforms, we focus on real participation, measurable conversion, and trackable delivery. Direct ordering and tracking are supported by 5000+ overseas Web3 users and independent execution environments.",
+        "No fake volume, only real user participation. The platform connects 5000+ overseas Web3 users and integrates 200+ KOL resources.",
       note: "Real user participation only, with direct ordering and order tracking.",
       primaryCta: "Browse Service Directory",
       secondaryCta: "Track Order",
-      trustItems: [
-        {
-          title: "5000+ overseas Web3 real users",
-          description: "Built for real participation and measurable delivery.",
-        },
-        {
-          title: "Real participation,\nnot hollow traffic",
-          description: "Built for interaction, conversion, and retention.",
-        },
-        {
-          title: "Independent execution\nenvironment",
-          description: "Cleaner execution with stronger credibility.",
-        },
-        {
-          title: "Trackable order\ndelivery",
-          description: "Ordering, execution, and updates stay on one path.",
-        },
-      ],
+        trustItems: [
+          {
+            title: "5000+ overseas\nWeb3 users",
+            description: "Real participation at scale.",
+          },
+          {
+            title: "Real\nparticipation",
+            description: "Built for interaction and retention.",
+          },
+          {
+            title: "Independent execution\nenvironment",
+            description: "Cleaner execution, stronger credibility.",
+          },
+          {
+            title: "Trackable order\ndelivery",
+            description: "Ordering and updates stay on one path.",
+          },
+        ],
       mockup: {
         eyebrow: "Live Task Console",
         title: "Real registration task in delivery",
@@ -138,31 +138,23 @@ export const en: Messages = {
       eyebrow: "Why REALJOIN",
       title: "Trackable growth delivery",
       description:
-        "REALJOIN works like a growth fulfillment layer for project teams: clear paths, complete ordering, and trackable execution.",
+        "REALJOIN works more like a growth execution layer for project teams: not just exposure entry points, but fuller delivery across participation, task execution, and result callbacks.",
       cta: "Browse Service Directory",
-      processTitle: "Service Flow",
-      processSteps: [
-        "Select Service",
-        "Create Order",
-        "Complete Payment",
-        "Track Progress",
-      ],
-      items: [
+      cards: [
         {
-          title: "Participation first",
-          description: "Replace vague exposure with real participation and stronger outcomes.",
+          label: "Participation & quality",
+          title: "Real user participation",
+          description: "Not just exposure, but real interaction and task participation.",
         },
         {
-          title: "Clear order flow",
-          description: "From order creation to tracking, the path stays visible.",
+          label: "Trackable delivery path",
+          title: "Trackable order flow",
+          description: "Key progress stays visible from ordering and payment to execution and callbacks.",
         },
         {
-          title: "Faster anonymous ordering",
-          description: "Submit requests without login and reduce repeated coordination.",
-        },
-        {
-          title: "Built for repeat use",
-          description: "Designed for staged scale-up, ongoing operations, and repeat orders.",
+          label: "Built for project teams",
+          title: "Built for result delivery",
+          description: "A better fit for project needs that require clear execution and staged delivery.",
         },
       ],
     },
@@ -213,13 +205,28 @@ export const en: Messages = {
       ],
     },
     trust: {
-      eyebrow: "Trust Layer",
-      title: "Real networks and independent execution,\none trackable delivery path",
+      eyebrow: "Growth Scenarios",
+      title: "Built for multiple Web3 growth scenarios",
       description:
-        "Trust comes from real users, cleaner execution conditions, and delivery that stays visible end to end.",
-      anchorEyebrow: "Network Support",
-      anchorTitle: "Overseas Web3 user network",
-      anchorDescription: "Built for real participation and measurable delivery.",
+        "From project warm-up and community growth to campaign participation and conversion support, delivery stays closer to real operating needs.",
+      cards: [
+        {
+          title: "Project warm-up",
+          description: "Build early attention and discussion before launch.",
+        },
+        {
+          title: "Community growth",
+          description: "Support joins, interaction, and ongoing activity growth.",
+        },
+        {
+          title: "Campaign participation",
+          description: "Fit for giveaways, task campaigns, and ranking pushes.",
+        },
+        {
+          title: "Conversion support",
+          description: "Cover registration, downloads, purchases, and follow-up interaction.",
+        },
+      ],
     },
     manifesto: {
       eyebrow: "Brand Thesis",
