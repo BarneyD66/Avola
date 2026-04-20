@@ -23,15 +23,22 @@ export function CategoryPreviewPackageList({
   }
 
   return (
-    <div className="mt-3.5 sm:mt-4">
-      <p className="text-[10px] font-medium uppercase tracking-[0.24em] text-zinc-500">
-        {messages.home.categories.packagePreview}
-      </p>
+    <div className="mt-4 rounded-[20px] border border-white/6 bg-black/10 px-3 py-3 sm:mt-4.5 sm:px-3.5 sm:py-3.5">
+      <div className="flex items-center justify-between gap-3">
+        <p className="text-[10px] font-medium uppercase tracking-[0.24em] text-zinc-500">
+          {messages.home.categories.packagePreview}
+        </p>
+        <span className="text-[10px] uppercase tracking-[0.22em] text-accent-strong/68">
+          {messages.home.categories.curatedLabel}
+        </span>
+      </div>
       <div className="mt-2 divide-y divide-white/8">
-        {visibleItems.map((item) => (
+        {visibleItems.map((item, index) => (
           <div
             key={`${item.title}-${item.price}`}
-            className="flex items-start justify-between gap-3 py-2 sm:gap-4"
+            className={`flex items-start justify-between gap-3 py-2.5 sm:gap-4 ${
+              index === 0 ? "pt-0.5" : ""
+            }`}
           >
             <div className="min-w-0">
               <p className="line-clamp-2 text-[13px] font-medium leading-5 text-foreground sm:truncate sm:text-[14px]">
@@ -41,7 +48,7 @@ export function CategoryPreviewPackageList({
                 {item.result}
               </p>
             </div>
-            <span className="shrink-0 pt-0.5 text-[13px] font-semibold text-accent-strong sm:text-[14px]">
+            <span className="shrink-0 rounded-full border border-accent/14 bg-accent-soft/35 px-2.5 py-1 text-[12px] font-semibold text-accent-strong sm:text-[13px]">
               {item.price}
             </span>
           </div>

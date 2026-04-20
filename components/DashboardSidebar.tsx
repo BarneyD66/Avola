@@ -27,7 +27,7 @@ export function DashboardSidebar() {
         href="/"
         className="text-lg font-semibold tracking-[0.18em] text-white hover:text-accent-strong"
       >
-        Avola
+        REALJOIN
       </Link>
 
       <p className="mt-3 hidden text-sm leading-7 text-zinc-500 sm:block">

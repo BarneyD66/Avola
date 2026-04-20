@@ -1,6 +1,7 @@
 ﻿export const zhCN = {
   header: {
-    homeAriaLabel: "Avola 首页",
+    homeAriaLabel: "REALJOIN 首页",
+    services: "服务目录",
     track: "查询订单",
     login: "登录",
   },
@@ -14,19 +15,240 @@
   },
   home: {
     intro: {
-      eyebrow: "Avola",
-      title: "让每一笔增长预算都转化成真实用户参与",
+      eyebrow: "REALJOIN",
+      badge: "真实用户参与增长",
+      title: "让每一笔增长预算\n都转化成真实用户参与",
       description:
-        "不同于只提供 KOL 发布和流量曝光的平台，我们更关注真实参与、实际转化与可追踪的增长结果。",
+        "不同于只提供曝光和 KOL 发帖的平台，我们更关注真实参与、实际转化与可追踪交付。平台支持直接下单、订单追踪与结果交付，背后连接 5000+ 海外 Web3 真实用户网络与独立参与环境。",
       note: "本平台仅提供真实用户参与服务，支持直接下单与订单追踪。",
+      primaryCta: "进入服务目录",
+      secondaryCta: "查询订单",
+      trustItems: [
+        {
+          title: "5000+ 海外 Web3 真实用户",
+          description: "持续承接真实参与与结果交付需求。",
+        },
+        {
+          title: "真实参与，不做空流量",
+          description: "更关注互动质量、实际转化与后续留存。",
+        },
+        {
+          title: "独立参与环境",
+          description: "避免单一环境堆量，提升参与可信度。",
+        },
+        {
+          title: "订单可追踪交付",
+          description: "从下单到进度更新保持统一查询路径。",
+        },
+      ],
+      mockup: {
+        eyebrow: "Live Task Console",
+        title: "真实注册任务交付中",
+        description: "围绕真实用户执行、状态回传与结果可追踪组织注册交付流程。",
+        taskLabel: "当前任务",
+        taskId: "RJ-REG-240418-072",
+        taskName: "网站注册 + 交互",
+        status: "执行中",
+        progressLabel: "执行进度",
+        progressValue: "72%",
+        completedLabel: "已完成注册",
+        completedValue: "864 / 1200",
+        targetLabel: "目标结果",
+        targetValue: "1200 次真实注册",
+        environmentLabel: "执行环境",
+        environmentValue: "独立参与环境",
+        supportPoints: [
+          "真实用户执行",
+          "结果可追踪",
+          "独立参与环境",
+        ],
+        feedTitle: "实时回传",
+        feed: [
+          {
+            label: "新增注册回传",
+            detail: "+24 users from overseas Web3 pool",
+            time: "刚刚",
+          },
+          {
+            label: "审核通过",
+            detail: "interaction verification approved",
+            time: "12 秒前",
+          },
+          {
+            label: "状态更新",
+            detail: "task batch 07 still running",
+            time: "28 秒前",
+          },
+          {
+            label: "持续执行中",
+            detail: "next participant wave is being assigned",
+            time: "1 分钟前",
+          },
+        ],
+      },
+      signals: [
+        {
+          title: "真实用户参与",
+          description: "比单纯曝光更接近真实互动、转化与后续留存。",
+        },
+        {
+          title: "可追踪的订单链路",
+          description: "下单、支付、执行与进度更新保持同一条可查询路径。",
+        },
+        {
+          title: "面向项目增长团队",
+          description: "适合需要结果承接、流程清晰与长期复购的项目方。",
+        },
+      ],
+      sceneLabels: ["真实参与层", "可追踪交付链路", "面向项目团队"],
+    },
+    coverage: {
+      eyebrow: "渠道覆盖",
+      title: "覆盖主流社交、社区、开发者与应用分发渠道",
+      items: {
+        x: "X / Twitter",
+        telegram: "Telegram",
+        discord: "Discord",
+        github: "GitHub",
+        instagram: "Instagram",
+        facebook: "Facebook",
+        tiktok: "TikTok",
+        threads: "Threads",
+        binance: "Binance",
+        okx: "OKX",
+        coinMarketCap: "CoinMarketCap",
+        dexScreener: "DexScreener",
+        pumpFun: "Pump.fun",
+        fourMeme: "Four.meme",
+        pancakeSwap: "PancakeSwap",
+        googlePlay: "Google Play",
+        appStores: "App Store / Google Play",
+      },
+    },
+    landing: {
+      eyebrow: "Why REALJOIN",
+      title: "交付可追踪的增长结果",
+      description:
+        "REALJOIN 更像一个面向项目方的增长承接层：服务路径清晰、下单链路完整、执行节奏可持续追踪。",
+      cta: "进入服务目录",
+      processTitle: "服务流程",
+      processSteps: ["选择服务", "创建订单", "完成支付", "跟踪进度"],
+      items: [
+        {
+          title: "真实参与优先",
+          description: "以真实用户参与替代空泛流量，提升结果可信度。",
+        },
+        {
+          title: "订单链路清晰",
+          description: "从创建订单到支付、执行与查询，路径始终清晰可见。",
+        },
+        {
+          title: "匿名下单效率",
+          description: "无需登录即可发起请求，减少沟通损耗与重复确认。",
+        },
+        {
+          title: "适合长期复购",
+          description: "更适合需要阶段性补量、持续运营与多订单管理的项目团队。",
+        },
+      ],
+    },
+    flow: {
+      eyebrow: "Delivery Flow",
+      title: "从下单到结果回传，交付路径始终保持清晰",
+      description:
+        "平台将任务分发给真实海外 Web3 用户网络，并持续回传状态与结果，便于项目方在统一路径中跟踪交付。",
+      currentStageLabel: "当前阶段",
+      completedLabel: "已完成",
+      nextLabel: "下一步",
+      steps: [
+        {
+          title: "直接下单",
+          description:
+            "选择服务与套餐后，系统生成统一订单路径。订单建立后，后续执行、结果更新与查询都会沿同一条路径推进。",
+          completed: "订单创建",
+          next: "任务分发",
+        },
+        {
+          title: "任务分发",
+          description:
+            "系统会按照服务需求组织执行节奏，并进入稳定的交付推进流程。这一阶段会完成任务安排与执行准备，为后续真实参与做好承接。",
+          completed: "直接下单",
+          next: "真实用户参与",
+        },
+        {
+          title: "真实用户参与",
+          description:
+            "任务进入真实用户执行阶段。平台会将任务分发给真实海外 Web3 用户网络，在独立参与环境中完成注册、互动或指定操作。",
+          completed: "直接下单、任务分发",
+          next: "结果回传、订单追踪",
+        },
+        {
+          title: "结果回传",
+          description:
+            "任务状态与阶段性结果会持续更新。项目方可以基于回传信息查看当前执行进度，并掌握交付状态变化。",
+          completed: "直接下单、任务分发、真实用户参与",
+          next: "订单追踪",
+        },
+        {
+          title: "订单追踪",
+          description:
+            "订单号与查询密码会保持统一追踪路径。从下单到结果更新，项目方都可以沿同一入口查看当前进度与交付状态。",
+          completed: "直接下单、任务分发、真实用户参与、结果回传",
+          next: "持续查询当前进度",
+        },
+      ],
+    },
+    trust: {
+      eyebrow: "Trust Layer",
+      title: "真实网络、独立环境与统一追踪路径，共同构成交付可信度",
+      description:
+        "可信度不来自更花哨的曝光包装，而来自真实用户网络、独立参与环境，以及始终可查询的交付路径。",
+      anchorEyebrow: "真实网络",
+      anchorTitle: "海外 Web3 真实用户网络",
+      anchorDescription: "持续承接真实参与与结果交付需求。",
+    },
+    manifesto: {
+      eyebrow: "Brand Thesis",
+      title: "为需要结果承接、流程清晰与长期复购的项目团队而设计",
+      description:
+        "REALJOIN 不是一个简单展示流量的平台，而是一个将下单、支付、执行与结果追踪组织成统一体验的增长承接层。",
+      pillars: [
+        {
+          title: "品牌感先于服务堆砌",
+          description: "先建立信任，再进入服务目录，让项目方对交付体系形成预期。",
+        },
+        {
+          title: "结构化执行而非临时拼接",
+          description: "从分类、套餐、支付到进度更新都保持统一节奏与可追踪路径。",
+        },
+        {
+          title: "更适合持续运营场景",
+          description: "适合多订单、多阶段与需要长期补量的项目增长团队。",
+        },
+      ],
+      note: "这也是首页先讲品牌，再进入目录页的原因。",
+    },
+    gateway: {
+      eyebrow: "Service Directory",
+      title: "当品牌认知建立之后，再进入具体服务选择",
+      description:
+        "服务目录将按分类承接不同增长需求，你可以先进入目录页，再选择具体的分类与服务方案。",
+      primaryCta: "进入服务目录",
+      secondaryCta: "查询订单",
     },
     notice: {
+      kicker: "购买前须知",
+      moduleTitle: "购买与规则",
+      moduleDescription:
+        "在进入具体服务前，先快速确认服务流程、购买说明、使用规则与客服入口。",
       title: "服务说明",
+      rulesTitle: "购买须知",
       paragraphs: [
         "请在下单前确认服务需求与相关要求。",
         "订单支付后不支持退款，请确认无误后再下单。",
         "目前仅支持 Crypto 付款。",
       ],
+      supportTitle: "客服",
       supportLabel: "客服：",
       supportHandle: "@Avolaofficial",
       rules: [
@@ -37,12 +259,34 @@
       ],
     },
     categories: {
+      kicker: "服务入口",
       title: "服务分类",
       description: "快速选择你需要的增长服务类型",
       packagePreview: "套餐预览",
+      curatedLabel: "精选",
       selectService: "选择服务",
       viewServiceDetails: "查看服务详情",
     },
+  },
+  services: {
+    eyebrow: "Curated Services",
+    title: "快速浏览服务目录",
+    description:
+      "按分类查看支持的平台入口、代表服务与起始价格，再进入对应详情页。",
+    note: "目录页仅作为分类入口，具体套餐、表单与支付流程将在服务详情页继续完成。",
+    backHome: "返回品牌首页",
+    railTitle: "目录导航",
+    railDescription: "先快速扫过能力边界，再进入更具体的分类与服务方案。",
+    railItems: [
+      "社交媒体增长与社区扩散",
+      "网站注册、交互与 KYC 场景承接",
+      "GitHub、代币 / NFT 与 App 相关增长服务",
+    ],
+    railFooter: "所有分类页都将继续承接到具体服务详情与套餐选择。",
+    editorialLabel: "精选目录",
+    coverageLabel: "覆盖入口",
+    representativeLabel: "代表服务",
+    openCategory: "进入分类",
   },
   service: {
     detailEyebrow: "Service Detail",

@@ -1,8 +1,9 @@
-import type { Messages } from "@/locales";
+﻿import type { Messages } from "@/locales";
 
 export const en: Messages = {
   header: {
-    homeAriaLabel: "Avola home",
+    homeAriaLabel: "REALJOIN home",
+    services: "Services",
     track: "Track Order",
     login: "Login",
   },
@@ -16,35 +17,292 @@ export const en: Messages = {
   },
   home: {
     intro: {
-      eyebrow: "Avola",
-      title: "Turn every growth budget into real user participation",
+      eyebrow: "REALJOIN",
+      badge: "Real User Participation Growth",
+      title: "Turn every growth budget\ninto real user participation",
       description:
-        "Unlike platforms that only provide KOL posting and traffic exposure, we focus more on real participation, actual conversion, and trackable growth results.",
-      note: "This platform only provides real user participation services, with direct ordering and order tracking supported.",
+        "Unlike platforms built around exposure and KOL posting, we focus on real participation, measurable conversion, and trackable delivery. Direct ordering, order tracking, and result delivery are backed by 5000+ overseas Web3 real users and independent participation environments.",
+      note: "Real user participation only, with direct ordering and order tracking.",
+      primaryCta: "Browse Service Directory",
+      secondaryCta: "Track Order",
+      trustItems: [
+        {
+          title: "5000+ overseas Web3 real users",
+          description: "Built for real participation and measurable delivery.",
+        },
+        {
+          title: "Real participation, not hollow traffic",
+          description: "Closer to real interaction, conversion, and retention.",
+        },
+        {
+          title: "Independent participation environment",
+          description: "Cleaner execution conditions with stronger credibility.",
+        },
+        {
+          title: "Trackable order delivery",
+          description: "Ordering, execution, and updates stay on one path.",
+        },
+      ],
+      mockup: {
+        eyebrow: "Live Task Console",
+        title: "Real registration task in delivery",
+        description: "Registration delivery organized around real user execution, status callbacks, and trackable output.",
+        taskLabel: "Current Task",
+        taskId: "RJ-REG-240418-072",
+        taskName: "Site Registration + Interaction",
+        status: "Running",
+        progressLabel: "Execution Progress",
+        progressValue: "72%",
+        completedLabel: "Completed Registrations",
+        completedValue: "864 / 1200",
+        targetLabel: "Target Output",
+        targetValue: "1200 real registrations",
+        environmentLabel: "Execution Environment",
+        environmentValue: "Independent participation setup",
+        supportPoints: [
+          "Real user execution",
+          "Trackable output",
+          "Independent setup",
+        ],
+        feedTitle: "Live Feed",
+        feed: [
+          {
+            label: "Registration callback",
+            detail: "+24 users from overseas Web3 pool",
+            time: "just now",
+          },
+          {
+            label: "Verification passed",
+            detail: "interaction verification approved",
+            time: "12s ago",
+          },
+          {
+            label: "Status updated",
+            detail: "task batch 07 still running",
+            time: "28s ago",
+          },
+          {
+            label: "Continuing execution",
+            detail: "next participant wave is being assigned",
+            time: "1m ago",
+          },
+        ],
+      },
+      signals: [
+        {
+          title: "Real user participation",
+          description:
+            "Closer to real interaction, conversion, and later retention than pure exposure.",
+        },
+        {
+          title: "Trackable order flow",
+          description:
+            "Ordering, payment, execution, and progress updates stay on one searchable path.",
+        },
+        {
+          title: "Built for growth teams",
+          description:
+            "Suitable for project teams that need result delivery, clear workflows, and repeat orders.",
+        },
+      ],
+      sceneLabels: [
+        "Real participation layer",
+        "Trackable delivery path",
+        "Built for project teams",
+      ],
+    },
+    coverage: {
+      eyebrow: "Coverage",
+      title: "Coverage across major social, community, developer, and app distribution channels",
+      items: {
+        x: "X / Twitter",
+        telegram: "Telegram",
+        discord: "Discord",
+        github: "GitHub",
+        instagram: "Instagram",
+        facebook: "Facebook",
+        tiktok: "TikTok",
+        threads: "Threads",
+        binance: "Binance",
+        okx: "OKX",
+        coinMarketCap: "CoinMarketCap",
+        dexScreener: "DexScreener",
+        pumpFun: "Pump.fun",
+        fourMeme: "Four.meme",
+        pancakeSwap: "PancakeSwap",
+        googlePlay: "Google Play",
+        appStores: "App Store / Google Play",
+      },
+    },
+    landing: {
+      eyebrow: "Why REALJOIN",
+      title: "Trackable growth delivery",
+      description:
+        "REALJOIN works like a growth fulfillment layer for project teams: clear paths, complete ordering, and trackable execution.",
+      cta: "Browse Service Directory",
+      processTitle: "Service Flow",
+      processSteps: [
+        "Select Service",
+        "Create Order",
+        "Complete Payment",
+        "Track Progress",
+      ],
+      items: [
+        {
+          title: "Participation first",
+          description: "Replace vague exposure with real participation and stronger outcomes.",
+        },
+        {
+          title: "Clear order flow",
+          description: "From order creation to tracking, the path stays visible.",
+        },
+        {
+          title: "Faster anonymous ordering",
+          description: "Submit requests without login and reduce repeated coordination.",
+        },
+        {
+          title: "Built for repeat use",
+          description: "Designed for staged scale-up, ongoing operations, and repeat orders.",
+        },
+      ],
+    },
+    flow: {
+      eyebrow: "Delivery Flow",
+      title: "From order creation to result callbacks, the delivery path stays clear",
+      description:
+        "Tasks are dispatched to a real overseas Web3 user network, with status and results fed back through one visible path.",
+      currentStageLabel: "Current Stage",
+      completedLabel: "Completed",
+      nextLabel: "Next",
+      steps: [
+        {
+          title: "Direct Ordering",
+          description:
+            "After selecting the service and package, the system creates one unified order path. Execution, updates, and tracking continue through the same path.",
+          completed: "Order created",
+          next: "Task dispatch",
+        },
+        {
+          title: "Task Dispatch",
+          description:
+            "The system arranges the execution rhythm based on service requirements and moves into a stable delivery flow. This stage prepares the task for real participation.",
+          completed: "Direct ordering",
+          next: "Real user participation",
+        },
+        {
+          title: "Real User Participation",
+          description:
+            "The task enters the real execution stage. It is assigned to a real overseas Web3 user network and completed in an independent participation environment.",
+          completed: "Direct ordering, task dispatch",
+          next: "Result callbacks, order tracking",
+        },
+        {
+          title: "Result Callbacks",
+          description:
+            "Task status and stage results continue to update. Teams can use callbacks to understand current execution progress and delivery changes.",
+          completed: "Direct ordering, task dispatch, real user participation",
+          next: "Order tracking",
+        },
+        {
+          title: "Order Tracking",
+          description:
+            "The order number and query password keep one consistent tracking path. From order creation to result updates, progress remains available through the same entry.",
+          completed: "Direct ordering, task dispatch, real user participation, result callbacks",
+          next: "Continue tracking progress",
+        },
+      ],
+    },
+    trust: {
+      eyebrow: "Trust Layer",
+      title: "Credibility comes from real networks, independent participation environments, and one visible delivery path",
+      description:
+        "Trust comes from a real user network, independent execution conditions, and delivery that stays queryable end to end.",
+      anchorEyebrow: "Network Support",
+      anchorTitle: "Overseas Web3 real user network",
+      anchorDescription: "Built for real participation demand and measurable delivery.",
+    },
+    manifesto: {
+      eyebrow: "Brand Thesis",
+      title: "Designed for project teams that need real delivery, clear process, and repeatable growth",
+      description:
+        "REALJOIN is a growth fulfillment layer that organizes ordering, payment, execution, and tracking into one clear experience.",
+      pillars: [
+        {
+          title: "Brand trust before service stacking",
+          description: "Build confidence first, then move into the service directory.",
+        },
+        {
+          title: "Structured execution, not ad hoc assembly",
+          description: "From packages to progress updates, the path stays unified and trackable.",
+        },
+        {
+          title: "Better suited for ongoing operations",
+          description: "Designed for phased campaigns, repeat orders, and ongoing operations.",
+        },
+      ],
+      note: "That is why the brand story comes first, and the directory comes next.",
+    },
+    gateway: {
+      eyebrow: "Service Directory",
+      title: "Build the brand case first, then move into concrete service selection",
+      description:
+        "The service directory organizes growth needs by category. Start there, then move into the service path that fits the current stage best.",
+      primaryCta: "Browse Service Directory",
+      secondaryCta: "Track Order",
     },
     notice: {
+      kicker: "Before Ordering",
+      moduleTitle: "Ordering & Rules",
+      moduleDescription:
+        "Before choosing a service, quickly confirm the flow, rules, and support entry.",
       title: "Service Notes",
+      rulesTitle: "Ordering Rules",
       paragraphs: [
-        "Please confirm your service needs and related requirements before placing an order.",
-        "Orders are not refundable after payment. Please confirm everything is correct before ordering.",
+        "Please confirm your service needs and requirements before ordering.",
+        "Orders are not refundable after payment. Please confirm everything before checkout.",
         "Only Crypto payment is currently supported.",
       ],
+      supportTitle: "Support",
       supportLabel: "Support:",
       supportHandle: "@Avolaofficial",
       rules: [
         "All services are carried out through real user participation.",
-        "After ordering, progress can be tracked in real time through the order number and query password.",
-        "Please keep your query information properly to avoid information leakage.",
-        "Disclaimer: The products on this site are for learning and testing purposes only. Do not use them for illegal activities. Once discovered, you bear the consequences yourself.",
+        "Track progress in real time with the order number and query password.",
+        "Keep your query information secure to avoid leakage.",
+        "Disclaimer: Products on this site are for learning and testing only. Do not use them for illegal activities.",
       ],
     },
     categories: {
+      kicker: "Service Entry",
       title: "Service Categories",
       description: "Quickly choose the type of growth service you need",
       packagePreview: "Package Preview",
+      curatedLabel: "Curated",
       selectService: "Select Service",
       viewServiceDetails: "View Service Details",
     },
+  },
+  services: {
+    eyebrow: "Curated Services",
+    title: "Browse the service directory",
+    description:
+      "Scan categories, supported entry points, representative services, and starting prices before going deeper.",
+    note: "Packages, forms, and payment flow continue on each service detail page.",
+    backHome: "Back to Brand Home",
+    railTitle: "Directory Guide",
+    railDescription:
+      "Scan the capability range first, then continue into the category that fits best.",
+    railItems: [
+      "Social media growth and community expansion",
+      "Site registration, interaction, and KYC handoff scenarios",
+      "GitHub, token / NFT, and app-related growth services",
+    ],
+    railFooter:
+      "Each category continues into service details and package selection.",
+    editorialLabel: "Curated Directory",
+    coverageLabel: "Coverage",
+    representativeLabel: "Representative Services",
+    openCategory: "Open Category",
   },
   service: {
     detailEyebrow: "Service Detail",
@@ -59,7 +317,7 @@ export const en: Messages = {
     orderRequest: "Order Request",
     buyNow: "Buy Now",
     noLoginDescription:
-      "No registration is required. Submit the order request after filling in the information.",
+      "No registration required. Fill in the information and submit the order request.",
     selectPackage: "Select Package",
     currentPackage: "Current Package",
     price: "Price",
@@ -90,12 +348,12 @@ export const en: Messages = {
     pageEyebrow: "Order Tracking",
     title: "Track Order",
     description:
-      "Enter the order number and query password to view the current progress and latest status.",
+      "Enter the order number and query password to view the latest progress and status.",
     loading: "Loading order tracking information.",
     formEyebrow: "Lookup",
     formTitle: "Track Order",
     formDescription:
-      "Fill in the order number and query password to view the current progress and latest status.",
+      "Fill in the order number and query password to view the latest progress and status.",
     orderId: "Order ID",
     orderIdPlaceholder: "Please enter the order ID",
     password: "Query Password",
@@ -117,10 +375,10 @@ export const en: Messages = {
     currentStatus: "Current Status",
     progressOverview: "Progress Overview",
     progressDescription:
-      "Progress will continue to update as the order advances. It is recommended to confirm the latest status by the most recent update time.",
+      "Progress updates as the order advances. Check the latest update time for the newest status.",
     timelineTitle: "Timeline",
     timelineDescription:
-      "The order status will advance by milestones, so you can keep track of the current stage.",
+      "The order advances by milestones so you can keep track of the current stage.",
     paymentStatus: "Payment Status",
     paymentStatusDescription: "Payment and execution status are displayed separately for easier tracking.",
   },
@@ -277,10 +535,10 @@ export const en: Messages = {
       "Your order information has been generated. Please keep the order number and query password properly for later tracking.",
     loadingTitle: "Reading order information",
     loadingDescription:
-      "Please wait while the demo order confirmation data in the current session is being loaded.",
+      "Please wait while the current session order data is loading.",
     cardTitle: "Order Information",
     cardDescription:
-      "This page shows demo order confirmation information, which can later be replaced with the formal order result receipt.",
+      "This page shows demo order confirmation data and can later be replaced with the formal receipt.",
     nextStepsTitle: "Next Steps",
     nextSteps: [
       'You can use the order number and query password on the "Track Order" page to follow progress.',
@@ -319,7 +577,7 @@ export const en: Messages = {
       eyebrow: "User Dashboard",
       title: "User Dashboard",
       description:
-        "View order progress, manage historical records, and quickly launch new service requests",
+      "View order progress, manage history, and quickly launch new service requests",
       stats: {
         totalOrders: {
           label: "Total Orders",
@@ -340,13 +598,13 @@ export const en: Messages = {
       },
       recentOrdersTitle: "Recent Orders",
       recentOrdersDescription:
-        "Focus on the orders that are moving recently and quickly enter the detail page to view the latest status.",
+        "Focus on active orders and jump into details for the latest status.",
       allOrders: "View All Orders",
       latestUpdatedAt: "Last Updated",
       paymentStatusLabel: "Payment",
       quickReorderTitle: "Quick Reorder",
       quickReorderDescription:
-        "You can directly re-enter the order page for frequently used services and reduce repeated path searching.",
+        "Quickly return to commonly used services without repeating the same search path.",
       reorderItems: [
         "Buy Twitter follower growth again",
         "Buy Verified comments again",
@@ -407,3 +665,4 @@ export const en: Messages = {
     home: "Back to Home",
   },
 };
+

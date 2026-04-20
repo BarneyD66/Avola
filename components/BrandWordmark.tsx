@@ -16,7 +16,7 @@ export function BrandWordmark({
     <span
       className={`brand-wordmark inline-block leading-none ${sizeClassMap[size]} ${className}`.trim()}
     >
-      AVOLA
+      REALJOIN
     </span>
   );
 }

@@ -5,12 +5,12 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://avola.local"),
+  metadataBase: new URL("https://realjoin.local"),
   title: {
-    default: "Avola",
-    template: "%s | Avola",
+    default: "REALJOIN",
+    template: "%s | REALJOIN",
   },
-  description: "Avola official site for real user participation services.",
+  description: "REALJOIN official site for real user participation services.",
 };
 
 export default function RootLayout({

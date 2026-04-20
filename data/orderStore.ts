@@ -1,4 +1,4 @@
-import { seedOrders } from "@/data/mockOrders";
+﻿import { seedOrders } from "@/data/mockOrders";
 import type { Service, ServicePackage } from "@/data/services";
 import { generateTgTaskCode } from "@/data/tgTaskTemplate";
 
@@ -112,7 +112,7 @@ export const orderStatusMeta = {
   },
   issue: {
     label: "异常处理中",
-    description: "当前订单存在异常，正在处理。",
+    description: "当前订单存在异常，正在处理中。",
     className: "border-rose-300/20 bg-rose-300/10 text-rose-100",
   },
 } satisfies Record<
@@ -865,3 +865,5 @@ export function createOrderFromService(
     tgTargetChannel: DEFAULT_TG_CHANNEL,
   });
 }
+
+
