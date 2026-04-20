@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { SiTelegram } from "react-icons/si";
 import { PlatformCoverageTicker } from "@/components/PlatformCoverageTicker";
@@ -8,7 +8,7 @@ import { useLocale } from "@/components/LocaleProvider";
 import { ViewportReveal } from "@/components/ViewportReveal";
 
 export function BrandHomepageExperience() {
-  const { messages } = useLocale();
+  const { messages, locale } = useLocale();
   const intro = messages.home.intro;
   const valueSection = messages.home.landing;
   const flowSection = messages.home.flow;
@@ -16,9 +16,23 @@ export function BrandHomepageExperience() {
   const notice = messages.home.notice;
   const [titleLineOne = intro.title, titleLineTwo = ""] = intro.title.split("\n");
   const [primarySignal, ...supportingSignals] = intro.signals;
-  const [activeFlowStepIndex, setActiveFlowStepIndex] = useState(2);
+  const [activeFlowStepIndex, setActiveFlowStepIndex] = useState(0);
+  const [isFlowPaused, setIsFlowPaused] = useState(false);
   const activeFlowStep = flowSection.steps[activeFlowStepIndex];
   const [, ...secondaryTrustItems] = intro.trustItems;
+
+  useEffect(() => {
+    if (isFlowPaused) {
+      return;
+    }
+
+    const stepCount = flowSection.steps.length;
+    const interval = window.setInterval(() => {
+      setActiveFlowStepIndex((current) => (current + 1) % stepCount);
+    }, 3200);
+
+    return () => window.clearInterval(interval);
+  }, [flowSection.steps.length, isFlowPaused]);
 
   return (
     <main className="brand-home-main relative flex-1 pt-30 pb-16 sm:pt-29 sm:pb-20">
@@ -35,7 +49,11 @@ export function BrandHomepageExperience() {
               <span className="mt-2.5 block sm:whitespace-nowrap">{titleLineTwo}</span>
             </h1>
 
-            <p className="brand-hero-subtitle hero-reveal hero-reveal-delay-2 mt-8 max-w-[46rem] text-[1.03rem] leading-8 text-muted-strong sm:text-[1.1rem] lg:text-[1.13rem] lg:leading-[2.02rem]">
+            <p
+              className={`brand-hero-subtitle hero-reveal hero-reveal-delay-2 mt-8 text-[1.03rem] leading-8 text-muted-strong sm:text-[1.1rem] lg:text-[1.13rem] lg:leading-[2.02rem] ${
+                locale === "en" ? "max-w-[42rem]" : "max-w-[46rem]"
+              }`}
+            >
               {intro.description}
             </p>
 
@@ -62,13 +80,13 @@ export function BrandHomepageExperience() {
               {intro.trustItems.map((item) => (
                 <div
                   key={item.title}
-                  className="brand-story-hero-trust-item rounded-[24px] px-4 py-4 text-left sm:px-5 sm:py-4.5"
+                  className="brand-story-hero-trust-item rounded-[24px] px-4 py-4 text-center sm:px-5 sm:py-4.5"
                 >
                   <span className="brand-story-hero-trust-dot mb-3 inline-flex h-2.5 w-2.5 rounded-full bg-accent/85" />
-                  <p className="brand-story-hero-trust-title text-[1rem] font-semibold leading-6 tracking-[-0.026em] text-foreground">
+                  <p className="brand-story-hero-trust-title mx-auto text-[1rem] font-semibold leading-[1.32] tracking-[-0.026em] text-foreground">
                     {item.title}
                   </p>
-                  <p className="brand-story-hero-trust-description mt-2 text-[13px] leading-6 text-muted sm:text-[13.5px]">
+                  <p className="brand-story-hero-trust-description mx-auto mt-3 text-[13px] leading-6 text-muted sm:text-[13.5px]">
                     {item.description}
                   </p>
                 </div>
@@ -134,7 +152,11 @@ export function BrandHomepageExperience() {
               </p>
             </div>
 
-            <div className="brand-flow-stage relative mt-10 grid gap-5 xl:grid-cols-[minmax(0,0.9fr)_minmax(360px,1.1fr)] xl:items-start">
+            <div
+              className="brand-flow-stage relative mt-10 grid gap-5 xl:grid-cols-[minmax(0,0.9fr)_minmax(360px,1.1fr)] xl:items-start"
+              onMouseEnter={() => setIsFlowPaused(true)}
+              onMouseLeave={() => setIsFlowPaused(false)}
+            >
               <ViewportReveal>
                 <div className="brand-flow-list rounded-[26px] px-5 py-5 sm:px-6 sm:py-6">
                   {flowSection.steps.map((step, index) => {
@@ -217,7 +239,13 @@ export function BrandHomepageExperience() {
               <p className="inline-flex rounded-full border border-white/6 bg-white/[0.02] px-3 py-1 text-[10px] font-medium uppercase tracking-[0.26em] text-accent-strong/76">
                 {trustSection.eyebrow}
               </p>
-              <h2 className="mx-auto mt-5 max-w-[22ch] text-[1.48rem] leading-[1.16] font-semibold tracking-[-0.04em] text-foreground sm:text-[1.84rem] lg:max-w-[18ch] lg:text-[2.06rem]">
+              <h2
+                className={`mx-auto mt-5 text-[1.48rem] leading-[1.16] font-semibold tracking-[-0.04em] text-foreground sm:text-[1.84rem] lg:text-[2.06rem] ${
+                  locale === "en"
+                    ? "max-w-[18ch] lg:max-w-[15ch]"
+                    : "max-w-[22ch] lg:max-w-[18ch]"
+                }`}
+              >
                 {trustSection.title}
               </h2>
               <p className="mx-auto mt-6 max-w-[40rem] text-[14px] leading-7 text-muted sm:text-[15px] sm:leading-7.5">
@@ -225,18 +253,19 @@ export function BrandHomepageExperience() {
               </p>
             </div>
 
-            <div className="brand-trust-strip mt-11 overflow-hidden rounded-[28px]">
-              <ViewportReveal className="brand-trust-cell brand-trust-cell-anchor px-5 py-6 sm:px-6 sm:py-6.5">
+            <div className="brand-trust-grid mt-11">
+              <ViewportReveal className="brand-trust-item brand-trust-item-anchor px-1 py-5 sm:px-2 sm:py-6">
+                <span className="brand-trust-accent-line mb-5 block" />
                 <p className="text-[10px] font-medium uppercase tracking-[0.24em] text-accent-strong/72">
                   {trustSection.anchorEyebrow}
                 </p>
                 <p className="mt-5 text-[2.18rem] leading-none font-semibold tracking-[-0.058em] text-foreground sm:text-[2.72rem]">
                   5000+
                 </p>
-                <h3 className="mt-4 max-w-[9.8ch] text-[1.08rem] leading-[1.18] font-semibold tracking-[-0.028em] text-foreground sm:text-[1.2rem]">
+                <h3 className="mt-4 max-w-[11ch] text-[1.08rem] leading-[1.18] font-semibold tracking-[-0.028em] text-foreground sm:text-[1.2rem]">
                   {trustSection.anchorTitle}
                 </h3>
-                <p className="mt-5 max-w-[20rem] text-[13px] leading-[1.72] text-muted sm:text-[14px] sm:leading-7">
+                <p className="mt-5 max-w-[21rem] text-[13px] leading-[1.72] text-muted sm:text-[14px] sm:leading-7">
                   {trustSection.anchorDescription}
                 </p>
               </ViewportReveal>
@@ -245,12 +274,10 @@ export function BrandHomepageExperience() {
                 <ViewportReveal
                   key={item.title}
                   delay={index * 90}
-                  className="brand-trust-cell px-5 py-6 sm:px-6 sm:py-6.5"
+                  className="brand-trust-item px-1 py-5 sm:px-2 sm:py-6"
                 >
-                  <p className="text-[10px] font-medium uppercase tracking-[0.24em] text-accent-strong/68">
-                      {`0${index + 1}`}
-                  </p>
-                  <p className="mt-5 max-w-[12ch] text-[1rem] font-semibold leading-[1.2] tracking-[-0.024em] text-foreground sm:text-[1.08rem]">
+                  <span className="brand-trust-accent-line mb-5 block" />
+                  <p className="max-w-[12ch] text-[1rem] font-semibold leading-[1.2] tracking-[-0.024em] text-foreground sm:text-[1.08rem]">
                     {item.title}
                   </p>
                   <p className="mt-5 max-w-[18rem] text-[13px] leading-[1.72] text-muted sm:text-[14px] sm:leading-7">
@@ -327,19 +354,14 @@ export function BrandHomepageExperience() {
                     {notice.rulesTitle}
                   </p>
                   <div className="mt-4 space-y-3">
-                    {notice.rules.map((item, index) => (
+                    {notice.rules.map((item) => (
                       <div
                         key={item}
                         className="brand-rule-line border-t border-white/7 pt-3 first:border-t-0 first:pt-0"
                       >
-                        <div className="flex items-start gap-3">
-                          <span className="mt-[0.18rem] text-[10px] font-medium uppercase tracking-[0.22em] text-accent-strong/72">
-                            0{index + 1}
-                          </span>
-                          <p className="text-[14px] leading-7 text-muted-strong sm:text-[15px]">
-                            {item}
-                          </p>
-                        </div>
+                        <p className="text-[14px] leading-7 text-muted-strong sm:text-[15px]">
+                          {item}
+                        </p>
                       </div>
                     ))}
                   </div>

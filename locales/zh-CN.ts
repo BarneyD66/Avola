@@ -154,7 +154,7 @@
     },
     flow: {
       eyebrow: "Delivery Flow",
-      title: "从下单到结果回传，交付路径始终保持清晰",
+      title: "从下单到结果回传，交付路径保持清晰",
       description:
         "平台将任务分发给真实海外 Web3 用户网络，并持续回传状态与结果，便于项目方在统一路径中跟踪交付。",
       currentStageLabel: "当前阶段",
@@ -269,10 +269,10 @@
     },
   },
   services: {
-    eyebrow: "Curated Services",
-    title: "快速浏览服务目录",
-    description:
-      "按分类查看支持的平台入口、代表服务与起始价格，再进入对应详情页。",
+      eyebrow: "Curated Services",
+      title: "选择服务类别",
+      description:
+        "按分类查看支持的平台入口、代表服务与起始价格，再进入对应详情页。",
     note: "目录页仅作为分类入口，具体套餐、表单与支付流程将在服务详情页继续完成。",
     backHome: "返回品牌首页",
     railTitle: "目录导航",

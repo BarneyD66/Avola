@@ -21,7 +21,7 @@ export const en: Messages = {
       badge: "Real User Participation Growth",
       title: "Turn every growth budget\ninto real user participation",
       description:
-        "Unlike platforms built around exposure and KOL posting, we focus on real participation, measurable conversion, and trackable delivery. Direct ordering, order tracking, and result delivery are backed by 5000+ overseas Web3 real users and independent participation environments.",
+        "Unlike exposure-first platforms, we focus on real participation, measurable conversion, and trackable delivery. Direct ordering and tracking are supported by 5000+ overseas Web3 users and independent execution environments.",
       note: "Real user participation only, with direct ordering and order tracking.",
       primaryCta: "Browse Service Directory",
       secondaryCta: "Track Order",
@@ -31,15 +31,15 @@ export const en: Messages = {
           description: "Built for real participation and measurable delivery.",
         },
         {
-          title: "Real participation, not hollow traffic",
-          description: "Closer to real interaction, conversion, and retention.",
+          title: "Real participation,\nnot hollow traffic",
+          description: "Built for interaction, conversion, and retention.",
         },
         {
-          title: "Independent participation environment",
-          description: "Cleaner execution conditions with stronger credibility.",
+          title: "Independent execution\nenvironment",
+          description: "Cleaner execution with stronger credibility.",
         },
         {
-          title: "Trackable order delivery",
+          title: "Trackable order\ndelivery",
           description: "Ordering, execution, and updates stay on one path.",
         },
       ],
@@ -214,12 +214,12 @@ export const en: Messages = {
     },
     trust: {
       eyebrow: "Trust Layer",
-      title: "Credibility comes from real networks, independent participation environments, and one visible delivery path",
+      title: "Real networks and independent execution,\none trackable delivery path",
       description:
-        "Trust comes from a real user network, independent execution conditions, and delivery that stays queryable end to end.",
+        "Trust comes from real users, cleaner execution conditions, and delivery that stays visible end to end.",
       anchorEyebrow: "Network Support",
-      anchorTitle: "Overseas Web3 real user network",
-      anchorDescription: "Built for real participation demand and measurable delivery.",
+      anchorTitle: "Overseas Web3 user network",
+      anchorDescription: "Built for real participation and measurable delivery.",
     },
     manifesto: {
       eyebrow: "Brand Thesis",
