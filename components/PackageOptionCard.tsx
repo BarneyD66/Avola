@@ -20,7 +20,7 @@ export function PackageOptionCard({
     <button
       type="button"
       onClick={() => onSelect(item.id)}
-      className={`relative flex w-full flex-col items-start rounded-2xl border px-3.5 py-3.5 text-left transition hover:-translate-y-0.5 active:translate-y-0 sm:px-4 sm:py-4 ${
+      className={`relative flex w-full flex-col items-start rounded-2xl border px-3 py-3 text-left transition hover:-translate-y-0.5 active:translate-y-0 sm:px-4 sm:py-4 ${
         selected
           ? "border-accent/50 bg-accent/8 shadow-[0_16px_34px_rgba(59,130,246,0.1)]"
           : "border-white/10 bg-white/[0.02] hover:border-white/18 hover:bg-white/[0.04]"
@@ -57,11 +57,11 @@ export function PackageOptionCard({
         </div>
       ) : null}
 
-      <span className="mt-2 text-sm font-medium leading-6 text-zinc-200">
+      <span className="mt-2 text-[13.5px] font-medium leading-6 text-zinc-200 sm:text-sm">
         {item.result}
       </span>
       {item.deliveryTime ? (
-        <span className="mt-2 text-sm leading-6 text-zinc-400">
+        <span className="mt-1.5 text-[13px] leading-6 text-zinc-400 sm:mt-2 sm:text-sm">
           {messages.service.estimatedPrefix} {item.deliveryTime}
         </span>
       ) : null}

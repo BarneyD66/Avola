@@ -34,11 +34,11 @@
         },
         {
           title: "独立参与环境",
-          description: "避免单一环境堆量，提升参与可信度。",
+          description: "避免单一环境堆量，提升参与质量与稳定性。",
         },
         {
           title: "订单可追踪交付",
-          description: "从下单到进度更新保持统一查询路径。",
+          description: "从下单到进度更新保持同一查询入口。",
         },
       ],
       mockup: {
@@ -189,7 +189,7 @@
         {
           title: "订单追踪",
           description:
-            "订单号与查询密码会保持统一追踪路径。从下单到结果更新，项目方都可以沿同一入口查看当前进度与交付状态。",
+            "订单号与查询密码会保持同一追踪入口。从下单到结果更新，项目方都可以沿同一入口查看当前进度与交付状态。",
           completed: "直接下单、任务分发、真实用户参与、结果回传",
           next: "持续查询当前进度",
         },
@@ -241,7 +241,7 @@
       note: "这也是首页先讲品牌，再进入目录页的原因。",
     },
     gateway: {
-      eyebrow: "Service Directory",
+      eyebrow: "服务目录",
       title: "当品牌认知建立之后，再进入具体服务选择",
       description:
         "服务目录将按分类承接不同增长需求，你可以先进入目录页，再选择具体的分类与服务方案。",
@@ -281,10 +281,10 @@
     },
   },
   services: {
-      eyebrow: "Curated Services",
-      title: "选择服务类别",
-      description:
-        "按分类查看支持的平台入口、代表服务与起始价格，再进入对应详情页。",
+    eyebrow: "服务目录",
+    title: "选择服务类别",
+    description:
+      "按分类查看支持的平台入口、代表服务与起始价格，再进入对应详情页。",
     note: "目录页仅作为分类入口，具体套餐、表单与支付流程将在服务详情页继续完成。",
     backHome: "返回品牌首页",
     railTitle: "目录导航",
@@ -295,7 +295,7 @@
       "GitHub、代币 / NFT 与 App 相关增长服务",
     ],
     railFooter: "所有分类页都将继续承接到具体服务详情与套餐选择。",
-    editorialLabel: "精选目录",
+    editorialLabel: "服务目录",
     coverageLabel: "覆盖入口",
     representativeLabel: "代表服务",
     openCategory: "进入分类",
@@ -412,9 +412,9 @@
         summary: "当前订单正在推进，请稍后查看最新进度。",
       },
       reviewing: {
-        label: "审核中",
-        description: "当前订单已进入结果核验阶段。",
-        summary: "当前订单已进入结果核验阶段，系统会在核验完成后更新最终状态。",
+        label: "执行中",
+        description: "当前订单正在持续推进中。",
+        summary: "当前订单正在持续推进中，系统会持续更新最新状态。",
       },
       completed: {
         label: "已完成",
@@ -431,7 +431,7 @@
       created: "订单已创建",
       queued: "已进入执行队列",
       running: "执行中",
-      reviewing: "审核中",
+      reviewing: "执行中",
       completed: "已完成",
       pending: "待更新",
     },
@@ -561,7 +561,7 @@
         },
         runningOrders: {
           label: "进行中订单数",
-          description: "包含待开始、执行中与审核中的订单",
+          description: "包含待开始与执行中的订单",
         },
         completedOrders: {
           label: "已完成订单数",
@@ -594,7 +594,7 @@
       filters: {
         all: "全部",
         running: "进行中",
-        reviewing: "审核中",
+        reviewing: "执行中",
         completed: "已完成",
         issue: "异常处理中",
       },

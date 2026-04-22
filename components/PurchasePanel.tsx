@@ -192,20 +192,20 @@ export function PurchasePanel({ service }: PurchasePanelProps) {
 
   return (
     <aside className="lg:sticky lg:top-28">
-      <div className="surface-panel rounded-[24px] border border-white/8 p-4 shadow-[0_18px_42px_rgba(0,0,0,0.2)] sm:rounded-[28px] sm:p-7">
+      <div className="surface-panel rounded-[24px] border border-white/8 p-3.5 shadow-[0_18px_42px_rgba(0,0,0,0.2)] sm:rounded-[28px] sm:p-7">
         <div>
           <p className="text-xs font-medium uppercase tracking-[0.28em] text-accent-strong/80">
             {messages.service.orderRequest}
           </p>
-          <h2 className="mt-3 text-[1.45rem] font-semibold tracking-tight text-white sm:mt-4 sm:text-2xl">
+          <h2 className="mt-2.5 text-[1.28rem] font-semibold tracking-tight text-white sm:mt-4 sm:text-2xl">
             {messages.service.buyNow}
           </h2>
-          <p className="mt-2.5 max-w-[30rem] text-sm leading-7 text-zinc-400 sm:mt-3">
+          <p className="mt-2 max-w-[30rem] text-[13.5px] leading-6.5 text-zinc-400 sm:mt-3 sm:text-sm sm:leading-7">
             {messages.service.noLoginDescription}
           </p>
         </div>
 
-        <form className="mt-6 space-y-4 sm:mt-7 sm:space-y-5" onSubmit={handleSubmit} noValidate>
+        <form className="mt-5 space-y-3.5 sm:mt-7 sm:space-y-5" onSubmit={handleSubmit} noValidate>
           {displayFields.map((field) => (
             <DynamicFieldRenderer
               key={field.key}
@@ -217,7 +217,7 @@ export function PurchasePanel({ service }: PurchasePanelProps) {
           ))}
 
           {localizedService.packages?.length ? (
-            <div className="rounded-[20px] border border-white/8 bg-white/[0.02] p-3.5 sm:rounded-[24px] sm:p-5">
+            <div className="rounded-[20px] border border-white/8 bg-white/[0.02] p-3 sm:rounded-[24px] sm:p-5">
               <PackageSelector
                 packages={localizedService.packages}
                 selectedPackageId={selectedPackageId}

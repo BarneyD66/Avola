@@ -97,7 +97,7 @@ export const en: Messages = {
         {
           title: "Trackable order flow",
           description:
-            "Ordering, payment, execution, and progress updates stay on one searchable path.",
+            "Ordering, payment, execution, and progress updates stay on one trackable path.",
         },
         {
           title: "Built for growth teams",
@@ -198,7 +198,7 @@ export const en: Messages = {
         {
           title: "Order Tracking",
           description:
-            "The order number and query password keep one consistent tracking path. From order creation to result updates, progress remains available through the same entry.",
+            "The order number and query password keep one consistent tracking entry. From order creation to result updates, progress stays visible through the same path.",
           completed: "Direct ordering, task dispatch, real user participation, result callbacks",
           next: "Continue tracking progress",
         },
@@ -290,13 +290,13 @@ export const en: Messages = {
     },
   },
   services: {
-    eyebrow: "Curated Services",
-    title: "Browse the service directory",
+    eyebrow: "Service Directory",
+    title: "Choose a service category",
     description:
-      "Scan categories, supported entry points, representative services, and starting prices before going deeper.",
+      "Browse categories, supported entry points, representative services, and starting prices before going deeper.",
     note: "Packages, forms, and payment flow continue on each service detail page.",
     backHome: "Back to Brand Home",
-    railTitle: "Directory Guide",
+    railTitle: "Directory",
     railDescription:
       "Scan the capability range first, then continue into the category that fits best.",
     railItems: [
@@ -306,7 +306,7 @@ export const en: Messages = {
     ],
     railFooter:
       "Each category continues into service details and package selection.",
-    editorialLabel: "Curated Directory",
+    editorialLabel: "Service Directory",
     coverageLabel: "Coverage",
     representativeLabel: "Representative Services",
     openCategory: "Open Category",

@@ -57,7 +57,7 @@ export function DashboardOrderTable({ orders }: DashboardOrderTableProps) {
   }, [activeFilter, filters, orders]);
 
   return (
-    <section className="surface-panel rounded-[24px] border border-white/8 p-4 sm:rounded-[30px] sm:p-8">
+    <section className="surface-panel rounded-[24px] border border-white/8 p-3.5 sm:rounded-[30px] sm:p-8">
       <div className="-mx-1 flex gap-2 overflow-x-auto px-1 pb-1 sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0 sm:pb-0">
         {filters.map((filter) => {
           const active = filter.key === activeFilter;
@@ -140,11 +140,11 @@ export function DashboardOrderTable({ orders }: DashboardOrderTableProps) {
         </table>
       </div>
 
-      <div className="mt-6 grid gap-4 xl:hidden">
+      <div className="mt-5 grid gap-3.5 xl:hidden sm:mt-6 sm:gap-4">
         {filteredOrders.map((order) => (
           <div
             key={order.id}
-            className="rounded-[22px] border border-white/8 bg-white/[0.02] p-4 sm:rounded-[24px] sm:p-5"
+            className="rounded-[22px] border border-white/8 bg-white/[0.02] p-3.5 sm:rounded-[24px] sm:p-5"
           >
             <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
               <div>

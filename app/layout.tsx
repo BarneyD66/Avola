@@ -5,7 +5,7 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://realjoin.local"),
+  metadataBase: new URL("https://realjoin.io"),
   title: {
     default: "REALJOIN",
     template: "%s | REALJOIN",

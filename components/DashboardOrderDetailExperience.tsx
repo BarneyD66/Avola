@@ -96,16 +96,16 @@ export function DashboardOrderDetailExperience({
 
   return (
     <div className="flex flex-col gap-5 sm:gap-8">
-      <section className="surface-panel rounded-[24px] border border-white/8 p-5 sm:rounded-[30px] sm:p-9">
+      <section className="surface-panel rounded-[24px] border border-white/8 p-4 sm:rounded-[30px] sm:p-9">
         <div className="flex flex-col gap-5 md:flex-row md:items-start md:justify-between">
           <div>
             <p className="text-xs font-medium uppercase tracking-[0.32em] text-accent-strong/80">
               {messages.dashboard.detail.eyebrow}
             </p>
-            <h2 className="mt-4 text-[2rem] leading-tight font-semibold tracking-[-0.03em] text-white sm:mt-5 sm:text-4xl">
+            <h2 className="mt-3 text-[1.75rem] leading-tight font-semibold tracking-[-0.03em] text-white sm:mt-5 sm:text-4xl">
               {serviceName}
             </h2>
-            <p className="mt-4 text-base leading-8 text-zinc-400 sm:text-lg">
+            <p className="mt-3 text-[15px] leading-7 text-zinc-400 sm:mt-4 sm:text-lg sm:leading-8">
               {messages.order.labels.orderId}: {order.id}
             </p>
           </div>
@@ -117,12 +117,12 @@ export function DashboardOrderDetailExperience({
         </div>
       </section>
 
-      <section className="surface-panel rounded-[24px] border border-white/8 p-4 sm:rounded-[30px] sm:p-8">
+      <section className="surface-panel rounded-[24px] border border-white/8 p-3.5 sm:rounded-[30px] sm:p-8">
         <h3 className="text-2xl font-semibold tracking-tight text-white">
           {messages.order.labels.basicInfo}
         </h3>
 
-        <div className="mt-6 grid gap-3 sm:grid-cols-2 sm:gap-4 xl:grid-cols-3">
+        <div className="mt-5 grid gap-2.5 sm:grid-cols-2 sm:gap-4 xl:grid-cols-3">
           <CopyableField label={messages.order.labels.orderId} value={order.id} />
           <CopyableField
             label={messages.order.labels.queryPassword}
@@ -132,12 +132,12 @@ export function DashboardOrderDetailExperience({
           />
         </div>
 
-        <p className="mt-4 text-sm leading-7 text-zinc-500">
+        <p className="mt-3.5 text-[13px] leading-6 text-zinc-500 sm:mt-4 sm:text-sm sm:leading-7">
           {messages.track.saveInfoHint}
         </p>
 
         {selectedPackage.label ? (
-          <div className="mt-6 rounded-2xl border border-accent/16 bg-accent/8 p-4">
+          <div className="mt-5 rounded-2xl border border-accent/16 bg-accent/8 p-3.5 sm:mt-6 sm:p-4">
             <p className="text-xs uppercase tracking-[0.24em] text-accent-strong/75">
               {messages.order.labels.selectedPackage}
             </p>
@@ -152,11 +152,11 @@ export function DashboardOrderDetailExperience({
           </div>
         ) : null}
 
-        <div className="mt-6 grid gap-3 sm:mt-8 sm:grid-cols-2 sm:gap-4 xl:grid-cols-3">
+        <div className="mt-5 grid gap-2.5 sm:mt-8 sm:grid-cols-2 sm:gap-4 xl:grid-cols-3">
           {infoItems.map((item) => (
             <div
               key={item.label}
-              className="rounded-2xl border border-white/8 bg-white/[0.025] p-4"
+              className="rounded-2xl border border-white/8 bg-white/[0.025] p-3.5 sm:p-4"
             >
               <p className="text-xs uppercase tracking-[0.24em] text-zinc-500">
                 {item.label}
@@ -169,12 +169,12 @@ export function DashboardOrderDetailExperience({
         </div>
       </section>
 
-      <section className="surface-panel rounded-[24px] border border-white/8 p-4 sm:rounded-[30px] sm:p-8">
+      <section className="surface-panel rounded-[24px] border border-white/8 p-3.5 sm:rounded-[30px] sm:p-8">
         <h3 className="text-2xl font-semibold tracking-tight text-white">
           {messages.dashboard.detail.paymentTitle}
         </h3>
 
-        <div className="mt-6 grid gap-3 sm:grid-cols-2 sm:gap-4 xl:grid-cols-3">
+        <div className="mt-5 grid gap-2.5 sm:grid-cols-2 sm:gap-4 xl:grid-cols-3">
           {[
             {
               label: messages.order.labels.paymentProvider,
@@ -203,7 +203,7 @@ export function DashboardOrderDetailExperience({
           ].map((item) => (
             <div
               key={item.label}
-              className="rounded-2xl border border-white/8 bg-white/[0.025] p-4"
+              className="rounded-2xl border border-white/8 bg-white/[0.025] p-3.5 sm:p-4"
             >
               <p className="text-xs uppercase tracking-[0.24em] text-zinc-500">
                 {item.label}
@@ -216,7 +216,7 @@ export function DashboardOrderDetailExperience({
         </div>
       </section>
 
-      <section className="surface-panel rounded-[24px] border border-white/8 p-4 sm:rounded-[30px] sm:p-8">
+      <section className="surface-panel rounded-[24px] border border-white/8 p-3.5 sm:rounded-[30px] sm:p-8">
         <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
           <div>
             <h3 className="text-2xl font-semibold tracking-tight text-white">
@@ -229,26 +229,26 @@ export function DashboardOrderDetailExperience({
           <p className="text-3xl font-semibold text-white">{order.progress}%</p>
         </div>
 
-        <ProgressBar className="mt-6" value={order.progress} />
+        <ProgressBar className="mt-5 sm:mt-6" value={order.progress} />
       </section>
 
-      <section className="surface-panel rounded-[24px] border border-white/8 p-4 sm:rounded-[30px] sm:p-8">
+      <section className="surface-panel rounded-[24px] border border-white/8 p-3.5 sm:rounded-[30px] sm:p-8">
         <h3 className="text-2xl font-semibold tracking-tight text-white">
           {messages.dashboard.detail.orderSummaryTitle}
         </h3>
-        <p className="mt-4 max-w-3xl text-base leading-8 text-zinc-400 sm:text-lg">
+        <p className="mt-3.5 max-w-3xl text-[15px] leading-7 text-zinc-400 sm:mt-4 sm:text-lg sm:leading-8">
           {statusMeta.summary}
         </p>
       </section>
 
-      <section className="surface-panel rounded-[24px] border border-white/8 p-4 sm:rounded-[30px] sm:p-8">
+      <section className="surface-panel rounded-[24px] border border-white/8 p-3.5 sm:rounded-[30px] sm:p-8">
         <h3 className="text-2xl font-semibold tracking-tight text-white">
           {messages.order.labels.timeline}
         </h3>
         <p className="mt-3 text-sm leading-7 text-zinc-400 sm:text-base">
           {messages.dashboard.detail.timelineDescription}
         </p>
-        <div className="mt-6">
+        <div className="mt-5 sm:mt-6">
           <OrderTimeline items={getLocalizedTimelineItems(order.timeline, locale)} />
         </div>
       </section>

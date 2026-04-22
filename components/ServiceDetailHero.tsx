@@ -25,15 +25,15 @@ export function ServiceDetailHero({ service }: ServiceDetailHeroProps) {
   ];
 
   return (
-    <div className="space-y-5 sm:space-y-6">
-      <section className="surface-panel rounded-[24px] border border-white/8 p-5 sm:rounded-[30px] sm:p-9">
+    <div className="space-y-4 sm:space-y-6">
+      <section className="surface-panel rounded-[24px] border border-white/8 p-4 sm:rounded-[30px] sm:p-9">
         <p className="text-xs font-medium uppercase tracking-[0.32em] text-accent-strong/80">
           {messages.service.detailEyebrow}
         </p>
-        <h1 className="mt-4 text-[2rem] leading-tight font-semibold tracking-[-0.03em] text-white sm:mt-5 sm:text-4xl lg:text-[3.2rem]">
+        <h1 className="mt-3.5 text-[1.76rem] leading-[1.1] font-semibold tracking-[-0.035em] text-white sm:mt-5 sm:text-4xl lg:text-[3.2rem]">
           {localizedService.name}
         </h1>
-        <p className="mt-3 text-base font-medium leading-7 text-zinc-200 sm:mt-4 sm:text-xl sm:leading-8">
+        <p className="mt-2.5 text-[15px] font-medium leading-7 text-zinc-200 sm:mt-4 sm:text-xl sm:leading-8">
           {localizedService.shortDesc}
         </p>
       </section>

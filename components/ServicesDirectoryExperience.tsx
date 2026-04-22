@@ -15,22 +15,24 @@ export function ServicesDirectoryExperience({
   const { locale, messages } = useLocale();
 
   return (
-    <main className="relative flex-1 pt-34 pb-14 sm:pt-31 sm:pb-18">
-      <div className="mx-auto flex w-full max-w-[88rem] flex-col gap-5 px-4 sm:gap-6 sm:px-6 lg:gap-7 lg:px-8">
-        <section className="services-directory-hero section-atmosphere surface-panel overflow-hidden rounded-[28px] border border-white/6 px-4 py-8 sm:px-8 sm:py-10 lg:px-10 lg:py-11">
+    <main className="relative flex-1 pt-34 pb-12 sm:pt-31 sm:pb-18">
+      <div className="mx-auto flex w-full max-w-[88rem] flex-col gap-4 px-4 sm:gap-6 sm:px-6 lg:gap-7 lg:px-8">
+        <section className="services-directory-hero section-atmosphere surface-panel overflow-hidden rounded-[28px] border border-white/6 px-4 py-7 sm:px-8 sm:py-10 lg:px-10 lg:py-11">
           <div className="services-directory-hero-grid flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
             <div className="max-w-[42rem]">
               <p className="text-[11px] font-medium uppercase tracking-[0.28em] text-accent-strong/75">
                 {messages.services.eyebrow}
               </p>
               <h1
-                className={`mt-3 text-[1.92rem] leading-[1.06] font-semibold tracking-[-0.05em] text-foreground sm:text-[2.35rem] lg:text-[2.72rem] ${
-                  locale === "en" ? "max-w-[16.5ch] sm:max-w-[13.5ch]" : "max-w-[13ch]"
+                className={`mt-2.5 text-[1.72rem] leading-[1.06] font-semibold tracking-[-0.05em] text-foreground sm:text-[2.35rem] lg:text-[2.72rem] ${
+                  locale === "en"
+                    ? "max-w-[15.5ch] sm:max-w-[14.5ch]"
+                    : "max-w-[10ch] sm:max-w-none"
                 }`}
               >
                 {messages.services.title}
               </h1>
-              <p className="mt-4 max-w-[34rem] text-[15px] leading-7 text-muted-strong sm:text-[16px] sm:leading-7.5">
+              <p className="mt-3 max-w-[34rem] text-[14px] leading-6.5 text-muted-strong sm:text-[16px] sm:leading-7.5">
                 {messages.services.description}
               </p>
             </div>

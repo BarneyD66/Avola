@@ -42,16 +42,16 @@ export function OrderResultCard({ order }: OrderResultCardProps) {
   ];
 
   return (
-    <section className="surface-panel rounded-[24px] border border-white/8 p-4 sm:rounded-[30px] sm:p-8">
+    <section className="surface-panel rounded-[24px] border border-white/8 p-3.5 sm:rounded-[30px] sm:p-8">
       <div className="flex flex-col gap-5 md:flex-row md:items-start md:justify-between">
         <div>
           <p className="text-xs font-medium uppercase tracking-[0.3em] text-accent-strong/80">
             {messages.track.resultEyebrow}
           </p>
-          <h2 className="mt-4 text-[1.45rem] font-semibold tracking-tight text-white sm:text-3xl">
+          <h2 className="mt-3 text-[1.3rem] font-semibold tracking-tight text-white sm:mt-4 sm:text-3xl">
             {serviceName}
           </h2>
-          <p className="mt-3 max-w-2xl text-sm leading-7 text-zinc-400 sm:text-base">
+          <p className="mt-2.5 max-w-2xl text-[13.5px] leading-6.5 text-zinc-400 sm:mt-3 sm:text-base sm:leading-7">
             {statusMeta.summary}
           </p>
         </div>
@@ -65,7 +65,7 @@ export function OrderResultCard({ order }: OrderResultCardProps) {
         </div>
       </div>
 
-      <div className="mt-6 grid gap-3 sm:mt-8 sm:grid-cols-2 sm:gap-4 xl:grid-cols-3">
+      <div className="mt-5 grid gap-2.5 sm:mt-8 sm:grid-cols-2 sm:gap-4 xl:grid-cols-3">
         <CopyableField
           label={messages.order.labels.orderId}
           value={order.id}
@@ -79,15 +79,15 @@ export function OrderResultCard({ order }: OrderResultCardProps) {
         />
       </div>
 
-      <p className="mt-4 text-sm leading-7 text-zinc-500">
+      <p className="mt-3.5 text-[13px] leading-6 text-zinc-500 sm:mt-4 sm:text-sm sm:leading-7">
         {messages.track.saveInfoHint}
       </p>
 
-      <div className="mt-6 grid gap-3 sm:mt-8 sm:grid-cols-2 sm:gap-4 xl:grid-cols-3">
+      <div className="mt-5 grid gap-2.5 sm:mt-8 sm:grid-cols-2 sm:gap-4 xl:grid-cols-3">
         {baseInfo.map((item) => (
           <div
             key={item.label}
-            className="rounded-2xl border border-white/8 bg-white/[0.025] p-4"
+            className="rounded-2xl border border-white/8 bg-white/[0.025] p-3.5 sm:p-4"
           >
             <p className="text-xs uppercase tracking-[0.24em] text-zinc-500">
               {item.label}
@@ -97,7 +97,7 @@ export function OrderResultCard({ order }: OrderResultCardProps) {
             </p>
           </div>
         ))}
-        <div className="rounded-2xl border border-white/8 bg-white/[0.025] p-4">
+        <div className="rounded-2xl border border-white/8 bg-white/[0.025] p-3.5 sm:p-4">
           <p className="text-xs uppercase tracking-[0.24em] text-zinc-500">
             {messages.track.currentStatus}
           </p>
@@ -108,7 +108,7 @@ export function OrderResultCard({ order }: OrderResultCardProps) {
             {statusMeta.description}
           </p>
         </div>
-        <div className="rounded-2xl border border-white/8 bg-white/[0.025] p-4">
+        <div className="rounded-2xl border border-white/8 bg-white/[0.025] p-3.5 sm:p-4">
           <p className="text-xs uppercase tracking-[0.24em] text-zinc-500">
             {messages.track.paymentStatus}
           </p>
@@ -121,7 +121,7 @@ export function OrderResultCard({ order }: OrderResultCardProps) {
         </div>
       </div>
 
-      <div className="mt-6 rounded-[22px] border border-white/8 bg-white/[0.02] p-4 sm:mt-8 sm:rounded-[24px] sm:p-6">
+      <div className="mt-5 rounded-[22px] border border-white/8 bg-white/[0.02] p-3.5 sm:mt-8 sm:rounded-[24px] sm:p-6">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
           <div>
             <p className="text-sm font-medium text-white">
@@ -138,8 +138,8 @@ export function OrderResultCard({ order }: OrderResultCardProps) {
         <ProgressBar className="mt-5" value={order.progress} />
       </div>
 
-      <div className="mt-6 sm:mt-8">
-        <div className="mb-4">
+      <div className="mt-5 sm:mt-8">
+        <div className="mb-3.5 sm:mb-4">
           <h3 className="text-lg font-semibold tracking-tight text-white">
             {messages.track.timelineTitle}
           </h3>

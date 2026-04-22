@@ -292,7 +292,7 @@ const timelineLabelMap: Record<string, string> = {
   "订单已创建": "Order created",
   "已进入执行队列": "Entered execution queue",
   "执行中": "Running",
-  "审核中": "Reviewing",
+  "审核中": "Running",
   "已完成": "Completed",
   "待更新": "Pending update",
 };

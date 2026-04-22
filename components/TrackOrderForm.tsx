@@ -51,21 +51,21 @@ export function TrackOrderForm({
   };
 
   return (
-    <section className="surface-panel rounded-[24px] border border-white/8 p-4 sm:rounded-[30px] sm:p-8">
+    <section className="surface-panel rounded-[24px] border border-white/8 p-3.5 sm:rounded-[30px] sm:p-8">
       <div className="max-w-2xl">
         <p className="text-xs font-medium uppercase tracking-[0.3em] text-accent-strong/80">
           {messages.track.formEyebrow}
         </p>
-        <h2 className="mt-4 text-[1.45rem] font-semibold tracking-tight text-white sm:text-3xl">
+        <h2 className="mt-3 text-[1.3rem] font-semibold tracking-tight text-white sm:mt-4 sm:text-3xl">
           {messages.track.formTitle}
         </h2>
-        <p className="mt-3 text-sm leading-7 text-zinc-400 sm:text-base">
+        <p className="mt-2.5 text-[13.5px] leading-6.5 text-zinc-400 sm:mt-3 sm:text-base sm:leading-7">
           {messages.track.formDescription}
         </p>
       </div>
 
       <form
-        className="mt-6 grid gap-4 sm:mt-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_auto] lg:items-end"
+        className="mt-5 grid gap-3.5 sm:mt-8 sm:gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_auto] lg:items-end"
         onSubmit={handleSubmit}
         noValidate
       >
