@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import type { CSSProperties, MouseEvent as ReactMouseEvent } from "react";
+import type { CSSProperties, FocusEvent as ReactFocusEvent, MouseEvent as ReactMouseEvent } from "react";
 import Link from "next/link";
 import { SiTelegram } from "react-icons/si";
 import { PlatformCoverageTicker } from "@/components/PlatformCoverageTicker";
@@ -79,6 +79,22 @@ function resetSectionGlow(target: GlowTarget) {
   target.style.setProperty("--section-glow-opacity", "0");
   target.style.setProperty("--section-parallax-x", "0px");
   target.style.setProperty("--section-parallax-y", "0px");
+}
+
+function applyMagneticMove(target: HTMLElement, event: ReactMouseEvent<HTMLElement>) {
+  const bounds = target.getBoundingClientRect();
+  const x = (event.clientX - bounds.left) / bounds.width;
+  const y = (event.clientY - bounds.top) / bounds.height;
+  const shiftX = (x - 0.5) * 2.4;
+  const shiftY = (y - 0.5) * 1.8;
+
+  target.style.setProperty("--button-move-x", `${shiftX.toFixed(2)}px`);
+  target.style.setProperty("--button-move-y", `${shiftY.toFixed(2)}px`);
+}
+
+function resetMagneticMove(target: HTMLElement) {
+  target.style.setProperty("--button-move-x", "0px");
+  target.style.setProperty("--button-move-y", "0px");
 }
 
 export function BrandHomepageExperience() {
@@ -170,6 +186,18 @@ export function BrandHomepageExperience() {
         }
       : {};
 
+  const magneticButtonProps =
+    pointerEffectsEnabled && !prefersReducedMotion
+      ? {
+          onMouseMove: (event: ReactMouseEvent<HTMLElement>) =>
+            applyMagneticMove(event.currentTarget, event),
+          onMouseLeave: (event: ReactMouseEvent<HTMLElement>) =>
+            resetMagneticMove(event.currentTarget),
+          onBlur: (event: ReactFocusEvent<HTMLElement>) =>
+            resetMagneticMove(event.currentTarget),
+        }
+      : {};
+
   return (
     <main className="brand-home-main relative flex-1 pt-30 pb-16 sm:pt-29 sm:pb-20">
       <div className="mx-auto flex w-full max-w-[88rem] flex-col gap-6 px-4 sm:gap-7 sm:px-6 lg:gap-8 lg:px-8">
@@ -201,12 +229,14 @@ export function BrandHomepageExperience() {
               <Link
                 href="/services"
                 className="ui-primary-button hero-primary-button inline-flex min-w-[13rem] items-center justify-center px-6 py-3.5 text-sm font-semibold"
+                {...magneticButtonProps}
               >
                 {intro.primaryCta}
               </Link>
               <Link
                 href="/track"
                 className="ui-secondary-button hero-secondary-button inline-flex min-w-[10.9rem] items-center justify-center rounded-full px-5 py-3.5 text-sm font-medium"
+                {...magneticButtonProps}
               >
                 {intro.secondaryCta}
               </Link>
@@ -496,12 +526,14 @@ export function BrandHomepageExperience() {
                 <Link
                   href="/services"
                   className="ui-primary-button inline-flex min-w-[12.75rem] items-center justify-center px-6 py-3.5 text-sm font-semibold"
+                  {...magneticButtonProps}
                 >
                   {intro.primaryCta}
                 </Link>
                 <Link
                   href="/track"
                   className="ui-secondary-button inline-flex min-w-[10.9rem] items-center justify-center rounded-full px-5 py-3.5 text-sm font-medium"
+                  {...magneticButtonProps}
                 >
                   {intro.secondaryCta}
                 </Link>

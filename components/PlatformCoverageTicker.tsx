@@ -1,5 +1,7 @@
 "use client";
 
+import { useEffect, useState } from "react";
+import type { FocusEvent as ReactFocusEvent, MouseEvent as ReactMouseEvent } from "react";
 import type { IconType } from "react-icons";
 import type { IconBaseProps } from "react-icons";
 import { FiDownload } from "react-icons/fi";
@@ -23,6 +25,28 @@ type CoverageItem = {
   label: string;
   icon: IconType;
 };
+
+type GlowTarget = HTMLElement;
+
+function applySectionGlowMove(target: GlowTarget, event: ReactMouseEvent<GlowTarget>) {
+  const bounds = target.getBoundingClientRect();
+  const x = ((event.clientX - bounds.left) / bounds.width) * 100;
+  const y = ((event.clientY - bounds.top) / bounds.height) * 100;
+  const shiftX = ((x - 50) / 50) * 6;
+  const shiftY = ((y - 50) / 50) * 4;
+
+  target.style.setProperty("--section-glow-x", `${x}%`);
+  target.style.setProperty("--section-glow-y", `${y}%`);
+  target.style.setProperty("--section-glow-opacity", "1");
+  target.style.setProperty("--section-parallax-x", `${shiftX.toFixed(2)}px`);
+  target.style.setProperty("--section-parallax-y", `${shiftY.toFixed(2)}px`);
+}
+
+function resetSectionGlow(target: GlowTarget) {
+  target.style.setProperty("--section-glow-opacity", "0");
+  target.style.setProperty("--section-parallax-x", "0px");
+  target.style.setProperty("--section-parallax-y", "0px");
+}
 
 const PumpFunIcon: IconType = (props: IconBaseProps) => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" {...props}>
@@ -66,6 +90,39 @@ const FourMemeIcon: IconType = (props: IconBaseProps) => (
 
 export function PlatformCoverageTicker() {
   const { messages } = useLocale();
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  const [pointerEffectsEnabled, setPointerEffectsEnabled] = useState(false);
+
+  useEffect(() => {
+    const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const pointerQuery = window.matchMedia("(hover: hover) and (pointer: fine)");
+
+    const updatePreferences = () => {
+      setPrefersReducedMotion(reducedMotionQuery.matches);
+      setPointerEffectsEnabled(pointerQuery.matches);
+    };
+
+    updatePreferences();
+    reducedMotionQuery.addEventListener("change", updatePreferences);
+    pointerQuery.addEventListener("change", updatePreferences);
+
+    return () => {
+      reducedMotionQuery.removeEventListener("change", updatePreferences);
+      pointerQuery.removeEventListener("change", updatePreferences);
+    };
+  }, []);
+
+  const interactiveSectionProps =
+    pointerEffectsEnabled && !prefersReducedMotion
+      ? {
+          onMouseEnter: (event: ReactMouseEvent<HTMLElement>) =>
+            event.currentTarget.style.setProperty("--section-glow-opacity", "1"),
+          onMouseMove: (event: ReactMouseEvent<HTMLElement>) =>
+            applySectionGlowMove(event.currentTarget, event),
+          onMouseLeave: (event: ReactMouseEvent<HTMLElement>) => resetSectionGlow(event.currentTarget),
+          onBlur: (event: ReactFocusEvent<HTMLElement>) => resetSectionGlow(event.currentTarget),
+        }
+      : {};
 
   const coverageItems: CoverageItem[] = [
     { label: messages.home.coverage.items.x, icon: SiX },
@@ -88,7 +145,11 @@ export function PlatformCoverageTicker() {
   ];
 
   return (
-    <section className="platform-coverage-band section-atmosphere relative overflow-hidden rounded-[28px] px-4 py-5 sm:px-6 sm:py-6 lg:px-8">
+    <section
+      className="platform-coverage-band interactive-section-glow section-glow-scenarios section-atmosphere relative overflow-hidden rounded-[28px] px-4 py-5 sm:px-6 sm:py-6 lg:px-8"
+      {...interactiveSectionProps}
+    >
+      <div className="section-cursor-glow" aria-hidden />
       <div className="relative flex flex-col gap-4">
         <div className="flex flex-col gap-1.5 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-[10px] font-medium uppercase tracking-[0.24em] text-accent-strong/74">
