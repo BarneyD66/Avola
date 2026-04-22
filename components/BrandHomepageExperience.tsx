@@ -252,7 +252,7 @@ export function BrandHomepageExperience() {
                     className="brand-story-hero-trust-item rounded-[24px] px-4 py-4 text-center sm:px-5 sm:py-4.5"
                   >
                     <span className="brand-story-hero-trust-dot mb-3 inline-flex h-2.5 w-2.5 rounded-full bg-accent/85" />
-                    <p className="brand-story-hero-trust-title mx-auto text-[1rem] font-semibold leading-[1.32] tracking-[-0.026em] text-foreground">
+                    <div className="brand-story-hero-trust-copy mx-auto">
                       {metricMatch ? (
                         <>
                           <AnimatedMetric
@@ -260,12 +260,16 @@ export function BrandHomepageExperience() {
                             play={!prefersReducedMotion}
                             className="brand-story-hero-trust-metric block"
                           />
-                          <span className="mt-2 block whitespace-pre-line">{metricMatch[2]}</span>
+                          <p className="brand-story-hero-trust-title mt-2 whitespace-pre-line text-[1rem] font-semibold leading-[1.32] tracking-[-0.026em] text-foreground">
+                            {metricMatch[2]}
+                          </p>
                         </>
                       ) : (
-                        item.title
+                        <p className="brand-story-hero-trust-title text-[1rem] font-semibold leading-[1.32] tracking-[-0.026em] text-foreground">
+                          {item.title}
+                        </p>
                       )}
-                    </p>
+                    </div>
                     <p className="brand-story-hero-trust-description mx-auto mt-3 text-[13px] leading-6 text-muted sm:text-[13.5px]">
                       {item.description}
                     </p>

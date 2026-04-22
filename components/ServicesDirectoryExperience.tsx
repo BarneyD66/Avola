@@ -12,7 +12,7 @@ type ServicesDirectoryExperienceProps = {
 export function ServicesDirectoryExperience({
   categories,
 }: ServicesDirectoryExperienceProps) {
-  const { messages } = useLocale();
+  const { locale, messages } = useLocale();
 
   return (
     <main className="relative flex-1 pt-34 pb-14 sm:pt-31 sm:pb-18">
@@ -23,7 +23,11 @@ export function ServicesDirectoryExperience({
               <p className="text-[11px] font-medium uppercase tracking-[0.28em] text-accent-strong/75">
                 {messages.services.eyebrow}
               </p>
-              <h1 className="mt-3 max-w-[13ch] text-[1.92rem] leading-[1.06] font-semibold tracking-[-0.05em] text-foreground sm:text-[2.35rem] lg:text-[2.72rem]">
+              <h1
+                className={`mt-3 text-[1.92rem] leading-[1.06] font-semibold tracking-[-0.05em] text-foreground sm:text-[2.35rem] lg:text-[2.72rem] ${
+                  locale === "en" ? "max-w-[16.5ch] sm:max-w-[13.5ch]" : "max-w-[13ch]"
+                }`}
+              >
                 {messages.services.title}
               </h1>
               <p className="mt-4 max-w-[34rem] text-[15px] leading-7 text-muted-strong sm:text-[16px] sm:leading-7.5">

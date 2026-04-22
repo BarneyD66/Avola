@@ -1484,26 +1484,57 @@ html.light [class*="text-xs"][class*="uppercase"] {
     0 0 0 5px rgba(59, 130, 246, 0.07),
     0 0 18px rgba(59, 130, 246, 0.12);
   margin-inline: auto;
+  transition:
+    opacity 200ms ease,
+    transform 200ms ease,
+    box-shadow 220ms ease,
+    filter 200ms ease;
+}
+
+.brand-story-hero-trust-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.55rem;
+  width: min(100%, 15rem);
+  margin-inline: auto;
+  text-align: center;
+}
+
+.brand-story-hero-trust-metric {
+  display: block;
+  width: 100%;
+  margin-inline: auto;
+  font-size: clamp(1.72rem, 2.3vw, 2.22rem);
+  line-height: 1;
+  font-weight: 650;
+  letter-spacing: -0.055em;
+  color: rgba(245, 248, 252, 0.98);
+  text-align: center;
+  text-wrap: nowrap;
 }
 
 .brand-story-hero-trust-title {
+  display: block;
+  width: 100%;
+  margin-inline: auto;
   text-wrap: balance;
-  max-width: 13ch;
-  min-height: 3.6em;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
+  max-width: 10.8ch;
+  min-height: 2.9em;
+  text-align: center;
 }
 
 .brand-story-hero-trust-description {
-  max-width: 18.5ch;
+  max-width: 19.5ch;
   text-wrap: balance;
   min-height: 4.9em;
+  text-align: center;
 }
 
 @media (min-width: 640px) {
   .brand-story-hero-trust-title {
-    min-height: 3.3em;
+    min-height: 2.85em;
   }
 
   .brand-story-hero-trust-description {
@@ -1934,20 +1965,31 @@ html.light .services-directory-card-panel {
 
   .brand-story-hero-trust-item {
     border-radius: 1.15rem;
-    padding: 1rem 1rem 0.95rem;
+    min-height: auto;
+    padding: 0.88rem 0.95rem 0.82rem;
+  }
+
+  .brand-story-hero-trust-copy {
+    width: min(100%, 12.8rem);
+    gap: 0.32rem;
+  }
+
+  .brand-story-hero-trust-metric {
+    font-size: 1.78rem;
   }
 
   .brand-story-hero-trust-title {
-    max-width: 16ch;
-    font-size: 0.98rem;
-    line-height: 1.34;
+    max-width: 9.6ch;
+    min-height: auto;
+    font-size: 0.92rem;
+    line-height: 1.22;
   }
 
   .brand-story-hero-trust-description {
-    max-width: 22rem;
-    margin-top: 0.65rem;
-    font-size: 0.82rem;
-    line-height: 1.55;
+    max-width: 18rem;
+    margin-top: 0.48rem;
+    font-size: 0.78rem;
+    line-height: 1.42;
   }
 
   .platform-coverage-band {
@@ -2003,9 +2045,15 @@ html.light .services-directory-card-panel {
   }
 
   .brand-flow-list-item {
-    grid-template-columns: auto auto minmax(0, 1fr);
-    gap: 0.78rem;
+    grid-template-columns: 2.4rem minmax(0, 1fr);
+    align-items: flex-start;
+    gap: 0.85rem;
     padding: 0.95rem 0 1rem;
+  }
+
+  .brand-flow-list-title,
+  .brand-flow-list-description {
+    text-align: left;
   }
 
   .brand-flow-list-item p.text-\[1rem\] {
@@ -2024,8 +2072,12 @@ html.light .services-directory-card-panel {
     height: 2.4rem;
   }
 
+  .brand-flow-list-line {
+    left: 1.12rem;
+  }
+
   .flow-detail-panel {
-    padding: 1.15rem 1rem 1.1rem;
+    display: none;
   }
 
   .brand-flow-active-rail {
@@ -2694,6 +2746,11 @@ html.light .brand-flow-inline-dot-muted {
 @media (max-width: 1023px) {
   .brand-home-hero {
     min-height: auto;
+  }
+
+  .hero-orbit-lines::before,
+  .hero-orbit-lines::after {
+    content: none;
   }
 }
 
