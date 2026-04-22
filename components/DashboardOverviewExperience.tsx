@@ -64,7 +64,7 @@ export function DashboardOverviewExperience() {
   ];
 
   return (
-    <div className="flex flex-col gap-5 sm:gap-8">
+    <div className="dashboard-overview-page flex flex-col gap-5 sm:gap-8">
       <section className="surface-panel rounded-[24px] border border-white/8 p-5 sm:rounded-[30px] sm:p-9">
         <p className="text-xs font-medium uppercase tracking-[0.32em] text-accent-strong/80">
           {messages.dashboard.overview.eyebrow}

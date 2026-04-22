@@ -1609,8 +1609,10 @@ html.light [class*="text-xs"][class*="uppercase"] {
   position: relative;
   display: grid;
   grid-template-columns: auto auto minmax(0, 1fr);
+  width: 100%;
   gap: 0.95rem;
   padding: 1.15rem 0 1.2rem;
+  text-align: left;
   transition:
     transform 180ms ease,
     border-color 180ms ease,
@@ -2044,11 +2046,16 @@ html.light .services-directory-card-panel {
     padding: 1rem 0.95rem 1.05rem;
   }
 
-  .brand-flow-list-item {
+.brand-flow-list-item {
     grid-template-columns: 2.4rem minmax(0, 1fr);
     align-items: flex-start;
+    width: 100%;
     gap: 0.85rem;
     padding: 0.95rem 0 1rem;
+  }
+
+  .brand-flow-list-item > .min-w-0 {
+    width: 100%;
   }
 
   .brand-flow-list-title,
@@ -2124,14 +2131,25 @@ html.light .services-directory-card-panel {
     padding: 1.35rem 1rem 1.4rem;
   }
 
+  .services-directory-hero-grid {
+    gap: 1rem;
+  }
+
   .services-directory-hero h1 {
-    max-width: 11.5ch;
-    font-size: 1.85rem;
+    max-width: 12.5ch;
+    font-size: 1.72rem;
     line-height: 1.08;
+  }
+
+  .services-directory-hero p.mt-3 {
+    max-width: 28rem;
+    font-size: 0.88rem;
+    line-height: 1.6;
   }
 
   .services-directory-actions {
     width: 100%;
+    gap: 0.7rem;
   }
 
   .services-directory-actions .ui-primary-button,
@@ -2197,6 +2215,121 @@ html.light .services-directory-card-panel {
   .services-directory-card-panel span.text-\[12px\] {
     padding: 0.22rem 0.62rem;
     font-size: 0.74rem;
+  }
+
+  .service-detail-stack {
+    gap: 0.8rem;
+  }
+
+  .service-detail-stack > .surface-panel,
+  .purchase-panel-shell .surface-panel,
+  .track-order-form-card,
+  .track-order-result-card,
+  .created-order-card,
+  .payment-summary-card,
+  .checkout-hero-card,
+  .checkout-actions-card,
+  .dashboard-overview-page > .surface-panel,
+  .dashboard-orders-page > .surface-panel,
+  .dashboard-order-detail-page > .surface-panel,
+  .dashboard-order-table-mobile-card {
+    border-radius: 1.2rem;
+    padding: 1rem 0.95rem 1.05rem;
+  }
+
+  .service-detail-hero-card h1,
+  .checkout-hero-card h1,
+  .dashboard-overview-page h2,
+  .dashboard-orders-page h2,
+  .dashboard-order-detail-page h2 {
+    font-size: 1.56rem;
+    line-height: 1.12;
+  }
+
+  .service-detail-hero-card h1 {
+    max-width: 12ch;
+    margin-top: 0.7rem;
+  }
+
+  .service-detail-hero-card p.text-\[15px\],
+  .checkout-hero-card p.text-base,
+  .dashboard-overview-page p.text-base,
+  .dashboard-orders-page p.text-base,
+  .dashboard-order-detail-page p.text-\[15px\],
+  .track-order-result-card p.text-\[13\.5px\],
+  .created-order-card p.text-\[13\.5px\],
+  .payment-summary-card p.text-\[13\.5px\],
+  .track-order-form-card p.text-\[13\.5px\] {
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+
+  .service-detail-stack .surface-panel h2,
+  .service-detail-stack .surface-panel h3,
+  .purchase-panel-shell h2,
+  .track-order-form-card h2,
+  .track-order-result-card h2,
+  .created-order-card h2,
+  .payment-summary-card h2,
+  .dashboard-overview-page h3,
+  .dashboard-order-detail-page h3 {
+    font-size: 1.16rem;
+    line-height: 1.2;
+  }
+
+  .purchase-panel-shell .surface-panel {
+    padding-top: 0.95rem;
+  }
+
+  .purchase-panel-shell form {
+    margin-top: 1rem;
+    gap: 0.85rem;
+  }
+
+  .purchase-panel-shell .ui-input {
+    min-height: 2.9rem;
+    font-size: 0.95rem;
+  }
+
+  .purchase-panel-shell textarea.ui-input {
+    min-height: 5.8rem;
+  }
+
+  .track-order-form-card form {
+    margin-top: 1rem;
+    gap: 0.85rem;
+  }
+
+  .track-order-result-card .rounded-2xl,
+  .created-order-card .rounded-2xl,
+  .payment-summary-card .rounded-2xl,
+  .dashboard-order-detail-page .rounded-2xl {
+    border-radius: 1rem;
+  }
+
+  .dashboard-overview-page,
+  .dashboard-orders-page,
+  .dashboard-order-detail-page {
+    gap: 1rem;
+  }
+
+  .dashboard-overview-page .mt-6,
+  .dashboard-order-detail-page .mt-5,
+  .dashboard-order-detail-page .mt-6,
+  .dashboard-order-detail-page .mt-8 {
+    margin-top: 1rem;
+  }
+
+  .dashboard-order-table-mobile-card .mt-5 {
+    margin-top: 0.95rem;
+  }
+
+  .checkout-actions-card .mt-4 {
+    margin-top: 0.85rem;
+  }
+
+  .checkout-actions-card .grid {
+    gap: 0.45rem;
   }
 }
 

@@ -95,7 +95,7 @@ export function DashboardOrderDetailExperience({
   ];
 
   return (
-    <div className="flex flex-col gap-5 sm:gap-8">
+    <div className="dashboard-order-detail-page flex flex-col gap-5 sm:gap-8">
       <section className="surface-panel rounded-[24px] border border-white/8 p-4 sm:rounded-[30px] sm:p-9">
         <div className="flex flex-col gap-5 md:flex-row md:items-start md:justify-between">
           <div>

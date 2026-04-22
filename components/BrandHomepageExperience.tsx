@@ -212,9 +212,9 @@ export function BrandHomepageExperience() {
           <div className="brand-hero-spotlight absolute inset-x-0 top-[18%] mx-auto h-56 w-[64%] rounded-full bg-accent/6 blur-3xl" />
 
           <ViewportReveal className="relative z-[1] mx-auto flex max-w-[62rem] flex-col items-center text-center">
-            <h1 className="brand-hero-headline hero-reveal hero-reveal-delay-1 max-w-none text-[1.92rem] leading-[1.08] font-semibold tracking-[-0.04em] text-foreground sm:text-[2.95rem] sm:leading-[1.04] lg:text-[3.35rem] xl:text-[3.72rem]">
-              <span className="block whitespace-nowrap">{titleLineOne}</span>
-              <span className="mt-2 block whitespace-nowrap sm:mt-2.5">{titleLineTwo}</span>
+            <h1 className="brand-hero-headline hero-reveal hero-reveal-delay-1 mx-auto max-w-[11.2ch] text-[1.72rem] leading-[1.1] font-semibold tracking-[-0.04em] text-foreground sm:max-w-none sm:text-[2.95rem] sm:leading-[1.04] lg:text-[3.35rem] xl:text-[3.72rem]">
+              <span className="mx-auto block w-fit whitespace-nowrap">{titleLineOne}</span>
+              <span className="mx-auto mt-2 block w-fit whitespace-nowrap sm:mt-2.5">{titleLineTwo}</span>
             </h1>
 
             <p
@@ -242,14 +242,14 @@ export function BrandHomepageExperience() {
               </Link>
             </div>
 
-            <div className="brand-story-hero-trust hero-reveal hero-reveal-delay-4 mt-9 grid w-full gap-3.5 sm:grid-cols-2 xl:grid-cols-4">
+            <div className="brand-story-hero-trust hero-reveal hero-reveal-delay-4 mt-9 grid w-full gap-3 sm:grid-cols-2 xl:grid-cols-4 sm:gap-3.5">
               {intro.trustItems.map((item) => {
                 const metricMatch = item.title.match(/^(\d+)\+\s*([\s\S]*)$/);
 
                 return (
                   <div
                     key={item.title}
-                    className="brand-story-hero-trust-item rounded-[24px] px-4 py-4 text-center sm:px-5 sm:py-4.5"
+                    className="brand-story-hero-trust-item rounded-[24px] px-4 py-3.5 text-center sm:px-5 sm:py-4.5"
                   >
                     <span className="brand-story-hero-trust-dot mb-3 inline-flex h-2.5 w-2.5 rounded-full bg-accent/85" />
                     <div className="brand-story-hero-trust-copy mx-auto">
@@ -260,17 +260,29 @@ export function BrandHomepageExperience() {
                             play={!prefersReducedMotion}
                             className="brand-story-hero-trust-metric block"
                           />
-                          <p className="brand-story-hero-trust-title mt-2 whitespace-pre-line text-[1rem] font-semibold leading-[1.32] tracking-[-0.026em] text-foreground">
+                          <p
+                            className={`brand-story-hero-trust-title mt-2 font-semibold tracking-[-0.026em] text-foreground ${
+                              locale !== "en"
+                                ? "whitespace-nowrap text-[0.92rem] leading-[1.18] sm:whitespace-pre-line sm:text-[1rem] sm:leading-[1.32]"
+                                : "whitespace-pre-line text-[1rem] leading-[1.32]"
+                            }`}
+                          >
                             {metricMatch[2]}
                           </p>
                         </>
                       ) : (
-                        <p className="brand-story-hero-trust-title text-[1rem] font-semibold leading-[1.32] tracking-[-0.026em] text-foreground">
+                        <p
+                          className={`brand-story-hero-trust-title font-semibold tracking-[-0.026em] text-foreground ${
+                            locale !== "en"
+                              ? "whitespace-nowrap text-[0.92rem] leading-[1.18] sm:whitespace-pre-line sm:text-[1rem] sm:leading-[1.32]"
+                              : "whitespace-pre-line text-[1rem] leading-[1.32]"
+                          }`}
+                        >
                           {item.title}
                         </p>
                       )}
                     </div>
-                    <p className="brand-story-hero-trust-description mx-auto mt-3 text-[13px] leading-6 text-muted sm:text-[13.5px]">
+                    <p className="brand-story-hero-trust-description mx-auto mt-2.5 text-[12.5px] leading-5.5 text-muted sm:mt-3 sm:text-[13.5px] sm:leading-6">
                       {item.description}
                     </p>
                   </div>

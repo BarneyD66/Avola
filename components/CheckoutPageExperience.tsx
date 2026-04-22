@@ -79,7 +79,7 @@ export function CheckoutPageExperience({
         <Header />
         <main className="relative flex-1 pt-36 pb-14 sm:pt-32 sm:pb-20">
           <div className="mx-auto flex w-full max-w-5xl flex-col gap-6 px-4 sm:gap-10 sm:px-6 lg:px-8">
-            <section className="surface-panel rounded-[24px] border border-white/8 p-5 sm:rounded-[30px] sm:p-9">
+            <section className="checkout-hero-card surface-panel rounded-[24px] border border-white/8 p-5 sm:rounded-[30px] sm:p-9">
               <p className="text-xs font-medium uppercase tracking-[0.32em] text-accent-strong/80">
                 {messages.checkout.eyebrow}
               </p>
@@ -115,7 +115,7 @@ export function CheckoutPageExperience({
       <Header />
       <main className="relative flex-1 pt-36 pb-14 sm:pt-32 sm:pb-20">
         <div className="mx-auto flex w-full max-w-5xl flex-col gap-6 px-4 sm:gap-10 sm:px-6 lg:px-8">
-          <section className="surface-panel rounded-[24px] border border-white/8 p-5 sm:rounded-[30px] sm:p-9">
+          <section className="checkout-hero-card surface-panel rounded-[24px] border border-white/8 p-5 sm:rounded-[30px] sm:p-9">
             <p className="text-xs font-medium uppercase tracking-[0.32em] text-accent-strong/80">
               {messages.checkout.eyebrow}
             </p>
@@ -130,7 +130,7 @@ export function CheckoutPageExperience({
           <PaymentSummaryCard order={order} />
           <PaymentInstructions />
 
-          <section className="surface-panel rounded-[24px] border border-white/8 p-4 sm:rounded-[30px] sm:p-8">
+          <section className="checkout-actions-card surface-panel rounded-[24px] border border-white/8 p-4 sm:rounded-[30px] sm:p-8">
             <div className="flex flex-col gap-3 sm:flex-row">
               <button
                 type="button"

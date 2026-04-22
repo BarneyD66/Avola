@@ -191,7 +191,7 @@ export function PurchasePanel({ service }: PurchasePanelProps) {
   };
 
   return (
-    <aside className="lg:sticky lg:top-28">
+    <aside className="purchase-panel-shell lg:sticky lg:top-28">
       <div className="surface-panel rounded-[24px] border border-white/8 p-3.5 shadow-[0_18px_42px_rgba(0,0,0,0.2)] sm:rounded-[28px] sm:p-7">
         <div>
           <p className="text-xs font-medium uppercase tracking-[0.28em] text-accent-strong/80">

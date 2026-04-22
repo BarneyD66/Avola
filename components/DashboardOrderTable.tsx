@@ -144,7 +144,7 @@ export function DashboardOrderTable({ orders }: DashboardOrderTableProps) {
         {filteredOrders.map((order) => (
           <div
             key={order.id}
-            className="rounded-[22px] border border-white/8 bg-white/[0.02] p-3.5 sm:rounded-[24px] sm:p-5"
+            className="dashboard-order-table-mobile-card rounded-[22px] border border-white/8 bg-white/[0.02] p-3.5 sm:rounded-[24px] sm:p-5"
           >
             <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
               <div>

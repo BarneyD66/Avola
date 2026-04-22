@@ -51,7 +51,7 @@ export function TrackOrderForm({
   };
 
   return (
-    <section className="surface-panel rounded-[24px] border border-white/8 p-3.5 sm:rounded-[30px] sm:p-8">
+    <section className="track-order-form-card surface-panel rounded-[24px] border border-white/8 p-3.5 sm:rounded-[30px] sm:p-8">
       <div className="max-w-2xl">
         <p className="text-xs font-medium uppercase tracking-[0.3em] text-accent-strong/80">
           {messages.track.formEyebrow}

@@ -25,8 +25,8 @@ export function ServiceDetailHero({ service }: ServiceDetailHeroProps) {
   ];
 
   return (
-    <div className="space-y-4 sm:space-y-6">
-      <section className="surface-panel rounded-[24px] border border-white/8 p-4 sm:rounded-[30px] sm:p-9">
+    <div className="service-detail-stack space-y-4 sm:space-y-6">
+      <section className="service-detail-hero-card surface-panel rounded-[24px] border border-white/8 p-4 sm:rounded-[30px] sm:p-9">
         <p className="text-xs font-medium uppercase tracking-[0.32em] text-accent-strong/80">
           {messages.service.detailEyebrow}
         </p>

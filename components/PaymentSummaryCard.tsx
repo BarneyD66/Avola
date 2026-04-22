@@ -28,7 +28,7 @@ export function PaymentSummaryCard({ order }: PaymentSummaryCardProps) {
   const displayPaymentStatus = getDisplayPaymentStatus(paymentStatus);
 
   return (
-    <section className="surface-panel rounded-[24px] border border-white/8 p-3.5 sm:rounded-[30px] sm:p-8">
+    <section className="payment-summary-card surface-panel rounded-[24px] border border-white/8 p-3.5 sm:rounded-[30px] sm:p-8">
       <div className="flex flex-col gap-5 md:flex-row md:items-start md:justify-between">
         <div>
           <p className="text-xs font-medium uppercase tracking-[0.3em] text-accent-strong/80">
