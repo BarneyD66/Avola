@@ -2046,21 +2046,25 @@ html.light .services-directory-card-panel {
     padding: 1rem 0.95rem 1.05rem;
   }
 
-.brand-flow-list-item {
-    grid-template-columns: 2.4rem minmax(0, 1fr);
+  .brand-flow-list-item {
+    display: flex;
     align-items: flex-start;
     width: 100%;
-    gap: 0.85rem;
+    gap: 0.9rem;
     padding: 0.95rem 0 1rem;
   }
 
   .brand-flow-list-item > .min-w-0 {
-    width: 100%;
+    flex: 1 1 auto;
+    min-width: 0;
+    width: auto;
   }
 
   .brand-flow-list-title,
   .brand-flow-list-description {
+    width: 100%;
     text-align: left;
+    text-wrap: pretty;
   }
 
   .brand-flow-list-item p.text-\[1rem\] {
@@ -4259,5 +4263,122 @@ html.light .brand-flow-card-active::before {
   50% {
     transform: translateX(12%);
     opacity: 0.14;
+  }
+}
+
+@media (max-width: 767px) {
+  .brand-hero-headline {
+    width: 100%;
+    max-width: 16rem;
+    margin-inline: auto;
+    align-items: center;
+    text-align: center;
+    font-size: 1.86rem;
+    line-height: 1.08;
+  }
+
+  .brand-hero-headline-line {
+    display: block;
+    width: 100%;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  .brand-story-hero-trust-item {
+    padding: 0.84rem 0.95rem 0.9rem;
+  }
+
+  .brand-story-hero-trust-copy {
+    width: 100% !important;
+    max-width: 100% !important;
+    gap: 0.26rem;
+  }
+
+  .brand-story-hero-trust-title {
+    display: block;
+    width: 100%;
+    max-width: none !important;
+    min-height: 0;
+    margin-inline: auto;
+    white-space: nowrap !important;
+    word-break: keep-all;
+    text-wrap: nowrap;
+    font-size: 0.78rem;
+    line-height: 1.1;
+    text-align: center;
+  }
+
+  .brand-story-hero-trust-title-mobile-singleline {
+    display: block;
+    width: 100%;
+    max-width: 100% !important;
+    margin-inline: auto;
+    white-space: nowrap !important;
+    word-break: keep-all;
+    text-wrap: nowrap;
+    letter-spacing: -0.02em;
+    text-align: center;
+  }
+
+  .brand-story-hero-trust-description {
+    max-width: 100%;
+    margin-top: 0.42rem;
+    font-size: 0.78rem;
+    line-height: 1.45;
+    text-align: center;
+  }
+
+  .brand-flow-mobile-stack {
+    width: 100%;
+  }
+
+  .brand-flow-mobile-item {
+    display: block;
+    width: 100%;
+    text-align: left;
+  }
+
+  .brand-flow-mobile-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.78rem;
+    width: 100%;
+  }
+
+  .brand-flow-mobile-marker {
+    flex: 0 0 2.45rem;
+    width: 2.45rem;
+    height: 2.45rem;
+    margin-top: 0.04rem;
+  }
+
+  .brand-flow-mobile-copy {
+    flex: 1 1 auto;
+    min-width: 0;
+    width: 100%;
+    max-width: none;
+    text-align: left;
+  }
+
+  .brand-flow-mobile-title {
+    display: block;
+    width: 100%;
+    margin: 0;
+    text-align: left;
+    font-size: 1rem;
+    line-height: 1.28;
+    white-space: normal;
+    word-break: keep-all;
+  }
+
+  .brand-flow-mobile-description {
+    display: block;
+    width: 100%;
+    margin-top: 0.48rem;
+    text-align: left;
+    font-size: 0.84rem;
+    line-height: 1.55;
+    white-space: normal;
+    word-break: break-word;
   }
 }

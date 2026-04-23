@@ -212,9 +212,9 @@ export function BrandHomepageExperience() {
           <div className="brand-hero-spotlight absolute inset-x-0 top-[18%] mx-auto h-56 w-[64%] rounded-full bg-accent/6 blur-3xl" />
 
           <ViewportReveal className="relative z-[1] mx-auto flex max-w-[62rem] flex-col items-center text-center">
-            <h1 className="brand-hero-headline hero-reveal hero-reveal-delay-1 mx-auto max-w-[11.2ch] text-[1.72rem] leading-[1.1] font-semibold tracking-[-0.04em] text-foreground sm:max-w-none sm:text-[2.95rem] sm:leading-[1.04] lg:text-[3.35rem] xl:text-[3.72rem]">
-              <span className="mx-auto block w-fit whitespace-nowrap">{titleLineOne}</span>
-              <span className="mx-auto mt-2 block w-fit whitespace-nowrap sm:mt-2.5">{titleLineTwo}</span>
+            <h1 className="brand-hero-headline hero-reveal hero-reveal-delay-1 mx-auto flex w-full max-w-[38rem] flex-col items-center text-[1.68rem] leading-[1.08] font-semibold tracking-[-0.04em] text-foreground sm:text-[2.95rem] sm:leading-[1.04] lg:text-[3.35rem] xl:text-[3.72rem]">
+              <span className="brand-hero-headline-line block whitespace-nowrap text-center">{titleLineOne}</span>
+              <span className="brand-hero-headline-line mt-2 block whitespace-nowrap text-center sm:mt-2.5">{titleLineTwo}</span>
             </h1>
 
             <p
@@ -263,7 +263,7 @@ export function BrandHomepageExperience() {
                           <p
                             className={`brand-story-hero-trust-title mt-2 font-semibold tracking-[-0.026em] text-foreground ${
                               locale !== "en"
-                                ? "whitespace-nowrap text-[0.92rem] leading-[1.18] sm:whitespace-pre-line sm:text-[1rem] sm:leading-[1.32]"
+                                ? "brand-story-hero-trust-title-mobile-singleline max-w-none whitespace-nowrap text-[0.82rem] leading-[1.1] sm:max-w-[10.8ch] sm:whitespace-pre-line sm:text-[1rem] sm:leading-[1.32]"
                                 : "whitespace-pre-line text-[1rem] leading-[1.32]"
                             }`}
                           >
@@ -274,7 +274,7 @@ export function BrandHomepageExperience() {
                         <p
                           className={`brand-story-hero-trust-title font-semibold tracking-[-0.026em] text-foreground ${
                             locale !== "en"
-                              ? "whitespace-nowrap text-[0.92rem] leading-[1.18] sm:whitespace-pre-line sm:text-[1rem] sm:leading-[1.32]"
+                              ? "brand-story-hero-trust-title-mobile-singleline max-w-none whitespace-nowrap text-[0.82rem] leading-[1.1] sm:max-w-[10.8ch] sm:whitespace-pre-line sm:text-[1rem] sm:leading-[1.32]"
                               : "whitespace-pre-line text-[1rem] leading-[1.32]"
                           }`}
                         >
@@ -371,47 +371,49 @@ export function BrandHomepageExperience() {
 
             <div
               ref={flowSectionRef}
-              className={`brand-flow-stage relative mt-10 grid gap-5 xl:grid-cols-[minmax(0,0.9fr)_minmax(360px,1.1fr)] xl:items-start ${
+              className={`brand-flow-stage relative mt-10 ${
                 isFlowSectionVisible ? "is-flow-visible" : ""
               }`}
               onMouseEnter={() => setIsFlowPaused(true)}
               onMouseLeave={() => setIsFlowPaused(false)}
             >
-              <div className="brand-flow-ambient absolute inset-x-[8%] top-[6%] h-40 rounded-full bg-accent/6 blur-3xl" />
-              <ViewportReveal delay={180}>
-                <div className="brand-flow-list rounded-[26px] px-5 py-5 sm:px-6 sm:py-6">
+              <div className="brand-flow-ambient absolute inset-x-[8%] top-[6%] hidden h-40 rounded-full bg-accent/6 blur-3xl sm:block" />
+
+              <ViewportReveal delay={180} className="sm:hidden">
+                <div className="brand-flow-mobile-stack space-y-3">
                   {flowSection.steps.map((step, index) => {
                     const isActive = index === activeFlowStepIndex;
                     return (
                       <button
-                        key={step.title}
+                        key={`${step.title}-mobile`}
                         type="button"
                         onClick={() => setActiveFlowStepIndex(index)}
-                        onMouseEnter={() => {
-                          setActiveFlowStepIndex(index);
-                          setIsFlowPaused(true);
-                        }}
-                        onFocus={() => {
-                          setActiveFlowStepIndex(index);
-                          setIsFlowPaused(true);
-                        }}
-                        onBlur={() => setIsFlowPaused(false)}
                         aria-pressed={isActive}
                         aria-current={isActive ? "step" : undefined}
-                        className={`brand-flow-list-item ${isActive ? "brand-flow-list-item-active" : ""}`}
-                        style={{ "--flow-step-delay": `${index * 90}ms` } as CSSProperties}
+                        className={`brand-flow-mobile-item w-full rounded-[24px] border px-4 py-4 text-left transition-all duration-200 ${
+                          isActive
+                            ? "border-accent/28 bg-[linear-gradient(145deg,rgba(29,78,216,0.14),rgba(255,255,255,0.03))] shadow-[0_12px_26px_rgba(15,23,42,0.18)]"
+                            : "border-white/6 bg-white/[0.015]"
+                        }`}
                       >
-                        <div className="brand-flow-list-line" />
-                        <div className="brand-flow-list-marker">
-                          <span className="brand-flow-list-number">{`0${index + 1}`}</span>
-                        </div>
-                        <div className="min-w-0">
-                          <p className="brand-flow-list-title text-[1rem] font-semibold tracking-[-0.024em] text-foreground sm:text-[1.04rem]">
-                            {step.title}
-                          </p>
-                          <p className="brand-flow-list-description mt-2 text-[13px] leading-6 text-muted sm:text-[14px]">
-                            {step.description}
-                          </p>
+                        <div className="brand-flow-mobile-row flex items-start gap-3">
+                          <span
+                            className={`brand-flow-mobile-marker inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border text-[10px] font-semibold tracking-[0.2em] uppercase ${
+                              isActive
+                                ? "border-accent/30 bg-accent/12 text-accent-strong shadow-[0_0_0_6px_rgba(59,130,246,0.08)]"
+                                : "border-white/10 bg-white/[0.03] text-accent-strong/88"
+                            }`}
+                          >
+                            {`0${index + 1}`}
+                          </span>
+                          <div className="brand-flow-mobile-copy min-w-0 flex-1">
+                            <p className="brand-flow-mobile-title text-[1rem] leading-[1.25] font-semibold tracking-[-0.02em] text-foreground">
+                              {step.title}
+                            </p>
+                            <p className="brand-flow-mobile-description mt-2 text-[13px] leading-6 text-muted">
+                              {step.description}
+                            </p>
+                          </div>
                         </div>
                       </button>
                     );
@@ -419,48 +421,91 @@ export function BrandHomepageExperience() {
                 </div>
               </ViewportReveal>
 
-              <ViewportReveal delay={260}>
-                <article
-                  key={activeFlowStep.title}
-                  className="brand-flow-card brand-flow-card-active flow-detail-panel brand-flow-detail-content rounded-[28px] px-5 py-6 sm:px-7 sm:py-7"
-                  style={{ "--flow-panel-delay": "360ms" } as CSSProperties}
-                >
-                  <p className="brand-flow-current-label text-[10px] font-medium uppercase tracking-[0.24em] text-accent-strong/74">
-                    {flowSection.currentStageLabel}
-                  </p>
-                  <div className="mt-4 flex flex-wrap items-center gap-3">
-                    <span className="inline-flex rounded-full border border-accent/18 bg-accent/10 px-3.5 py-1.5 text-[10px] uppercase tracking-[0.22em] text-accent-strong">
-                      {`0${activeFlowStepIndex + 1}`}
-                    </span>
-                    <h3 className="brand-flow-card-title text-[1.45rem] leading-[1.08] font-semibold tracking-[-0.04em] text-foreground sm:text-[1.7rem]">
-                      {activeFlowStep.title}
-                    </h3>
+              <div className="relative hidden gap-5 sm:grid xl:grid-cols-[minmax(0,0.9fr)_minmax(360px,1.1fr)] xl:items-start">
+                <ViewportReveal delay={180}>
+                  <div className="brand-flow-list rounded-[26px] px-5 py-5 sm:px-6 sm:py-6">
+                    {flowSection.steps.map((step, index) => {
+                      const isActive = index === activeFlowStepIndex;
+                      return (
+                        <button
+                          key={step.title}
+                          type="button"
+                          onClick={() => setActiveFlowStepIndex(index)}
+                          onMouseEnter={() => {
+                            setActiveFlowStepIndex(index);
+                            setIsFlowPaused(true);
+                          }}
+                          onFocus={() => {
+                            setActiveFlowStepIndex(index);
+                            setIsFlowPaused(true);
+                          }}
+                          onBlur={() => setIsFlowPaused(false)}
+                          aria-pressed={isActive}
+                          aria-current={isActive ? "step" : undefined}
+                          className={`brand-flow-list-item ${isActive ? "brand-flow-list-item-active" : ""}`}
+                          style={{ "--flow-step-delay": `${index * 90}ms` } as CSSProperties}
+                        >
+                          <div className="brand-flow-list-line" />
+                          <div className="brand-flow-list-marker">
+                            <span className="brand-flow-list-number">{`0${index + 1}`}</span>
+                          </div>
+                          <div className="brand-flow-list-copy min-w-0">
+                            <p className="brand-flow-list-title text-[1rem] font-semibold tracking-[-0.024em] text-foreground sm:text-[1.04rem]">
+                              {step.title}
+                            </p>
+                            <p className="brand-flow-list-description mt-2 text-[13px] leading-6 text-muted sm:text-[14px]">
+                              {step.description}
+                            </p>
+                          </div>
+                        </button>
+                      );
+                    })}
                   </div>
-                  <p className="brand-flow-card-description mt-4 max-w-[34rem] text-[15px] leading-8 text-muted sm:text-[16px]">
-                    {activeFlowStep.description}
-                  </p>
+                </ViewportReveal>
 
-                  <div className="brand-flow-active-rail mt-7 grid gap-3 sm:grid-cols-2">
-                    <div className="brand-flow-active-block rounded-[20px] px-4 py-4 sm:px-5">
-                      <p className="brand-flow-active-label text-[10px] uppercase tracking-[0.22em] text-accent-strong/72">
-                        {flowSection.completedLabel}
-                      </p>
-                      <p className="brand-flow-active-copy mt-3 text-[13px] leading-6 text-muted-strong sm:text-[14px] sm:leading-7">
-                        {activeFlowStep.completed}
-                      </p>
+                <ViewportReveal delay={260}>
+                  <article
+                    key={activeFlowStep.title}
+                    className="brand-flow-card brand-flow-card-active flow-detail-panel brand-flow-detail-content rounded-[28px] px-5 py-6 sm:px-7 sm:py-7"
+                    style={{ "--flow-panel-delay": "360ms" } as CSSProperties}
+                  >
+                    <p className="brand-flow-current-label text-[10px] font-medium uppercase tracking-[0.24em] text-accent-strong/74">
+                      {flowSection.currentStageLabel}
+                    </p>
+                    <div className="mt-4 flex flex-wrap items-center gap-3">
+                      <span className="inline-flex rounded-full border border-accent/18 bg-accent/10 px-3.5 py-1.5 text-[10px] uppercase tracking-[0.22em] text-accent-strong">
+                        {`0${activeFlowStepIndex + 1}`}
+                      </span>
+                      <h3 className="brand-flow-card-title text-[1.45rem] leading-[1.08] font-semibold tracking-[-0.04em] text-foreground sm:text-[1.7rem]">
+                        {activeFlowStep.title}
+                      </h3>
                     </div>
+                    <p className="brand-flow-card-description mt-4 max-w-[34rem] text-[15px] leading-8 text-muted sm:text-[16px]">
+                      {activeFlowStep.description}
+                    </p>
 
-                    <div className="brand-flow-active-block rounded-[20px] px-4 py-4 sm:px-5">
-                      <p className="brand-flow-active-label text-[10px] uppercase tracking-[0.22em] text-accent-strong/72">
-                        {flowSection.nextLabel}
-                      </p>
-                      <p className="brand-flow-active-copy mt-3 text-[13px] leading-6 text-muted-strong sm:text-[14px] sm:leading-7">
-                        {activeFlowStep.next}
-                      </p>
+                    <div className="brand-flow-active-rail mt-7 grid gap-3 sm:grid-cols-2">
+                      <div className="brand-flow-active-block rounded-[20px] px-4 py-4 sm:px-5">
+                        <p className="brand-flow-active-label text-[10px] uppercase tracking-[0.22em] text-accent-strong/72">
+                          {flowSection.completedLabel}
+                        </p>
+                        <p className="brand-flow-active-copy mt-3 text-[13px] leading-6 text-muted-strong sm:text-[14px] sm:leading-7">
+                          {activeFlowStep.completed}
+                        </p>
+                      </div>
+
+                      <div className="brand-flow-active-block rounded-[20px] px-4 py-4 sm:px-5">
+                        <p className="brand-flow-active-label text-[10px] uppercase tracking-[0.22em] text-accent-strong/72">
+                          {flowSection.nextLabel}
+                        </p>
+                        <p className="brand-flow-active-copy mt-3 text-[13px] leading-6 text-muted-strong sm:text-[14px] sm:leading-7">
+                          {activeFlowStep.next}
+                        </p>
+                      </div>
                     </div>
-                  </div>
-                </article>
-              </ViewportReveal>
+                  </article>
+                </ViewportReveal>
+              </div>
             </div>
           </div>
         </section>
