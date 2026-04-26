@@ -307,7 +307,13 @@ export function BrandHomepageExperience() {
                 </p>
               </ViewportReveal>
               <ViewportReveal delay={70}>
-                <h2 className="mt-4 max-w-[22ch] text-[1.7rem] leading-[1.14] font-semibold tracking-[-0.044em] text-foreground sm:text-[2.08rem] lg:max-w-[19ch] lg:text-[2.34rem] xl:text-[2.5rem]">
+                <h2
+                  className={`mt-4 text-[1.7rem] leading-[1.14] font-semibold tracking-[-0.044em] text-foreground sm:text-[2.08rem] lg:text-[2.34rem] xl:text-[2.5rem] ${
+                    locale === "zh-CN"
+                      ? "max-w-[22ch] sm:max-w-none sm:whitespace-nowrap"
+                      : "max-w-[22ch] lg:max-w-[19ch]"
+                  }`}
+                >
                   {valueSection.title}
                 </h2>
               </ViewportReveal>
