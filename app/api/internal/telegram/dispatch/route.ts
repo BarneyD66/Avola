@@ -41,7 +41,7 @@ export async function POST(request: Request) {
   }
 
   try {
-    if (!reserveTelegramDispatch(payload.orderId)) {
+    if (!(await reserveTelegramDispatch(payload.orderId))) {
       return NextResponse.json({
         ok: true,
         orderId: payload.orderId,
@@ -68,7 +68,7 @@ export async function POST(request: Request) {
       randyMessageId: result.randyMessageId,
     });
   } catch (error) {
-    releaseTelegramDispatch(payload.orderId);
+    await releaseTelegramDispatch(payload.orderId);
 
     return NextResponse.json(
       {
