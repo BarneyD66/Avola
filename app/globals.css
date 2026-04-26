@@ -2790,6 +2790,11 @@ html.light .brand-flow-card {
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.88);
 }
 
+html.light .brand-story-hero-trust-metric {
+  color: #1f3147;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.72);
+}
+
 html.light .brand-value-card:hover,
 html.light .brand-purchase-card:hover,
 html.light .brand-contact-card:hover {
