@@ -53,9 +53,18 @@ export function OrderResultCard({ order }: OrderResultCardProps) {
   const statusMeta = messages.order.status[displayStatus];
   const paymentStatus = order.paymentStatus ?? "pending_payment";
   const paymentMeta = messages.payment.status[getDisplayPaymentStatus(paymentStatus)];
-  const servicePackage = getServiceBySlug(order.serviceSlug)?.packages?.find(
-    (item) => item.id === order.selectedPackageId,
-  );
+  const servicePackages = getServiceBySlug(order.serviceSlug)?.packages ?? [];
+  const servicePackage =
+    servicePackages.find((item) => item.id === order.selectedPackageId) ??
+    servicePackages.find(
+      (item) =>
+        item.price === order.selectedPackagePrice ||
+        item.displayPrice === order.selectedPackagePrice ||
+        item.price === order.paymentAmount ||
+        item.displayPrice === order.paymentAmount ||
+        item.price === order.amount ||
+        item.displayPrice === order.amount,
+    );
   const fallbackTarget =
     parseParticipantValue(order.selectedPackageParticipants) ||
     parseParticipantValue(servicePackage?.participants) ||
