@@ -1,4 +1,8 @@
 import { NextResponse } from "next/server";
+import {
+  releaseTelegramDispatch,
+  reserveTelegramDispatch,
+} from "@/lib/paymentSessionStore";
 import { dispatchTelegramTask } from "@/lib/telegram";
 
 export async function POST(request: Request) {
@@ -28,6 +32,15 @@ export async function POST(request: Request) {
   }
 
   try {
+    if (!reserveTelegramDispatch(payload.orderId)) {
+      return NextResponse.json({
+        ok: true,
+        orderId: payload.orderId,
+        skipped: true,
+        reason: "Telegram task already dispatched or in progress.",
+      });
+    }
+
     const result = await dispatchTelegramTask(payload.message);
 
     return NextResponse.json({
@@ -38,6 +51,8 @@ export async function POST(request: Request) {
       randyMessageId: result.randyMessageId,
     });
   } catch (error) {
+    releaseTelegramDispatch(payload.orderId);
+
     return NextResponse.json(
       {
         ok: false,

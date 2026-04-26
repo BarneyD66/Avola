@@ -3,6 +3,8 @@ import { verifyCryptomusWebhook } from "@/lib/cryptomus";
 import {
   getPendingPaymentSession,
   markPendingPaymentSessionDispatched,
+  releaseTelegramDispatch,
+  reserveTelegramDispatch,
 } from "@/lib/paymentSessionStore";
 import { dispatchTelegramTask } from "@/lib/telegram";
 
@@ -41,6 +43,15 @@ export async function POST(request: Request) {
   }
 
   try {
+    if (!reserveTelegramDispatch(orderId)) {
+      return NextResponse.json({
+        ok: true,
+        orderId,
+        dispatched: false,
+        skipped: true,
+      });
+    }
+
     const result = await dispatchTelegramTask(pendingSession.tgMessage);
     markPendingPaymentSessionDispatched(orderId);
 
@@ -52,6 +63,8 @@ export async function POST(request: Request) {
       randyMessageId: result.randyMessageId,
     });
   } catch (error) {
+    releaseTelegramDispatch(orderId);
+
     return NextResponse.json(
       {
         ok: false,

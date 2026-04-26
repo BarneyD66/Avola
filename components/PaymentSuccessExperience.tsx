@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useRef, useState, useSyncExternalStore } from "react";
+import { useEffect, useRef, useSyncExternalStore } from "react";
 import { Header } from "@/components/Header";
 import { useLocale } from "@/components/LocaleProvider";
 import { PaymentSuccessCard } from "@/components/PaymentSuccessCard";
@@ -11,11 +11,8 @@ import {
   getOrdersSnapshot,
   getServerOrdersSnapshot,
   markOrderPaid,
-  markOrderTgDispatched,
-  markOrderTgFailed,
   subscribeToOrders,
 } from "@/data/orderStore";
-import { buildTgTaskMessage } from "@/data/tgTaskTemplate";
 
 type PaymentSuccessExperienceProps = {
   orderId: string;
@@ -33,7 +30,6 @@ export function PaymentSuccessExperience({
   );
   const order = getOrderById(orderId);
   const hasReconciledPayment = useRef(false);
-  const [reconcileError, setReconcileError] = useState("");
 
   useEffect(() => {
     if (
@@ -47,41 +43,7 @@ export function PaymentSuccessExperience({
     }
 
     hasReconciledPayment.current = true;
-    const paidOrder = markOrderPaid(order.id);
-
-    if (!paidOrder || paidOrder.tgDispatchStatus === "tg_dispatched") {
-      return;
-    }
-
-    fetch("/api/internal/telegram/dispatch", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        orderId: paidOrder.id,
-        message: buildTgTaskMessage(paidOrder),
-      }),
-    })
-      .then(async (response) => {
-        const result = (await response.json()) as {
-          ok?: boolean;
-          messageId?: string;
-          error?: string;
-        };
-
-        if (!response.ok || !result.ok) {
-          throw new Error(result.error ?? "Telegram dispatch failed.");
-        }
-
-        markOrderTgDispatched(paidOrder.id, result.messageId);
-      })
-      .catch((error) => {
-        const message =
-          error instanceof Error ? error.message : "Telegram dispatch failed.";
-        markOrderTgFailed(paidOrder.id, message);
-        setReconcileError(message);
-      });
+    markOrderPaid(order.id);
   }, [order, searchParams]);
 
   if (!order) {
@@ -150,11 +112,6 @@ export function PaymentSuccessExperience({
       <main className="relative flex-1 pt-36 pb-14 sm:pt-32 sm:pb-20">
         <div className="mx-auto flex w-full max-w-5xl flex-col gap-8 px-4 sm:gap-10 sm:px-6 lg:px-8">
           <PaymentSuccessCard order={order} />
-          {reconcileError ? (
-            <section className="rounded-2xl border border-amber-300/20 bg-amber-300/10 px-4 py-3 text-sm leading-6 text-amber-100">
-              {reconcileError}
-            </section>
-          ) : null}
         </div>
       </main>
     </>

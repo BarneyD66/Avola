@@ -8,6 +8,7 @@ type PendingPaymentSession = {
 type PaymentSessionGlobal = typeof globalThis & {
   __realjoinPaymentSessions?: Map<string, PendingPaymentSession>;
   __realjoinTaskCodeCounters?: Record<string, number>;
+  __realjoinTelegramDispatchLocks?: Set<string>;
 };
 
 const globalForSessions = globalThis as PaymentSessionGlobal;
@@ -52,4 +53,24 @@ export function markPendingPaymentSessionDispatched(orderId: string) {
 
   getSessionMap().set(orderId, nextSession);
   return nextSession;
+}
+
+function getDispatchLocks() {
+  globalForSessions.__realjoinTelegramDispatchLocks ??= new Set();
+  return globalForSessions.__realjoinTelegramDispatchLocks;
+}
+
+export function reserveTelegramDispatch(orderId: string) {
+  const locks = getDispatchLocks();
+
+  if (locks.has(orderId)) {
+    return false;
+  }
+
+  locks.add(orderId);
+  return true;
+}
+
+export function releaseTelegramDispatch(orderId: string) {
+  getDispatchLocks().delete(orderId);
 }
