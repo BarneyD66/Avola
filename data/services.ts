@@ -135,7 +135,7 @@ function createPackages(
     deliveryTime: item.durationLabel ?? item.deliveryTime,
     durationLabel: item.durationLabel ?? item.deliveryTime,
     durationHours: item.durationHours,
-    recommended: item.recommended,
+    recommended: index === items.length - 1,
   }));
 }
 
