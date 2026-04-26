@@ -443,7 +443,7 @@
     },
   },
   payment: {
-    provider: "Unipay",
+    provider: "Cryptomus",
     method: "Crypto",
     status: {
       pending_payment: {
@@ -489,9 +489,9 @@
       "支付确认后，系统将自动更新订单状态",
       "若支付后页面未自动更新，请稍后在订单查询页查看",
     ],
-    continuePayment: "模拟支付成功",
-    continuePaymentHint: "当前按钮仅用于内部联调阶段的模拟支付测试。",
-    mockModeHint: "模拟支付成功后，订单将进入内部处理流程。",
+    continuePayment: "前往 Cryptomus 支付",
+    continuePaymentHint: "点击后将跳转到 Cryptomus 官方支付页完成 Crypto 付款。",
+    mockModeHint: "支付完成后，订单会进入处理流程并同步内部执行任务。",
     trackOrder: "去订单查询",
     backHome: "返回首页",
     packageTitle: "已选套餐",

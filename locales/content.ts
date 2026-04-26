@@ -622,7 +622,11 @@ function formatDeliveryTime(deliveryTime?: string) {
     return deliveryTime;
   }
 
-  return deliveryTime.replace(/小时/g, " hours").replace(/\s+/g, " ").trim();
+  return deliveryTime
+    .replace(/天/g, " days")
+    .replace(/小时/g, " hours")
+    .replace(/\s+/g, " ")
+    .trim();
 }
 
 function extractAmountText(input: string) {

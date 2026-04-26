@@ -46,12 +46,15 @@ export type Order = {
   selectedPackagePrice?: string;
   selectedPackageResult?: string;
   selectedPackageDeliveryTime?: string;
+  selectedPackageInternalCost?: string;
+  selectedPackageDurationHours?: string;
+  selectedPackageParticipants?: string;
   deliveryTime?: string;
   formValues?: Record<string, string>;
   targetLink?: string;
   additionalRequirement?: string;
   contact?: string;
-  paymentProvider?: "unipay";
+  paymentProvider?: "unipay" | "cryptomus";
   paymentMethod?: "crypto";
   paymentStatus?: PaymentStatus;
   paymentAmount?: string;
@@ -254,6 +257,19 @@ function createMockPaymentInfo(order: Order) {
     paymentExpiresAt: formatDateTime(expiresAt),
   };
 }
+
+export type PaymentSessionUpdate = {
+  paymentProvider?: "unipay" | "cryptomus";
+  paymentStatus?: PaymentStatus;
+  paymentAmount?: string;
+  paymentCurrency?: string;
+  paymentChain?: string;
+  paymentAddress?: string;
+  paymentQrCode?: string;
+  paymentSessionId?: string;
+  paymentReference?: string;
+  paymentExpiresAt?: string;
+};
 
 function getDefaultPaymentStatus(order: Order): PaymentStatus {
   if (order.paymentStatus) {
@@ -651,6 +667,36 @@ export function startOrderPayment(orderId: string) {
   });
 }
 
+export function applyOrderPaymentSession(
+  orderId: string,
+  paymentSession: PaymentSessionUpdate,
+) {
+  return replaceOrder(orderId, (order) => {
+    const updatedAt = formatDateTime(new Date());
+
+    return {
+      ...order,
+      updatedAt,
+      paymentProvider: paymentSession.paymentProvider ?? order.paymentProvider,
+      paymentMethod: "crypto",
+      paymentStatus: paymentSession.paymentStatus ?? "awaiting_transfer",
+      paymentAmount: paymentSession.paymentAmount ?? order.paymentAmount,
+      paymentCurrency: paymentSession.paymentCurrency ?? order.paymentCurrency,
+      paymentChain: paymentSession.paymentChain ?? order.paymentChain,
+      paymentAddress: paymentSession.paymentAddress ?? order.paymentAddress,
+      paymentQrCode: paymentSession.paymentQrCode ?? order.paymentQrCode,
+      paymentSessionId:
+        paymentSession.paymentSessionId ?? order.paymentSessionId,
+      paymentReference:
+        paymentSession.paymentReference ?? order.paymentReference,
+      paymentExpiresAt:
+        paymentSession.paymentExpiresAt ?? order.paymentExpiresAt,
+      summary:
+        "支付会话已创建，请在支付页面完成付款，到账后订单将进入处理流程。",
+    };
+  });
+}
+
 export function setOrderPaymentConfirming(orderId: string) {
   return replaceOrder(orderId, (order) => {
     const updatedAt = formatDateTime(new Date());
@@ -851,12 +897,18 @@ export function createOrderFromService(
     selectedPackagePrice: selectedPackage?.price,
     selectedPackageResult: selectedPackage?.result,
     selectedPackageDeliveryTime: selectedPackage?.deliveryTime,
+    selectedPackageInternalCost: selectedPackage?.internalCost,
+    selectedPackageDurationHours: selectedPackage?.durationHours,
+    selectedPackageParticipants: selectedPackage?.participants,
     deliveryTime: resolvedDeliveryTime,
     formValues: cleanedFormValues,
     targetLink: getTargetLinkFromFormValues(cleanedFormValues),
     additionalRequirement: cleanedFormValues?.extraRequirements,
     contact: cleanedFormValues?.contact,
-    paymentProvider: "unipay",
+    paymentProvider:
+      process.env.NEXT_PUBLIC_PAYMENT_PROVIDER === "cryptomus"
+        ? "cryptomus"
+        : "unipay",
     paymentMethod: "crypto",
     paymentStatus: "pending_payment",
     paymentAmount: selectedPackage?.price ?? service.price,

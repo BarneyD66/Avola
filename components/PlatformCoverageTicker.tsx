@@ -58,33 +58,37 @@ const PumpFunIcon: IconType = (props: IconBaseProps) => (
 );
 
 const DexScreenerIcon: IconType = (props: IconBaseProps) => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" {...props}>
-    <path d="M12 4.8c1.86 0 3.68.86 5.01 2.36 1.46 1.66 2.18 3.95 2 6.3-.2 2.67-1.53 5.08-3.67 6.24-1.14.62-2.34.82-3.34.82s-2.2-.2-3.34-.82c-2.14-1.16-3.47-3.57-3.67-6.24-.18-2.35.54-4.64 2-6.3A6.72 6.72 0 0 1 12 4.8Z" />
-    <path d="M8.35 11.15 12 13.5l3.65-2.35" />
-    <path d="M9.15 15.6c.92.78 1.82 1.1 2.85 1.1s1.93-.32 2.85-1.1" />
-    <circle cx="9.55" cy="10.15" r="0.72" fill="currentColor" stroke="none" />
-    <circle cx="14.45" cy="10.15" r="0.72" fill="currentColor" stroke="none" />
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" {...props}>
+    <path
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M3.85 3.25c1.9 2.6 3.87 4.05 5.9 4.34l2.25 3.08 2.25-3.08c2.03-.29 4-1.74 5.9-4.34-.5 4.88-1.38 8.98-2.64 12.3L12 21.3l-5.51-5.75C5.23 12.23 4.35 8.13 3.85 3.25Zm4.2 6.06 3.08 1.22-2.04 2.2-1.04-3.42Zm7.9 0-3.08 1.22 2.04 2.2 1.04-3.42ZM12 12.12l1.18 2.22L12 16.25l-1.18-1.91L12 12.12Z"
+    />
   </svg>
 );
 
 const PancakeSwapIcon: IconType = (props: IconBaseProps) => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" {...props}>
-    <path d="M9.05 7.1V5.9a1.55 1.55 0 1 1 3.1 0v1" />
-    <path d="M11.85 6.9V5.85a1.55 1.55 0 1 1 3.1 0V7.1" />
-    <path d="M7.15 11.15c0-2.88 2.17-5.15 4.85-5.15s4.85 2.27 4.85 5.15c0 2.82-2.17 5.2-4.85 5.2s-4.85-2.38-4.85-5.2Z" />
-    <path d="M6.25 14.5c.84 1.88 2.78 3.1 5.75 3.1s4.91-1.22 5.75-3.1" />
-    <circle cx="10.2" cy="10.95" r="0.62" fill="currentColor" stroke="none" />
-    <circle cx="13.8" cy="10.95" r="0.62" fill="currentColor" stroke="none" />
-    <path d="M10.3 13.6c.63.48 1.14.68 1.7.68s1.07-.2 1.7-.68" />
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" {...props}>
+    <path d="M8.28 3.08c1.14 0 2.08.93 2.08 2.08v3.01a10.7 10.7 0 0 1 3.28 0V5.16a2.08 2.08 0 1 1 4.16 0v5.29c1.71 1.18 2.75 2.86 2.75 4.7 0 3.54-3.83 6.42-8.55 6.42s-8.55-2.88-8.55-6.42c0-1.84 1.04-3.52 2.75-4.7V5.16c0-1.15.93-2.08 2.08-2.08Zm-2.8 12.55c.47 2.31 3.25 4.1 6.52 4.1s6.05-1.79 6.52-4.1c-1.25 1.45-3.68 2.44-6.52 2.44s-5.27-.99-6.52-2.44Z" />
+    <circle cx="9.35" cy="13.15" r="1.05" fill="var(--page-bg, #0b1119)" />
+    <circle cx="14.65" cy="13.15" r="1.05" fill="var(--page-bg, #0b1119)" />
   </svg>
 );
 
 const FourMemeIcon: IconType = (props: IconBaseProps) => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" {...props}>
-    <rect x="4.4" y="4.4" width="15.2" height="15.2" rx="5" />
-    <path d="M13.9 7.8v8.4" />
-    <path d="M9.2 12.15h6.2" />
-    <path d="m9.2 12.15 4.7-4.35" />
+  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" {...props}>
+    <path
+      d="M8.1 20.25c-1.72-.38-3.03-1.64-3.3-3.32l-.72-4.48c-.14-.86.47-1.66 1.34-1.74.64-.06 1.21.29 1.47.83V5.2a1.28 1.28 0 0 1 2.56 0v4.95-6.3a1.28 1.28 0 0 1 2.56 0v6.07-5.18a1.28 1.28 0 1 1 2.56 0v5.7-3.48a1.28 1.28 0 0 1 2.56 0v5.58l.78-1.1a1.4 1.4 0 0 1 2.31 1.58l-2.45 4.07c-1.18 1.96-3.34 3.16-5.65 3.16H8.1Z"
+      fill="currentColor"
+    />
+    <path
+      d="M7.02 12.08v3.18m2.43-5.11v4.92m2.56-5.15v5.02m2.56-4.5v4.18"
+      stroke="var(--page-bg, #0b1119)"
+      strokeWidth="1.15"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      opacity="0.78"
+    />
   </svg>
 );
 

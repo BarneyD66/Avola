@@ -11,8 +11,13 @@ export type ServicePackage = {
   id: string;
   label: string;
   price: string;
+  displayPrice?: string;
+  internalCost?: string;
+  participants?: string;
   result: string;
   deliveryTime?: string;
+  durationLabel?: string;
+  durationHours?: string;
   recommended?: boolean;
 };
 
@@ -106,8 +111,13 @@ function createPackages(
   slug: string,
   items: Array<{
     price: string;
+    displayPrice?: string;
+    internalCost?: string;
+    participants?: string;
     result: string;
     deliveryTime: string;
+    durationLabel?: string;
+    durationHours?: string;
     label?: string;
     recommended?: boolean;
   }>,
@@ -117,9 +127,14 @@ function createPackages(
     label:
       item.label ??
       (index === 0 ? "入门方案" : index === 1 ? "增长方案" : "扩量方案"),
-    price: item.price,
+    price: item.displayPrice ?? item.price,
+    displayPrice: item.displayPrice ?? item.price,
+    internalCost: item.internalCost,
+    participants: item.participants,
     result: item.result,
-    deliveryTime: item.deliveryTime,
+    deliveryTime: item.durationLabel ?? item.deliveryTime,
+    durationLabel: item.durationLabel ?? item.deliveryTime,
+    durationHours: item.durationHours,
     recommended: item.recommended,
   }));
 }
@@ -282,14 +297,37 @@ const packageMap: Record<string, ServicePackage[]> = {
     { price: "$520", result: "约 80 条评论", deliveryTime: "24-72 小时" },
   ]),
   "instagram-follow": createPackages("instagram-follow", [
-    { price: "$45", result: "约 500 关注", deliveryTime: "6-24 小时" },
     {
-      price: "$95",
-      result: "约 1,100 关注",
-      deliveryTime: "12-24 小时",
+      price: "$75",
+      displayPrice: "$75",
+      internalCost: "$10",
+      participants: "500",
+      result: "500 参与人数",
+      deliveryTime: "3天",
+      durationLabel: "3天",
+      durationHours: "72 Hours",
+    },
+    {
+      price: "$150",
+      displayPrice: "$150",
+      internalCost: "$20",
+      participants: "1000",
+      result: "1000 参与人数",
+      deliveryTime: "5天",
+      durationLabel: "5天",
+      durationHours: "120 Hours",
       recommended: true,
     },
-    { price: "$180", result: "约 2,500 关注", deliveryTime: "24-48 小时" },
+    {
+      price: "$300",
+      displayPrice: "$300",
+      internalCost: "$50",
+      participants: "2000",
+      result: "2000 参与人数",
+      deliveryTime: "7天",
+      durationLabel: "7天",
+      durationHours: "168 Hours",
+    },
   ]),
   "instagram-like": createPackages("instagram-like", [
     { price: "$25", result: "约 400 点赞", deliveryTime: "6-24 小时" },

@@ -4269,7 +4269,7 @@ html.light .brand-flow-card-active::before {
 @media (max-width: 767px) {
   .brand-hero-headline {
     width: 100%;
-    max-width: 16rem;
+    max-width: min(100%, 24rem);
     margin-inline: auto;
     align-items: center;
     text-align: center;
@@ -4279,7 +4279,9 @@ html.light .brand-flow-card-active::before {
 
   .brand-hero-headline-line {
     display: block;
-    width: 100%;
+    width: fit-content;
+    max-width: 100%;
+    margin-inline: auto;
     text-align: center;
     white-space: nowrap;
   }

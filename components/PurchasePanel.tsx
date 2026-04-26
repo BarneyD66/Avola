@@ -1,12 +1,15 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { useMemo, useState } from "react";
 import { DynamicFieldRenderer } from "@/components/DynamicFieldRenderer";
 import { useLocale } from "@/components/LocaleProvider";
 import { PackageSelector } from "@/components/PackageSelector";
 import { PurchaseSummary } from "@/components/PurchaseSummary";
-import { addOrder, createOrderFromService } from "@/data/orderStore";
+import {
+  addOrder,
+  applyOrderPaymentSession,
+  createOrderFromService,
+} from "@/data/orderStore";
 import {
   getDefaultServicePackage,
   type Service,
@@ -38,7 +41,6 @@ function getSelectableFields(service: Service) {
 }
 
 export function PurchasePanel({ service }: PurchasePanelProps) {
-  const router = useRouter();
   const { locale, messages } = useLocale();
   const localizedService = useMemo(
     () => getLocalizedService(service, locale),
@@ -88,6 +90,8 @@ export function PurchasePanel({ service }: PurchasePanelProps) {
     queryPassword: "",
   });
   const [errors, setErrors] = useState<ErrorMap>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [paymentError, setPaymentError] = useState("");
 
   const selectedPackage =
     localizedService.packages?.find((item) => item.id === selectedPackageId) ??
@@ -148,8 +152,9 @@ export function PurchasePanel({ service }: PurchasePanelProps) {
     });
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setPaymentError("");
 
     const nextErrors: ErrorMap = {};
 
@@ -187,7 +192,48 @@ export function PurchasePanel({ service }: PurchasePanelProps) {
     );
 
     addOrder(order);
-    router.push(`/checkout/${order.id}`);
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch("/api/payments/cryptomus/create", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ order }),
+      });
+      const result = (await response.json()) as {
+        ok?: boolean;
+        paymentUrl?: string;
+        paymentSessionId?: string;
+        paymentReference?: string;
+        paymentAmount?: string;
+        paymentCurrency?: string;
+        paymentExpiresAt?: string;
+        error?: string;
+      };
+
+      if (!response.ok || !result.ok || !result.paymentUrl) {
+        throw new Error(result.error ?? "Payment could not be created.");
+      }
+
+      applyOrderPaymentSession(order.id, {
+        paymentProvider: "cryptomus",
+        paymentStatus: "awaiting_transfer",
+        paymentAmount: result.paymentAmount,
+        paymentCurrency: result.paymentCurrency,
+        paymentSessionId: result.paymentSessionId,
+        paymentReference: result.paymentReference,
+        paymentExpiresAt: result.paymentExpiresAt,
+      });
+
+      window.location.assign(result.paymentUrl);
+    } catch (error) {
+      setPaymentError(
+        error instanceof Error ? error.message : "Payment could not be started.",
+      );
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -297,10 +343,17 @@ export function PurchasePanel({ service }: PurchasePanelProps) {
 
           <button
             type="submit"
-            className="ui-primary-button w-full px-5 py-3.5 text-sm font-semibold"
+            disabled={isSubmitting}
+            className="ui-primary-button w-full px-5 py-3.5 text-sm font-semibold disabled:cursor-not-allowed disabled:opacity-60"
           >
-            {messages.service.buyNow}
+            {isSubmitting ? messages.checkout.continuePayment : messages.service.buyNow}
           </button>
+
+          {paymentError ? (
+            <p className="rounded-2xl border border-rose-300/20 bg-rose-300/10 px-4 py-3 text-sm leading-6 text-rose-100">
+              {paymentError}
+            </p>
+          ) : null}
         </form>
       </div>
     </aside>

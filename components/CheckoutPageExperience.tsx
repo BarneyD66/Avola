@@ -14,6 +14,7 @@ import {
   markOrderPaidMock,
   markOrderTgDispatched,
   markOrderTgFailed,
+  applyOrderPaymentSession,
   subscribeToOrders,
 } from "@/data/orderStore";
 import { buildTgTaskMessage } from "@/data/tgTaskTemplate";
@@ -34,8 +35,9 @@ export function CheckoutPageExperience({
   );
   const order = getOrderById(orderId);
   const [isConfirming, setIsConfirming] = useState(false);
+  const [paymentError, setPaymentError] = useState("");
 
-  const handleContinuePayment = async () => {
+  const dispatchMockPayment = async () => {
     setIsConfirming(true);
     const paidOrder = markOrderPaidMock(orderId);
 
@@ -71,6 +73,61 @@ export function CheckoutPageExperience({
     }
 
     router.push(`/order/success/${orderId}`);
+  };
+
+  const handleContinuePayment = async () => {
+    if (!order) {
+      return;
+    }
+
+    setIsConfirming(true);
+    setPaymentError("");
+
+    try {
+      const response = await fetch("/api/payments/cryptomus/create", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ order }),
+      });
+      const result = (await response.json()) as {
+        ok?: boolean;
+        paymentUrl?: string;
+        paymentSessionId?: string;
+        paymentReference?: string;
+        paymentAmount?: string;
+        paymentCurrency?: string;
+        paymentExpiresAt?: string;
+        error?: string;
+      };
+
+      if (response.status === 501) {
+        await dispatchMockPayment();
+        return;
+      }
+
+      if (!response.ok || !result.ok || !result.paymentUrl) {
+        throw new Error(result.error ?? "Cryptomus payment could not be created.");
+      }
+
+      applyOrderPaymentSession(order.id, {
+        paymentProvider: "cryptomus",
+        paymentStatus: "awaiting_transfer",
+        paymentAmount: result.paymentAmount,
+        paymentCurrency: result.paymentCurrency,
+        paymentSessionId: result.paymentSessionId,
+        paymentReference: result.paymentReference,
+        paymentExpiresAt: result.paymentExpiresAt,
+      });
+
+      window.location.assign(result.paymentUrl);
+    } catch (error) {
+      setPaymentError(
+        error instanceof Error ? error.message : "Payment could not be started.",
+      );
+      setIsConfirming(false);
+    }
   };
 
   if (!order) {
@@ -147,6 +204,11 @@ export function CheckoutPageExperience({
                 {messages.checkout.trackOrder}
               </Link>
             </div>
+            {paymentError ? (
+              <p className="mt-4 rounded-2xl border border-rose-300/20 bg-rose-300/10 px-4 py-3 text-sm leading-6 text-rose-100">
+                {paymentError}
+              </p>
+            ) : null}
             <div className="mt-4 grid gap-2 text-sm leading-7 text-muted sm:grid-cols-2">
               <p>{messages.checkout.continuePaymentHint}</p>
               <p>{messages.checkout.mockModeHint}</p>

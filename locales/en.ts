@@ -464,7 +464,7 @@ export const en: Messages = {
     },
   },
   payment: {
-    provider: "Unipay",
+    provider: "Cryptomus",
     method: "Crypto",
     status: {
       pending_payment: {
@@ -512,11 +512,11 @@ export const en: Messages = {
       "After payment is confirmed, the system will automatically update the order status.",
       "If the page does not update automatically after payment, please check later on the order tracking page.",
     ],
-    continuePayment: "Simulate Payment Success",
+    continuePayment: "Pay with Cryptomus",
     continuePaymentHint:
-      "This button is currently used for internal mock payment testing.",
+      "You will be redirected to the Cryptomus payment page to complete crypto payment.",
     mockModeHint:
-      "After simulated payment success, the order will enter the internal processing flow.",
+      "After payment is completed, the order enters processing and syncs to internal execution.",
     trackOrder: "Track Order",
     backHome: "Back to Home",
     packageTitle: "Selected Package",

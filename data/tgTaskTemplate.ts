@@ -120,9 +120,15 @@ export function getOrderTargetLink(order: Order) {
 }
 
 export function buildTgTaskMessage(order: Order) {
-  const amount = order.paymentAmount ?? order.selectedPackagePrice ?? order.amount;
+  const amount =
+    order.selectedPackageInternalCost ??
+    order.paymentAmount ??
+    order.selectedPackagePrice ??
+    order.amount;
   const estimatedTime = normalizeEstimatedTime(
-    order.selectedPackageDeliveryTime ?? order.deliveryTime,
+    order.selectedPackageDurationHours ??
+      order.selectedPackageDeliveryTime ??
+      order.deliveryTime,
   );
   const taskCode = order.tgTaskCode ?? "UNASSIGNED";
   const actionText = getTgActionText(order.serviceSlug);
