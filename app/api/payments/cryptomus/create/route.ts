@@ -9,6 +9,7 @@ import {
   generatePaymentTaskCode,
   savePendingPaymentSession,
 } from "@/lib/paymentSessionStore";
+import { parseParticipantTarget } from "@/lib/raffleStore";
 import { buildTgTaskMessage } from "@/data/tgTaskTemplate";
 import { getServiceBySlug, type ServicePackage } from "@/data/services";
 import type { Order } from "@/data/orderStore";
@@ -152,6 +153,9 @@ export async function POST(request: Request) {
       orderId: String(order.id),
       tgMessage,
       createdAt: Date.now(),
+      targetParticipants: parseParticipantTarget(
+        selectedPackage?.participants ?? order.selectedPackageParticipants,
+      ),
     });
 
     return NextResponse.json({

@@ -3,6 +3,7 @@ type PendingPaymentSession = {
   tgMessage: string;
   createdAt: number;
   dispatchedAt?: number;
+  targetParticipants?: number;
 };
 
 type PaymentSessionGlobal = typeof globalThis & {

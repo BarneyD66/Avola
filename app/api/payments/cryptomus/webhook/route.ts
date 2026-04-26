@@ -52,7 +52,10 @@ export async function POST(request: Request) {
       });
     }
 
-    const result = await dispatchTelegramTask(pendingSession.tgMessage);
+    const result = await dispatchTelegramTask(pendingSession.tgMessage, {
+      orderId,
+      targetParticipants: pendingSession.targetParticipants,
+    });
     markPendingPaymentSessionDispatched(orderId);
 
     return NextResponse.json({

@@ -3,13 +3,22 @@ import {
   releaseTelegramDispatch,
   reserveTelegramDispatch,
 } from "@/lib/paymentSessionStore";
+import { parseParticipantTarget } from "@/lib/raffleStore";
 import { dispatchTelegramTask } from "@/lib/telegram";
 
 export async function POST(request: Request) {
-  let payload: { orderId?: unknown; message?: unknown };
+  let payload: {
+    orderId?: unknown;
+    message?: unknown;
+    targetParticipants?: unknown;
+  };
 
   try {
-    payload = (await request.json()) as { orderId?: unknown; message?: unknown };
+    payload = (await request.json()) as {
+      orderId?: unknown;
+      message?: unknown;
+      targetParticipants?: unknown;
+    };
   } catch {
     return NextResponse.json(
       { ok: false, error: "Invalid request payload." },
@@ -41,7 +50,15 @@ export async function POST(request: Request) {
       });
     }
 
-    const result = await dispatchTelegramTask(payload.message);
+    const result = await dispatchTelegramTask(payload.message, {
+      orderId: payload.orderId,
+      targetParticipants: parseParticipantTarget(
+        typeof payload.targetParticipants === "string" ||
+          typeof payload.targetParticipants === "number"
+          ? payload.targetParticipants
+          : undefined,
+      ),
+    });
 
     return NextResponse.json({
       ok: true,
