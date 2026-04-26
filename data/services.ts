@@ -384,6 +384,7 @@ const packageMap: Record<string, ServicePackage[]> = {
       price: "$2",
       displayPrice: "$2",
       internalCost: "$1",
+      participants: "300",
       result: "约 300 人加入群组",
       deliveryTime: "72 小时",
       durationLabel: "72 小时",

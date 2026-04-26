@@ -12,6 +12,7 @@ import {
   getDisplayPaymentStatus,
   type Order,
 } from "@/data/orderStore";
+import { getServiceBySlug } from "@/data/services";
 import {
   getLocalizedServiceName,
   getLocalizedTimelineItems,
@@ -27,6 +28,20 @@ type RaffleProgress = {
   progress: number;
 };
 
+function parseParticipantValue(value?: string | number | null) {
+  if (typeof value === "number" && Number.isFinite(value)) {
+    return Math.max(0, Math.floor(value));
+  }
+
+  const matched = String(value ?? "").match(/\d[\d,]*/);
+
+  if (!matched) {
+    return 0;
+  }
+
+  return Number(matched[0].replace(/,/g, ""));
+}
+
 export function OrderResultCard({ order }: OrderResultCardProps) {
   const { locale, messages } = useLocale();
   const displayStatus = getDisplayOrderStatus(order.status);
@@ -38,19 +53,37 @@ export function OrderResultCard({ order }: OrderResultCardProps) {
   const statusMeta = messages.order.status[displayStatus];
   const paymentStatus = order.paymentStatus ?? "pending_payment";
   const paymentMeta = messages.payment.status[getDisplayPaymentStatus(paymentStatus)];
-  const fallbackTarget = Number(
-    String(order.selectedPackageParticipants ?? "").replace(/[^\d]/g, ""),
+  const servicePackage = getServiceBySlug(order.serviceSlug)?.packages?.find(
+    (item) => item.id === order.selectedPackageId,
   );
+  const fallbackTarget =
+    parseParticipantValue(order.selectedPackageParticipants) ||
+    parseParticipantValue(servicePackage?.participants) ||
+    parseParticipantValue(order.selectedPackageResult) ||
+    parseParticipantValue(servicePackage?.result);
   const [raffleProgress, setRaffleProgress] = useState<RaffleProgress | null>(
     null,
   );
   const participantTarget =
-    raffleProgress?.targetParticipants || (Number.isFinite(fallbackTarget) ? fallbackTarget : 0);
+    raffleProgress?.targetParticipants || fallbackTarget;
   const participantCurrent = raffleProgress?.currentParticipants ?? 0;
+  const usesParticipantProgress = participantTarget > 0;
   const deliveryProgress =
-    participantTarget > 0
+    usesParticipantProgress
       ? Math.min(100, Math.round((participantCurrent / participantTarget) * 100))
       : order.progress;
+  const progressOverviewTitle =
+    usesParticipantProgress
+      ? locale === "en"
+        ? "Participant Progress"
+        : "参与进度"
+      : messages.track.progressOverview;
+  const progressOverviewDescription =
+    usesParticipantProgress
+      ? locale === "en"
+        ? "Participant count syncs from the Telegram participation button."
+        : "参与人数会随 Telegram 按钮参与同步更新。"
+      : messages.track.progressDescription;
   const baseInfo = [
     { label: messages.order.labels.serviceName, value: serviceName },
     { label: messages.order.labels.createdAt, value: order.createdAt },
@@ -117,7 +150,7 @@ export function OrderResultCard({ order }: OrderResultCardProps) {
           <OrderStatusBadge status={order.status} />
           <PaymentStatusBadge status={paymentStatus} />
           <p className="text-sm text-zinc-500">
-            {participantTarget > 0
+            {usesParticipantProgress
               ? `${participantCurrent} / ${participantTarget}`
               : messages.track.currentProgress.replace("{value}", String(order.progress))}
           </p>
@@ -184,16 +217,16 @@ export function OrderResultCard({ order }: OrderResultCardProps) {
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
           <div>
             <p className="text-sm font-medium text-white">
-              {messages.track.progressOverview}
+              {progressOverviewTitle}
             </p>
             <p className="mt-2 text-sm leading-7 text-zinc-400">
-              {messages.track.progressDescription}
+              {progressOverviewDescription}
             </p>
           </div>
           <div className="text-right">
             <p className="text-2xl font-semibold text-white">
-              {participantTarget > 0
-                ? `${participantCurrent}/${participantTarget}`
+              {usesParticipantProgress
+                ? `${participantCurrent} / ${participantTarget}`
                 : `${order.progress}%`}
             </p>
           </div>

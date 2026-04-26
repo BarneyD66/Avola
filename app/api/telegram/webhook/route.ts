@@ -71,7 +71,7 @@ export async function POST(request: Request) {
     );
   }
 
-  const result = recordRaffleParticipant({
+  const result = await recordRaffleParticipant({
     orderId,
     chatId: String(chatId),
     raffleMessageId: String(messageId),
@@ -99,6 +99,6 @@ export async function POST(request: Request) {
     ok: true,
     orderId,
     currentParticipants: result.count,
-    progress: getRaffleProgress(orderId),
+    progress: await getRaffleProgress(orderId),
   });
 }

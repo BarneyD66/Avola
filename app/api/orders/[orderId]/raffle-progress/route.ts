@@ -6,7 +6,7 @@ export async function GET(
   context: { params: Promise<{ orderId: string }> },
 ) {
   const { orderId } = await context.params;
-  const progress = getRaffleProgress(orderId);
+  const progress = await getRaffleProgress(orderId);
 
   if (!progress) {
     return NextResponse.json({

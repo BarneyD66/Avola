@@ -95,7 +95,7 @@ export async function dispatchTelegramTask(
   let raffleMessageId: string | undefined;
 
   if (options?.orderId) {
-    createRaffleSession({
+    await createRaffleSession({
       orderId: options.orderId,
       chatId,
       taskMessageId: messageId,
@@ -110,7 +110,7 @@ export async function dispatchTelegramTask(
       replyMarkup: getParticipateKeyboard(options.orderId),
     });
 
-    updateRaffleMessageId(options.orderId, raffleMessageId);
+    await updateRaffleMessageId(options.orderId, raffleMessageId);
   }
 
   return { chatId, messageId, randyMessageId: raffleMessageId };
