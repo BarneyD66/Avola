@@ -43,16 +43,13 @@ export function Header() {
           <div className="hidden items-center gap-2 md:flex">
             <LocaleToggle />
             <ThemeToggle />
-            <Link href="/login" className="header-login-pill active:scale-[0.98]">
-              {messages.header.login}
-            </Link>
           </div>
           <div className="grid gap-2 md:hidden">
             <div className="flex flex-wrap items-center justify-between gap-2">
               <LocaleToggle />
               <ThemeToggle />
             </div>
-            <div className="grid grid-cols-3 gap-2">
+            <div className="grid grid-cols-2 gap-2">
               {navItems.map((item) => (
                 <Link
                   key={`compact-${item.href}`}
@@ -62,9 +59,6 @@ export function Header() {
                   {item.label}
                 </Link>
               ))}
-              <Link href="/login" className="nav-pill header-mobile-pill active:scale-[0.98]">
-                {messages.header.login}
-              </Link>
             </div>
           </div>
         </div>
