@@ -2251,8 +2251,11 @@ html.light .services-directory-card-panel {
   }
 
   .service-detail-hero-card h1 {
-    max-width: 12ch;
+    max-width: 100%;
     margin-top: 0.7rem;
+    white-space: nowrap;
+    font-size: clamp(1.34rem, 7.4vw, 1.62rem);
+    letter-spacing: -0.045em;
   }
 
   .service-detail-hero-card p.text-\[15px\],

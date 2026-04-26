@@ -380,7 +380,15 @@ const packageMap: Record<string, ServicePackage[]> = {
     { price: "$260", result: "约 500 评论", deliveryTime: "24-48 小时" },
   ]),
   "telegram-join-group": createPackages("telegram-join-group", [
-    { price: "$60", result: "约 300 人加入群组", deliveryTime: "12-24 小时" },
+    {
+      price: "$2",
+      displayPrice: "$2",
+      internalCost: "$1",
+      result: "约 300 人加入群组",
+      deliveryTime: "72 小时",
+      durationLabel: "72 小时",
+      durationHours: "72 Hours",
+    },
     {
       price: "$140",
       result: "约 900 人加入群组",

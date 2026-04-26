@@ -1,6 +1,5 @@
 "use client";
 
-import { InfoList } from "@/components/InfoList";
 import { useLocale } from "@/components/LocaleProvider";
 import { SectionBlock } from "@/components/SectionBlock";
 import type { Service } from "@/data/services";
@@ -13,16 +12,6 @@ type ServiceDetailHeroProps = {
 export function ServiceDetailHero({ service }: ServiceDetailHeroProps) {
   const { locale, messages } = useLocale();
   const localizedService = getLocalizedService(service, locale);
-
-  const deliveryItems = [
-    messages.service.startingPrice.replace("{value}", localizedService.price),
-    messages.service.estimatedDelivery.replace(
-      "{value}",
-      localizedService.deliveryTime,
-    ),
-    messages.service.executionMode,
-    messages.service.purchaseMode,
-  ];
 
   return (
     <div className="service-detail-stack space-y-4 sm:space-y-6">
@@ -45,15 +34,31 @@ export function ServiceDetailHero({ service }: ServiceDetailHeroProps) {
       </SectionBlock>
 
       <SectionBlock title={messages.service.scenariosTitle}>
-        <InfoList items={localizedService.scenarios} />
-      </SectionBlock>
-
-      <SectionBlock title={messages.service.deliveryTitle}>
-        <InfoList items={deliveryItems} />
+        <ul className="space-y-3">
+          {localizedService.scenarios.map((item) => (
+            <li
+              key={item}
+              className="flex items-start gap-2.5 rounded-2xl border border-white/6 bg-white/[0.025] px-3 py-2 text-[13.5px] leading-6 text-zinc-300 sm:gap-3 sm:px-4 sm:py-3 sm:text-base sm:leading-7"
+            >
+              <span className="mt-2 h-1.5 w-1.5 flex-none rounded-full bg-accent" />
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
       </SectionBlock>
 
       <SectionBlock title={messages.service.notesTitle}>
-        <InfoList items={localizedService.notes} />
+        <ul className="space-y-3">
+          {localizedService.notes.map((item) => (
+            <li
+              key={item}
+              className="flex items-start gap-2.5 rounded-2xl border border-white/6 bg-white/[0.025] px-3 py-2 text-[13.5px] leading-6 text-zinc-300 sm:gap-3 sm:px-4 sm:py-3 sm:text-base sm:leading-7"
+            >
+              <span className="mt-2 h-1.5 w-1.5 flex-none rounded-full bg-accent" />
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
       </SectionBlock>
     </div>
   );
