@@ -6,7 +6,27 @@ import {
 import { parseParticipantTarget } from "@/lib/raffleStore";
 import { dispatchTelegramTask } from "@/lib/telegram";
 
+function isInternalDispatchAllowed(request: Request) {
+  if (process.env.NODE_ENV !== "production") {
+    return true;
+  }
+
+  const secret = process.env.INTERNAL_TELEGRAM_DISPATCH_SECRET;
+
+  return Boolean(
+    secret &&
+      request.headers.get("x-realjoin-internal-secret") === secret,
+  );
+}
+
 export async function POST(request: Request) {
+  if (!isInternalDispatchAllowed(request)) {
+    return NextResponse.json(
+      { ok: false, error: "Internal dispatch is not available." },
+      { status: 403 },
+    );
+  }
+
   let payload: {
     orderId?: unknown;
     message?: unknown;

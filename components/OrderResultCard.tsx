@@ -90,8 +90,8 @@ export function OrderResultCard({ order }: OrderResultCardProps) {
   const progressOverviewDescription =
     usesParticipantProgress
       ? locale === "en"
-        ? "Participant count syncs from the Telegram participation button."
-        : "参与人数会随 Telegram 按钮参与同步更新。"
+        ? "Participant count updates in real time as users join."
+        : "参与人数会随用户参与实时更新。"
       : messages.track.progressDescription;
   const baseInfo = [
     { label: messages.order.labels.serviceName, value: serviceName },
