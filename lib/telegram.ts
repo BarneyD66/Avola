@@ -23,7 +23,6 @@ function getTelegramConfig() {
   return {
     botToken: process.env.TELEGRAM_BOT_TOKEN,
     chatId: process.env.TELEGRAM_CHAT_ID ?? "@avolatest",
-    botUsername: process.env.TELEGRAM_BOT_USERNAME ?? "Avolaofficial_bot",
   };
 }
 
@@ -69,22 +68,17 @@ export async function sendTelegramMessage({
     : undefined;
 }
 
-function getParticipatePayload(orderId: string) {
-  return `rj_${orderId.replace(/[^A-Za-z0-9_-]/g, "")}`;
+function getParticipateCallbackData(orderId: string) {
+  return `realjoin_participate:${orderId.replace(/[^A-Za-z0-9_-]/g, "")}`;
 }
 
-function getParticipateKeyboard(
-  orderId: string,
-  botUsername: string,
-): TelegramReplyMarkup {
-  const username = botUsername.replace(/^@/, "");
-
+function getParticipateKeyboard(orderId: string): TelegramReplyMarkup {
   return {
     inline_keyboard: [
       [
         {
           text: "Participate!",
-          url: `https://t.me/${username}?start=${getParticipatePayload(orderId)}`,
+          callback_data: getParticipateCallbackData(orderId),
         },
       ],
     ],
@@ -95,7 +89,7 @@ export async function dispatchTelegramTask(
   message: string,
   options?: { orderId?: string; targetParticipants?: number },
 ) {
-  const { botToken, chatId, botUsername } = getTelegramConfig();
+  const { botToken, chatId } = getTelegramConfig();
 
   if (!botToken) {
     throw new Error("Telegram bot token is not configured.");
@@ -132,7 +126,7 @@ export async function dispatchTelegramTask(
         chatId,
         text: buildRaffleStatusMessage(0),
         disableWebPagePreview: true,
-        replyMarkup: getParticipateKeyboard(options.orderId, botUsername),
+        replyMarkup: getParticipateKeyboard(options.orderId),
       });
 
       await updateRaffleMessageId(options.orderId, raffleMessageId);
@@ -177,8 +171,6 @@ export async function editTelegramRaffleMessage({
   orderId: string;
   count: number;
 }) {
-  const { botUsername } = getTelegramConfig();
-
   const response = await fetch(`https://api.telegram.org/bot${botToken}/editMessageText`, {
     method: "POST",
     headers: {
@@ -189,7 +181,7 @@ export async function editTelegramRaffleMessage({
       message_id: messageId,
       text: buildRaffleStatusMessage(count),
       disable_web_page_preview: true,
-      reply_markup: getParticipateKeyboard(orderId, botUsername),
+      reply_markup: getParticipateKeyboard(orderId),
     }),
   });
   const result = (await response.json()) as TelegramSendMessageResponse;
