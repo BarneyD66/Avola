@@ -131,6 +131,27 @@ export async function createRaffleSession({
   return session;
 }
 
+export async function getRaffleSession(orderId: string) {
+  const session = getRaffleMap().get(orderId);
+  const redisSession = await getRedisSession(orderId);
+
+  if (!session && !redisSession) {
+    return null;
+  }
+
+  return {
+    orderId,
+    chatId: session?.chatId ?? redisSession?.chatId ?? "",
+    taskMessageId: session?.taskMessageId ?? redisSession?.taskMessageId,
+    raffleMessageId: session?.raffleMessageId ?? redisSession?.raffleMessageId,
+    targetParticipants:
+      session?.targetParticipants ?? redisSession?.targetParticipants ?? 0,
+    participantIds: session?.participantIds ?? [],
+    createdAt: session?.createdAt ?? redisSession?.createdAt ?? Date.now(),
+    updatedAt: session?.updatedAt ?? redisSession?.updatedAt ?? Date.now(),
+  };
+}
+
 export async function updateRaffleMessageId(
   orderId: string,
   raffleMessageId?: string,

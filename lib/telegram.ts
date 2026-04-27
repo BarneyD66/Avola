@@ -1,6 +1,7 @@
 import {
   buildRaffleStatusMessage,
   createRaffleSession,
+  getRaffleSession,
   updateRaffleMessageId,
 } from "@/lib/raffleStore";
 
@@ -85,32 +86,42 @@ export async function dispatchTelegramTask(
     throw new Error("Telegram bot token is not configured.");
   }
 
-  const messageId = await sendTelegramMessage({
-    botToken,
-    chatId,
-    text: message,
-    disableWebPagePreview: false,
-  });
+  const existingSession = options?.orderId
+    ? await getRaffleSession(options.orderId)
+    : null;
+  let messageId = existingSession?.taskMessageId;
 
-  let raffleMessageId: string | undefined;
+  if (!messageId) {
+    messageId = await sendTelegramMessage({
+      botToken,
+      chatId,
+      text: message,
+      disableWebPagePreview: false,
+    });
+  }
+
+  let raffleMessageId = existingSession?.raffleMessageId;
 
   if (options?.orderId) {
     await createRaffleSession({
       orderId: options.orderId,
       chatId,
       taskMessageId: messageId,
+      raffleMessageId,
       targetParticipants: options.targetParticipants,
     });
 
-    raffleMessageId = await sendTelegramMessage({
-      botToken,
-      chatId,
-      text: buildRaffleStatusMessage(0),
-      disableWebPagePreview: true,
-      replyMarkup: getParticipateKeyboard(options.orderId),
-    });
+    if (!raffleMessageId) {
+      raffleMessageId = await sendTelegramMessage({
+        botToken,
+        chatId,
+        text: buildRaffleStatusMessage(0),
+        disableWebPagePreview: true,
+        replyMarkup: getParticipateKeyboard(options.orderId),
+      });
 
-    await updateRaffleMessageId(options.orderId, raffleMessageId);
+      await updateRaffleMessageId(options.orderId, raffleMessageId);
+    }
   }
 
   return { chatId, messageId, randyMessageId: raffleMessageId };
