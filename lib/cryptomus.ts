@@ -1,4 +1,4 @@
-import { createHash } from "crypto";
+import { createHash, timingSafeEqual } from "crypto";
 import { execFileSync } from "child_process";
 
 const CRYPTOMUS_API_URL = "https://api.cryptomus.com/v1";
@@ -117,14 +117,28 @@ function getCryptomusCredentials() {
 export function createCryptomusSign(
   payload: Record<string, unknown>,
   apiKey = process.env.CRYPTOMUS_PAYMENT_API_KEY,
+  options?: { escapeSlashes?: boolean },
 ) {
   if (!apiKey) {
     throw new Error("Cryptomus payment API key is not configured.");
   }
 
-  const encodedPayload = Buffer.from(JSON.stringify(payload)).toString("base64");
+  const payloadJson = options?.escapeSlashes
+    ? JSON.stringify(payload).replace(/\//g, "\\/")
+    : JSON.stringify(payload);
+  const encodedPayload = Buffer.from(payloadJson).toString("base64");
 
   return createHash("md5").update(`${encodedPayload}${apiKey}`).digest("hex");
+}
+
+function signaturesMatch(expected: string, received: string) {
+  const expectedBuffer = Buffer.from(expected);
+  const receivedBuffer = Buffer.from(received);
+
+  return (
+    expectedBuffer.length === receivedBuffer.length &&
+    timingSafeEqual(expectedBuffer, receivedBuffer)
+  );
 }
 
 export function verifyCryptomusWebhook(payload: Record<string, unknown>) {
@@ -137,7 +151,17 @@ export function verifyCryptomusWebhook(payload: Record<string, unknown>) {
   const unsignedPayload = { ...payload };
   delete unsignedPayload.sign;
 
-  return createCryptomusSign(unsignedPayload) === receivedSign;
+  // Cryptomus' webhook examples generate the hash with PHP json_encode and
+  // JSON_UNESCAPED_UNICODE. That keeps Unicode readable but still escapes "/",
+  // so URL fields can produce a different digest than plain JSON.stringify.
+  const expectedSigns = [
+    createCryptomusSign(unsignedPayload),
+    createCryptomusSign(unsignedPayload, undefined, { escapeSlashes: true }),
+  ];
+
+  return expectedSigns.some((expectedSign) =>
+    signaturesMatch(expectedSign, receivedSign),
+  );
 }
 
 export function normalizeCryptomusAmount(value: string) {

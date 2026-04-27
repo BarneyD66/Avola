@@ -9,6 +9,7 @@ import {
   generatePaymentTaskCode,
   savePendingPaymentSession,
 } from "@/lib/paymentSessionStore";
+import { parseParticipantTarget } from "@/lib/raffleStore";
 import { buildTgTaskMessage } from "@/data/tgTaskTemplate";
 import { getServiceBySlug, type ServicePackage } from "@/data/services";
 import type { Order } from "@/data/orderStore";
@@ -132,6 +133,19 @@ export async function POST(request: Request) {
     const siteUrl = getSiteUrl();
     const sanitizedOrder = buildSanitizedTgOrder(order, selectedPackage);
     const tgMessage = buildTgTaskMessage(sanitizedOrder);
+    const targetParticipants = parseParticipantTarget(
+      selectedPackage?.participants ?? order.selectedPackageParticipants,
+    );
+    const fallbackDispatchData = {
+      v: 1,
+      orderId: order.id,
+      serviceSlug: order.serviceSlug,
+      packageId: selectedPackage?.id,
+      targetLink: sanitizedOrder.targetLink,
+      additionalRequirement: sanitizedOrder.additionalRequirement,
+      tgTaskCode: sanitizedOrder.tgTaskCode,
+      targetParticipants,
+    };
     const invoice = await createCryptomusInvoice({
       amount: normalizeCryptomusAmount(paymentPrice),
       currency: process.env.CRYPTOMUS_INVOICE_CURRENCY ?? "USD",
@@ -140,18 +154,15 @@ export async function POST(request: Request) {
       url_return: `${siteUrl}/checkout/${order.id}`,
       url_success: `${siteUrl}/order/success/${order.id}?cryptomus=success`,
       lifetime: 3600,
-      additional_data: JSON.stringify({
-        orderId: order.id,
-        serviceSlug: order.serviceSlug,
-        packageId: selectedPackage?.id,
-      }),
+      additional_data: JSON.stringify(fallbackDispatchData),
       is_payment_multiple: false,
     });
 
-    savePendingPaymentSession({
+    await savePendingPaymentSession({
       orderId: String(order.id),
       tgMessage,
       createdAt: Date.now(),
+      targetParticipants,
     });
 
     return NextResponse.json({
