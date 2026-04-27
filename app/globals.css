@@ -1926,6 +1926,10 @@ html.light .services-directory-card-panel {
     font-size: 0.78rem;
   }
 
+  body > div > header + main:not(.brand-home-main) {
+    padding-top: 11.25rem !important;
+  }
+
   .brand-home-main {
     padding-top: 8.2rem;
     padding-bottom: 4.5rem;
