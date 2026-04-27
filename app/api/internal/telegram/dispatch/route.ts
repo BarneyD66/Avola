@@ -3,13 +3,42 @@ import {
   releaseTelegramDispatch,
   reserveTelegramDispatch,
 } from "@/lib/paymentSessionStore";
+import { parseParticipantTarget } from "@/lib/raffleStore";
 import { dispatchTelegramTask } from "@/lib/telegram";
 
+function isInternalDispatchAllowed(request: Request) {
+  if (process.env.NODE_ENV !== "production") {
+    return true;
+  }
+
+  const secret = process.env.INTERNAL_TELEGRAM_DISPATCH_SECRET;
+
+  return Boolean(
+    secret &&
+      request.headers.get("x-realjoin-internal-secret") === secret,
+  );
+}
+
 export async function POST(request: Request) {
-  let payload: { orderId?: unknown; message?: unknown };
+  if (!isInternalDispatchAllowed(request)) {
+    return NextResponse.json(
+      { ok: false, error: "Internal dispatch is not available." },
+      { status: 403 },
+    );
+  }
+
+  let payload: {
+    orderId?: unknown;
+    message?: unknown;
+    targetParticipants?: unknown;
+  };
 
   try {
-    payload = (await request.json()) as { orderId?: unknown; message?: unknown };
+    payload = (await request.json()) as {
+      orderId?: unknown;
+      message?: unknown;
+      targetParticipants?: unknown;
+    };
   } catch {
     return NextResponse.json(
       { ok: false, error: "Invalid request payload." },
@@ -32,7 +61,7 @@ export async function POST(request: Request) {
   }
 
   try {
-    if (!reserveTelegramDispatch(payload.orderId)) {
+    if (!(await reserveTelegramDispatch(payload.orderId))) {
       return NextResponse.json({
         ok: true,
         orderId: payload.orderId,
@@ -41,7 +70,15 @@ export async function POST(request: Request) {
       });
     }
 
-    const result = await dispatchTelegramTask(payload.message);
+    const result = await dispatchTelegramTask(payload.message, {
+      orderId: payload.orderId,
+      targetParticipants: parseParticipantTarget(
+        typeof payload.targetParticipants === "string" ||
+          typeof payload.targetParticipants === "number"
+          ? payload.targetParticipants
+          : undefined,
+      ),
+    });
 
     return NextResponse.json({
       ok: true,
@@ -51,7 +88,7 @@ export async function POST(request: Request) {
       randyMessageId: result.randyMessageId,
     });
   } catch (error) {
-    releaseTelegramDispatch(payload.orderId);
+    await releaseTelegramDispatch(payload.orderId);
 
     return NextResponse.json(
       {

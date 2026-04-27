@@ -200,7 +200,7 @@ export const en: Messages = {
           description:
             "The order number and query password keep one consistent tracking entry. From order creation to result updates, progress stays visible through the same path.",
           completed: "Direct ordering, task dispatch, real user participation, result callbacks",
-          next: "Continue tracking progress",
+          next: "",
         },
       ],
     },

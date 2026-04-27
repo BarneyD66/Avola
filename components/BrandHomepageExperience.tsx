@@ -307,7 +307,13 @@ export function BrandHomepageExperience() {
                 </p>
               </ViewportReveal>
               <ViewportReveal delay={70}>
-                <h2 className="mt-4 max-w-[22ch] text-[1.7rem] leading-[1.14] font-semibold tracking-[-0.044em] text-foreground sm:text-[2.08rem] lg:max-w-[19ch] lg:text-[2.34rem] xl:text-[2.5rem]">
+                <h2
+                  className={`mt-4 text-[1.7rem] leading-[1.14] font-semibold tracking-[-0.044em] text-foreground sm:text-[2.08rem] lg:text-[2.34rem] xl:text-[2.5rem] ${
+                    locale === "zh-CN"
+                      ? "max-w-[22ch] sm:max-w-none sm:whitespace-nowrap"
+                      : "max-w-[22ch] lg:max-w-[19ch]"
+                  }`}
+                >
                   {valueSection.title}
                 </h2>
               </ViewportReveal>
@@ -484,7 +490,11 @@ export function BrandHomepageExperience() {
                       {activeFlowStep.description}
                     </p>
 
-                    <div className="brand-flow-active-rail mt-7 grid gap-3 sm:grid-cols-2">
+                    <div
+                      className={`brand-flow-active-rail mt-7 grid gap-3 ${
+                        activeFlowStep.next ? "sm:grid-cols-2" : "sm:grid-cols-1"
+                      }`}
+                    >
                       <div className="brand-flow-active-block rounded-[20px] px-4 py-4 sm:px-5">
                         <p className="brand-flow-active-label text-[10px] uppercase tracking-[0.22em] text-accent-strong/72">
                           {flowSection.completedLabel}
@@ -494,14 +504,16 @@ export function BrandHomepageExperience() {
                         </p>
                       </div>
 
-                      <div className="brand-flow-active-block rounded-[20px] px-4 py-4 sm:px-5">
-                        <p className="brand-flow-active-label text-[10px] uppercase tracking-[0.22em] text-accent-strong/72">
-                          {flowSection.nextLabel}
-                        </p>
-                        <p className="brand-flow-active-copy mt-3 text-[13px] leading-6 text-muted-strong sm:text-[14px] sm:leading-7">
-                          {activeFlowStep.next}
-                        </p>
-                      </div>
+                      {activeFlowStep.next ? (
+                        <div className="brand-flow-active-block rounded-[20px] px-4 py-4 sm:px-5">
+                          <p className="brand-flow-active-label text-[10px] uppercase tracking-[0.22em] text-accent-strong/72">
+                            {flowSection.nextLabel}
+                          </p>
+                          <p className="brand-flow-active-copy mt-3 text-[13px] leading-6 text-muted-strong sm:text-[14px] sm:leading-7">
+                            {activeFlowStep.next}
+                          </p>
+                        </div>
+                      ) : null}
                     </div>
                   </article>
                 </ViewportReveal>

@@ -1,8 +1,11 @@
-type PendingPaymentSession = {
+import { normalizeRedisHash, redisCommand } from "@/lib/redis";
+
+export type PendingPaymentSession = {
   orderId: string;
   tgMessage: string;
   createdAt: number;
   dispatchedAt?: number;
+  targetParticipants?: number;
 };
 
 type PaymentSessionGlobal = typeof globalThis & {
@@ -13,9 +16,72 @@ type PaymentSessionGlobal = typeof globalThis & {
 
 const globalForSessions = globalThis as PaymentSessionGlobal;
 
+const emptyValue = "__empty__";
+
+function getPaymentSessionKey(orderId: string) {
+  return `realjoin:payment-session:${orderId}`;
+}
+
+function getPaymentDispatchLockKey(orderId: string) {
+  return `realjoin:payment-dispatch-lock:${orderId}`;
+}
+
 function getSessionMap() {
   globalForSessions.__realjoinPaymentSessions ??= new Map();
   return globalForSessions.__realjoinPaymentSessions;
+}
+
+function serializeOptionalValue(value?: string | number) {
+  return value === undefined || value === null ? emptyValue : String(value);
+}
+
+function parseOptionalValue(value?: string) {
+  return !value || value === emptyValue ? undefined : value;
+}
+
+function parseStoredSession(
+  value: Record<string, string> | null,
+): PendingPaymentSession | null {
+  if (!value || Object.keys(value).length === 0 || !value.orderId || !value.tgMessage) {
+    return null;
+  }
+
+  return {
+    orderId: value.orderId,
+    tgMessage: value.tgMessage,
+    createdAt: Number(value.createdAt || Date.now()),
+    dispatchedAt: parseOptionalValue(value.dispatchedAt)
+      ? Number(value.dispatchedAt)
+      : undefined,
+    targetParticipants: parseOptionalValue(value.targetParticipants)
+      ? Number(value.targetParticipants)
+      : undefined,
+  };
+}
+
+async function saveRedisPendingPaymentSession(session: PendingPaymentSession) {
+  await redisCommand(
+    "hset",
+    getPaymentSessionKey(session.orderId),
+    "orderId",
+    session.orderId,
+    "tgMessage",
+    session.tgMessage,
+    "createdAt",
+    session.createdAt,
+    "dispatchedAt",
+    serializeOptionalValue(session.dispatchedAt),
+    "targetParticipants",
+    serializeOptionalValue(session.targetParticipants),
+  );
+}
+
+async function getRedisPendingPaymentSession(orderId: string) {
+  const hash = normalizeRedisHash(
+    await redisCommand<unknown>("hgetall", getPaymentSessionKey(orderId)),
+  );
+
+  return parseStoredSession(hash);
 }
 
 function getDatePart(date: Date) {
@@ -31,16 +97,17 @@ export function generatePaymentTaskCode(date = new Date()) {
   return `${datePart}${nextValue.toString().padStart(2, "0")}`;
 }
 
-export function savePendingPaymentSession(session: PendingPaymentSession) {
+export async function savePendingPaymentSession(session: PendingPaymentSession) {
   getSessionMap().set(session.orderId, session);
+  await saveRedisPendingPaymentSession(session);
 }
 
-export function getPendingPaymentSession(orderId: string) {
-  return getSessionMap().get(orderId);
+export async function getPendingPaymentSession(orderId: string) {
+  return getSessionMap().get(orderId) ?? (await getRedisPendingPaymentSession(orderId));
 }
 
-export function markPendingPaymentSessionDispatched(orderId: string) {
-  const session = getPendingPaymentSession(orderId);
+export async function markPendingPaymentSessionDispatched(orderId: string) {
+  const session = await getPendingPaymentSession(orderId);
 
   if (!session) {
     return null;
@@ -52,6 +119,7 @@ export function markPendingPaymentSessionDispatched(orderId: string) {
   };
 
   getSessionMap().set(orderId, nextSession);
+  await saveRedisPendingPaymentSession(nextSession);
   return nextSession;
 }
 
@@ -60,7 +128,20 @@ function getDispatchLocks() {
   return globalForSessions.__realjoinTelegramDispatchLocks;
 }
 
-export function reserveTelegramDispatch(orderId: string) {
+export async function reserveTelegramDispatch(orderId: string) {
+  const redisReserved = await redisCommand<string>(
+    "set",
+    getPaymentDispatchLockKey(orderId),
+    "1",
+    "nx",
+    "ex",
+    600,
+  );
+
+  if (redisReserved !== null) {
+    return redisReserved === "OK";
+  }
+
   const locks = getDispatchLocks();
 
   if (locks.has(orderId)) {
@@ -71,6 +152,7 @@ export function reserveTelegramDispatch(orderId: string) {
   return true;
 }
 
-export function releaseTelegramDispatch(orderId: string) {
+export async function releaseTelegramDispatch(orderId: string) {
+  await redisCommand("del", getPaymentDispatchLockKey(orderId));
   getDispatchLocks().delete(orderId);
 }

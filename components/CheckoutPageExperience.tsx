@@ -12,12 +12,9 @@ import {
   getOrdersSnapshot,
   getServerOrdersSnapshot,
   markOrderPaidMock,
-  markOrderTgDispatched,
-  markOrderTgFailed,
   applyOrderPaymentSession,
   subscribeToOrders,
 } from "@/data/orderStore";
-import { buildTgTaskMessage } from "@/data/tgTaskTemplate";
 
 type CheckoutPageExperienceProps = {
   orderId: string;
@@ -39,39 +36,7 @@ export function CheckoutPageExperience({
 
   const dispatchMockPayment = async () => {
     setIsConfirming(true);
-    const paidOrder = markOrderPaidMock(orderId);
-
-    if (paidOrder) {
-      try {
-        const response = await fetch("/api/internal/telegram/dispatch", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            orderId: paidOrder.id,
-            message: buildTgTaskMessage(paidOrder),
-          }),
-        });
-        const result = (await response.json()) as {
-          ok?: boolean;
-          messageId?: string;
-          error?: string;
-        };
-
-        if (!response.ok || !result.ok) {
-          throw new Error(result.error ?? "Telegram dispatch failed.");
-        }
-
-        markOrderTgDispatched(paidOrder.id, result.messageId);
-      } catch (error) {
-        markOrderTgFailed(
-          paidOrder.id,
-          error instanceof Error ? error.message : "Telegram dispatch failed.",
-        );
-      }
-    }
-
+    markOrderPaidMock(orderId);
     router.push(`/order/success/${orderId}`);
   };
 
