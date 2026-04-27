@@ -73,24 +73,31 @@ async function getRedisSession(orderId: string) {
 async function saveRedisSession(
   session: Omit<RaffleSession, "participantIds">,
 ) {
-  await redisCommand(
-    "hset",
-    getRaffleKey(session.orderId),
-    "orderId",
-    session.orderId,
-    "chatId",
-    session.chatId,
-    "taskMessageId",
-    session.taskMessageId ?? "",
-    "raffleMessageId",
-    session.raffleMessageId ?? "",
-    "targetParticipants",
-    session.targetParticipants,
-    "createdAt",
-    session.createdAt,
-    "updatedAt",
-    session.updatedAt,
-  );
+  try {
+    await redisCommand(
+      "hset",
+      getRaffleKey(session.orderId),
+      "orderId",
+      session.orderId,
+      "chatId",
+      session.chatId,
+      "taskMessageId",
+      session.taskMessageId ?? "",
+      "raffleMessageId",
+      session.raffleMessageId ?? "",
+      "targetParticipants",
+      session.targetParticipants,
+      "createdAt",
+      session.createdAt,
+      "updatedAt",
+      session.updatedAt,
+    );
+  } catch (error) {
+    console.error("[raffle-store] Failed to persist raffle session", {
+      orderId: session.orderId,
+      error: error instanceof Error ? error.message : String(error),
+    });
+  }
 }
 
 export async function createRaffleSession({

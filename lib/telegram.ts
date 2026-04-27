@@ -14,13 +14,16 @@ type TelegramSendMessageResponse = {
 };
 
 type TelegramReplyMarkup = {
-  inline_keyboard: Array<Array<{ text: string; callback_data: string }>>;
+  inline_keyboard: Array<
+    Array<{ text: string; callback_data?: string; url?: string }>
+  >;
 };
 
 function getTelegramConfig() {
   return {
     botToken: process.env.TELEGRAM_BOT_TOKEN,
     chatId: process.env.TELEGRAM_CHAT_ID ?? "@avolatest",
+    botUsername: process.env.TELEGRAM_BOT_USERNAME ?? "Avolaofficial_bot",
   };
 }
 
@@ -55,7 +58,10 @@ export async function sendTelegramMessage({
   const result = (await response.json()) as TelegramSendMessageResponse;
 
   if (!response.ok || !result.ok) {
-    throw new Error(result.description ?? "Telegram dispatch failed.");
+    throw new Error(
+      result.description ??
+        `Telegram dispatch failed with status ${response.status}.`,
+    );
   }
 
   return result.result?.message_id
@@ -63,13 +69,22 @@ export async function sendTelegramMessage({
     : undefined;
 }
 
-function getParticipateKeyboard(orderId: string): TelegramReplyMarkup {
+function getParticipatePayload(orderId: string) {
+  return `rj_${orderId.replace(/[^A-Za-z0-9_-]/g, "")}`;
+}
+
+function getParticipateKeyboard(
+  orderId: string,
+  botUsername: string,
+): TelegramReplyMarkup {
+  const username = botUsername.replace(/^@/, "");
+
   return {
     inline_keyboard: [
       [
         {
           text: "Participate!",
-          callback_data: `realjoin_participate:${orderId}`,
+          url: `https://t.me/${username}?start=${getParticipatePayload(orderId)}`,
         },
       ],
     ],
@@ -80,7 +95,7 @@ export async function dispatchTelegramTask(
   message: string,
   options?: { orderId?: string; targetParticipants?: number },
 ) {
-  const { botToken, chatId } = getTelegramConfig();
+  const { botToken, chatId, botUsername } = getTelegramConfig();
 
   if (!botToken) {
     throw new Error("Telegram bot token is not configured.");
@@ -117,7 +132,7 @@ export async function dispatchTelegramTask(
         chatId,
         text: buildRaffleStatusMessage(0),
         disableWebPagePreview: true,
-        replyMarkup: getParticipateKeyboard(options.orderId),
+        replyMarkup: getParticipateKeyboard(options.orderId, botUsername),
       });
 
       await updateRaffleMessageId(options.orderId, raffleMessageId);
@@ -162,7 +177,9 @@ export async function editTelegramRaffleMessage({
   orderId: string;
   count: number;
 }) {
-  await fetch(`https://api.telegram.org/bot${botToken}/editMessageText`, {
+  const { botUsername } = getTelegramConfig();
+
+  const response = await fetch(`https://api.telegram.org/bot${botToken}/editMessageText`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -172,7 +189,15 @@ export async function editTelegramRaffleMessage({
       message_id: messageId,
       text: buildRaffleStatusMessage(count),
       disable_web_page_preview: true,
-      reply_markup: getParticipateKeyboard(orderId),
+      reply_markup: getParticipateKeyboard(orderId, botUsername),
     }),
   });
+  const result = (await response.json()) as TelegramSendMessageResponse;
+
+  if (!response.ok || !result.ok) {
+    throw new Error(
+      result.description ??
+        `Telegram raffle update failed with status ${response.status}.`,
+    );
+  }
 }
